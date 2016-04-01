@@ -25,7 +25,7 @@ class Regular_Text(pygame.sprite.Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
 class Click_Button(pygame.sprite.Sprite):
-    def __init__(self, size, color, box_color, position, text, font = None):
+    def __init__(self, size, color, box_color, position, text, next_screen = None, font = None):
         pygame.sprite.Sprite.__init__(self)
         self.size = size
         self.color = color
@@ -41,14 +41,18 @@ class Click_Button(pygame.sprite.Sprite):
         self.box_x = self.outline.x + 1
         self.box_y = self.outline.y + 1
         self.gray = False
+        self.next_screen = next_screen
 
-    def update(self, event, next_screen, end_event = None):
+
+    def update(self, screen, event, exiter = None):
         self.gray = False
         mouse_pos = pygame.mouse.get_pos()
         if mouse_pos[0] > self.outline.left and mouse_pos[0] < self.outline.right and mouse_pos[1] > self.outline.top and mouse_pos[1] < self.outline.bottom:
             self.gray = True
-        if event.type == pygame.MOUSEBUTTONDOWN and self.gray == True:
-            print "hi"
+        if (event.type == pygame.MOUSEBUTTONDOWN or (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE)) and self.gray == True and self.next_screen != None and self.next_screen != False and self.next_screen != True:
+            self.next_screen(screen)
+        elif (event.type == pygame.MOUSEBUTTONDOWN or (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE)) and self.gray == True and self.next_screen != None:
+            exiter = self.next_screen
 
     def TextBlit(self, screen):
         if self.gray == True:
@@ -59,42 +63,46 @@ class Click_Button(pygame.sprite.Sprite):
 
 class Option_Text(pygame.sprite.Sprite):
     def __init__(self, size, color, position, text, button, font = None):
+        pygame.sprite.Sprite.__init__(self)
         self.size = size
         self.color = color
         self.font = pygame.font.Font(font, size)
+        self.text = text
         self.image = self.font.render(self.text, 1, self.color)
         self.rect = self.image.get_rect()
         self.rect.center = position
         self.button = button
-        self.back_rect = pygame.Rect(self.rect.top, self.rect.right + 5, self.rect.height + 3, 100)
-        self.back = pygame.Surface([self.back_rect.width, self.back_rect.height])
+        self.back_rect = pygame.Rect(self.rect.right + 5, self.rect.top, self.rect.height + 3, 4 * self.size)
+        self.back = pygame.Surface([self.back_rect.height, self.back_rect.width])
         self.back.convert()
         self.back.fill(LIGHT_GREY)
         for k in key_list:
             if self.button == k[0]:
                 self.button_text = k[1]
-        self.button_text_image = self.font.Font(self.button_text, size)
+        self.button_text_image = self.font.render(self.button_text, 1, self.color)
         self.button_text_rect = self.button_text_image.get_rect()
         self.button_text_rect.x = self.back_rect.x + 3
         self.button_text_rect.y = self.rect.y
         self.selected = False
+        self.back_outline = pygame.Rect(self.back_rect.x - 1, self.back_rect.top - 4, self.back_rect.height + 2, self.back_rect.width + 2)
 
-        def update(event, option_text_group):
-            mouse_pos = pygame.mouse.get_pos()
-            if event == pygame.MOUSEBUTTONDOWN and mouse_pos[0] > self.back_rect.left and mouse_pos[0] < self.back_rect.right and mouse_pos[1] > self.back_rect.top and mouse_pos[1] < self.back_rect.bottom:
-                for o in option_text_group:
-                    o.selected = False
-                self.selected = True
+    def update(self, event, option_text_group, mouse_pos):
+        if event.type == pygame.MOUSEBUTTONDOWN and mouse_pos[0] > self.back_outline.left and mouse_pos[0] < self.back_outline.right and mouse_pos[1] > self.back_outline.top and mouse_pos[1] < self.back_outline.bottom:
+            for o in option_text_group:
+                o.selected = False
+            self.selected = True
 
-            if self.selected == True:
-                for k in key_list:
-                    if event == k[0]:
-                        self.button = k[0]
-                        self.button_text = k[1]
-                        self.button_text_image = self.font.Font(self.button_text, font)
+        if self.selected == True:
+             for k in key_list:
+                 if event.type == pygame.KEYDOWN and event.key == k[0]:
+                    self.button = k[0]
+                    self.button_text = k[1]
+                    self.button_text_image = self.font.render(self.button_text, 1, self.color)
 
-        def TextBlit(screen):
-            screen.blit(self.image, (self.rect.x, self.rect.y))
-            screen.blit(self.back, (self.back_rect.x, self.back_rect.y))
-            screen.blit(self.button_text_image, (self.button_text_rect.x, self.button_text_rect.y))
+    def TextBlit(self, screen):
+        screen.blit(self.image, (self.rect.x, self.rect.y))
+        screen.blit(self.back, (self.back_rect.x, self.back_rect.y - 3))
+        screen.blit(self.button_text_image, (self.button_text_rect.x, self.button_text_rect.y))
+        if self.selected == True:
+            pygame.draw.rect(screen, BLACK, self.back_outline, 1)
 
