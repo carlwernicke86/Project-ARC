@@ -3,29 +3,29 @@ import pygame, sys
 
 def options(screen):
     #These are all the options buttons
-    jump = Option_Text(100, BLACK, (screen.get_rect().centerx/2, screen.get_rect().centery/2), "Jump:", pygame.K_SPACE)
-    right = Option_Text(100, BLACK, (jump.rect.centerx, jump.rect.centery + 125), "Right:", pygame.K_d)
-    left = Option_Text(100, BLACK, (jump.rect.centerx, jump.rect.centery + 250), "Left: ", pygame.K_a)
+    jump = Option_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Jump:", pygame.K_SPACE)
+    right = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 125), "Right:", pygame.K_d)
+    left = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 250), "Left: ", pygame.K_a)
 
-    right.rect.right = jump.rect.right
-    left.rect.right = jump.rect.right
     option_text_group = pygame.sprite.Group()
     option_text_group.add(jump, right, left)
 
     #This is the escape button
-    exit = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().bottom - 100), "Main Menu")
+    exit = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().bottom - 100), "Main Menu", False)
     click_button_group = pygame.sprite.Group()
     click_button_group.add(exit)
 
-    options = True
-    while options:
+    option = True
+    while option:
         mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
-            option_text_group.update(event, option_text_group,mouse_pos)
-            click_button_group.update(screen, event, options)
+            option_text_group.update(event, option_text_group, mouse_pos)
+            click_button_group.update(screen, event)
+            option = exit.stay
             if event.type == pygame.QUIT: sys.exit()
-
-
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    option = False
 
         screen.fill(WHITE)
         for o in option_text_group:

@@ -1,6 +1,7 @@
 import pygame, sys
 from other_objects import *
 from arc_options import options
+from arc_missions import missions
 
 def intro(screen, clock, fps):
 
@@ -8,15 +9,16 @@ def intro(screen, clock, fps):
     Title = Regular_Text(80, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Project ARC")
 
     #Click Text Objects
-    New_Game = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery/1.5), "New Game")
+    New_Game = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery/1.5), "New Game", None)
     Options = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, New_Game.rect.y + 65), "Options", options)
+    Mission_Button = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, Options.rect.y + 65), "Missions", missions)
 
     #Groups and adding things to groups
     regular_text_group = pygame.sprite.Group()
     regular_text_group.add(Title)
 
     click_button_group = pygame.sprite.Group()
-    click_button_group.add(New_Game, Options)
+    click_button_group.add(New_Game, Options, Mission_Button)
 
 
 

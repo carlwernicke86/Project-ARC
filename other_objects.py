@@ -25,7 +25,7 @@ class Regular_Text(pygame.sprite.Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
 class Click_Button(pygame.sprite.Sprite):
-    def __init__(self, size, color, box_color, position, text, next_screen = None, font = None):
+    def __init__(self, size, color, box_color, position, text, next_screen, object = None,font = None):
         pygame.sprite.Sprite.__init__(self)
         self.size = size
         self.color = color
@@ -42,17 +42,26 @@ class Click_Button(pygame.sprite.Sprite):
         self.box_y = self.outline.y + 1
         self.gray = False
         self.next_screen = next_screen
+        self.stay = True
+        self.object = object
 
 
-    def update(self, screen, event, exiter = None):
+    def update(self, screen, event):
         self.gray = False
         mouse_pos = pygame.mouse.get_pos()
         if mouse_pos[0] > self.outline.left and mouse_pos[0] < self.outline.right and mouse_pos[1] > self.outline.top and mouse_pos[1] < self.outline.bottom:
             self.gray = True
-        if (event.type == pygame.MOUSEBUTTONDOWN or (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE)) and self.gray == True and self.next_screen != None and self.next_screen != False and self.next_screen != True:
-            self.next_screen(screen)
-        elif (event.type == pygame.MOUSEBUTTONDOWN or (event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE)) and self.gray == True and self.next_screen != None:
-            exiter = self.next_screen
+        if event.type == pygame.MOUSEBUTTONUP and self.gray == True:
+            if self.next_screen == False or self.next_screen == True:
+                self.stay = self.next_screen
+            elif self.next_screen == None:
+                return None
+            elif self.object != None:
+                self.next_screen(self.object, screen)
+            else:
+                self.next_screen(screen)
+            self.gray = False
+
 
     def TextBlit(self, screen):
         if self.gray == True:
@@ -70,7 +79,7 @@ class Option_Text(pygame.sprite.Sprite):
         self.text = text
         self.image = self.font.render(self.text, 1, self.color)
         self.rect = self.image.get_rect()
-        self.rect.center = position
+        self.rect.topright = position
         self.button = button
         self.back_rect = pygame.Rect(self.rect.right + 5, self.rect.top, self.rect.height + 3, 4 * self.size)
         self.back = pygame.Surface([self.back_rect.height, self.back_rect.width])
@@ -106,3 +115,32 @@ class Option_Text(pygame.sprite.Sprite):
         if self.selected == True:
             pygame.draw.rect(screen, BLACK, self.back_outline, 1)
 
+
+class Mission():
+    def __init__(self, screen, employer, building, difficulty, requirements, reward, mission_goto):
+        self.employer = employer
+        self.employer_text = Regular_Text(40, BLACK, (screen.get_rect().centerx, 100), ("Employer: " + str(employer)))
+        self.building = building
+        self.building_text = Regular_Text(40, BLACK, ((screen.get_rect().centerx), 200), ("Location: " + str(building)))
+        self.difficulty = Regular_Text(40, BLACK, ((screen.get_rect().centerx), 300), ("Difficulty: " + str(difficulty)))
+        self.requirements = requirements
+        self.requirements_text = Regular_Text(40, BLACK, (screen.get_rect().centerx, 400), ("Requirements: "))
+        self.reward = reward
+        self.reward_text = Regular_Text(40, BLACK, ((screen.get_rect().centerx), 500), ("Reward: " + str(reward)))
+        self.accept = Click_Button(40, GREEN, LIGHT_GREY, (screen.get_rect().centerx - 100, 600), "Accept", mission_goto)
+        self.decline = Click_Button(40, RED, LIGHT_GREY, (screen.get_rect().centerx + 100, 600), "Decline", False)
+
+    def update(self, screen, event):
+        self.accept.update(screen, event)
+        self.decline.update(screen, event)
+
+    def TextBlit(self, screen):
+        screen.blit(self.employer_text.image, (self.employer_text.rect.x, self.employer_text.rect.y))
+        screen.blit(self.building_text.image, (self.building_text.rect.x, self.building_text.rect.y))
+        screen.blit(self.difficulty.image, (self.difficulty.rect.x, self.difficulty.rect.y))
+        screen.blit(self.reward_text.image, (self.reward_text.rect.x, self.reward_text.rect.y))
+        screen.blit(self.requirements_text.image, (self.requirements_text.rect.x, self.requirements_text.rect.y))
+        self.accept.TextBlit(screen)
+        self.decline.TextBlit(screen)
+        for r in range(len(self.requirements)):
+            screen.blit(Regular_Text(40, BLACK, (0, 0), str(self.requirements[r])).image, (self.requirements_text.rect.right + 10, self.requirements_text.rect.y + (60 * r)))
