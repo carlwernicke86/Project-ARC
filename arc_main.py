@@ -1,5 +1,6 @@
 import pygame, os
 from arc_intro import intro
+from HubLocation import hub
 
 
 fps = 60
@@ -19,6 +20,8 @@ beg_time = pygame.time.get_ticks()     #The time the game first begins
 
 def main():
     intro(screen, clock, fps)
+    hub(screen, clock, fps)
+
 
 
 main()

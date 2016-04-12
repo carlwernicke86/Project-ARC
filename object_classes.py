@@ -69,7 +69,7 @@ class Hero(pygame.sprite.Sprite):
         for p in platform_group:
             if pygame.sprite.collide_rect(self, p):
                 if isinstance(p, WinDocs):
-                    print "YOU WIN"
+                    x = 1
                 if xvel > 0:
                     self.rect.right = p.rect.left
                 if xvel < 0:
@@ -115,7 +115,7 @@ class Camera(object):
         self.state = pygame.Rect(x, y, self.state.width, self.state.height)
 
 class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 for guard + 96 for flashlight
-    def __init__(self, direction, range, x, y): #The full distance a sec guard travels is the range in starting direction then range + 128 in the other direciton
+    def __init__(self, direction, range, x, y): #The full distance a sec guard travels is the range in starting direction then range + 128 in the other direction
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface([128,64])
         self.image.convert()

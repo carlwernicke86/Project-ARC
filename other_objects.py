@@ -8,6 +8,9 @@ GREEN = (50, 200, 50)
 BLUE = (50, 50, 200)
 RED =(200, 50, 50)
 
+WIN_W = 1600
+WIN_H = 900
+
 #Position is a tuple of (x, y)
 #So far we only have menuing text objects and buttons
 class Regular_Text(pygame.sprite.Sprite):
@@ -144,3 +147,37 @@ class Mission():
         self.decline.TextBlit(screen)
         for r in range(len(self.requirements)):
             screen.blit(Regular_Text(40, BLACK, (0, 0), str(self.requirements[r])).image, (self.requirements_text.rect.right + 10, self.requirements_text.rect.y + (60 * r)))
+
+
+class Scroll_Text(pygame.sprite.Sprite):
+    def __init__(self, text, color, font = None, go = False):
+        pygame.sprite.Sprite.__init__(self)
+        self.text = text
+        self.color = color
+        self.font = pygame.font.Font(font, 40)
+        self.image = self.font.render("", 1, self.color)
+        self.timer = 0
+        self.rect = pygame.Rect(150, WIN_H - 150, 1300, 140)
+        self.go = go
+        self.cur_text = ""
+
+
+    def update(self, screen, cur_event, activate_event):
+        if cur_event == activate_event:
+            self.go = True
+
+
+    def TextBlit(self, screen, TIMER):
+        if self.go == True and TIMER%10 == 0:
+            self.cur_text = self.text[0:len(self.cur_text) + 1]
+            self.image = self.font.render(self.cur_text, 1, self.color)
+
+        pygame.draw.rect(screen, BLACK, self.rect, 1)
+        screen.blit(self.image, (self.rect.left + 20, self.rect.top + 20))
+
+
+
+
+
+
+

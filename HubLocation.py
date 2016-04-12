@@ -1,7 +1,8 @@
 import pygame, os, sys, math
 from object_classes import *
+from other_objects import *
 
-os.environ["SDL_VIDE_CENTERED"] = '1'
+os.environ["SDL_VIDEO_CENTERED"] = '1'
 
 TIMER = 0
 
@@ -9,12 +10,10 @@ TIMER = 0
 WIN_W = 1600
 WIN_H = 900
 
-def main():
+def hub(screen, clock, fps):
     pygame.init()
 
     apartment = desk = True
-    pygame.display.set_caption("Project ARC")
-    screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 
     platform_group = pygame.sprite.Group()
     hero_group = pygame.sprite.Group()
@@ -25,6 +24,7 @@ def main():
     hero = Hero(128, 96)
     hero_group.add(hero)
 
+    dummy_scroll = Scroll_Text("hi",BLACK)
 
     # Load apartment level
     apartment_level = [
@@ -59,20 +59,24 @@ def main():
 
     #Apartment, mostly eye candy and mechanism for 'desk' level selector
     while apartment:
+        clock.tick(fps)
         screen.fill((255,255,255))
         #Quitting the game
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
+                dummy_scroll.update(screen, event.key, pygame.K_RETURN)
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
+
 
         #Update
         hero_group.update(platform_group)
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group)
+        dummy_scroll.TextBlit(screen, TIMER)
 
         #Put stuff on the screen yo
         for p in platform_group:
@@ -83,7 +87,3 @@ def main():
             screen.blit(sg.image, camera.apply(sg))
 
         pygame.display.flip()
-
-
-if __name__ == "__main__":
-    main()
