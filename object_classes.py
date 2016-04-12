@@ -79,6 +79,7 @@ class Hero(pygame.sprite.Sprite):
                     self.grounded = True
                     self.yvel = 0
                 if yvel < 0:
+                    self.yvel = 0
                     self.rect.top = p.rect.bottom
 
 class Platform(pygame.sprite.Sprite):
@@ -180,6 +181,33 @@ class TriggerDoor(pygame.sprite.Sprite):
         self.movecount = 0
 
     def update(self, trigger):
-        if trigger.active == True and self.movecount < 65:
+        if trigger.active == True and self.movecount < 64:
             self.rect.y -= 1
             self.movecount += 1
+
+class MotionSensor(pygame.sprite.Sprite):
+    def __init__(self, x, y, ontime, offtime): #Ontime is how long the laser is on, offtime is how long the laser is off
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([8, 64])
+        self.image.convert()
+        self.image.fill((247, 29, 29))
+        self.rect = pygame.Rect(x, y, 8, 64)
+        self.ontime = ontime
+        self.offtime = offtime
+        self.active = True
+        self.ontimer = 0 #Counts how long the laser is on
+        self.offtimer = 0 #Counts how long the laser is off
+
+    def update(self, hero):
+        if self.active == True:
+            self.ontimer += 1
+        elif self.active == False:
+            self.offtimer += 1
+        if self.ontimer == self.ontime:
+            self.ontimer = 0
+            self.active = False
+        if self.offtimer == self.offtime:
+            self.offtimer = 0
+            self.active = True
+        if pygame.sprite.collide_rect(self, hero) and self.active == True:
+            print "CAUGHT"

@@ -18,31 +18,31 @@ def main():
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 
     #Group creation
-    platform_group = pygame.sprite.Group()
-    hero_group = pygame.sprite.Group()
-    secguard_group = pygame.sprite.Group()
-    trigger_group = pygame.sprite.Group()
+    platform_group = pygame.sprite.Group() #Walls, floors, and stuff
+    hero_group = pygame.sprite.Group() #The main character
+    secguard_group = pygame.sprite.Group() #Security Guards
+    motsen_group = pygame.sprite.Group() #Motion sensing lasers
 
     #Object creation
     hero = Hero(96, 288)
     hero_group.add(hero)
     sec1 = SecGuard("right", 128, 640, 288)
-    trig1 = Trigger(32, 320)
+    trig1 = Trigger(1248, 224)
 
     secguard_group.add(sec1)
 
     #Load tutorial level
     tutorial_level = [ #3 space gap is jumpable
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
-        "P                                                          P",
-        "P                                                          P",
-        "P                                                          P",
-        "P                                                          P",
-        "P                     PPPPPP                               P",
-        "P                                                          P",
-        "P                                                          P",
-        "P          PPPPPPPP                                   PPPPPP",
-        "P                                                     O    P",
+        "P                                     P                    P",
+        "P                                     P                    P",
+        "P                                     P                    P",
+        "P                                     P                    P",
+        "P                     PPPPPP          P                    P",
+        "P                                     P                    P",
+        "P                                     P                    P",
+        "P          PPPPPPPP                   PPPPP           PPPPPP",
+        "P                                     L L L           O    P",
         "P                                                        D P",#288 y value
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
     ]   #01234567890123456789012345678901234567890123456789012345678
@@ -63,6 +63,9 @@ def main():
             if col == "O":
                 o = TriggerDoor(x, y)
                 platform_group.add(o)
+            if col == "L":
+                l = MotionSensor(x, y, 180, 180)
+                motsen_group.add(l)
             x += 32
         y += 32
         x = 0
@@ -90,6 +93,7 @@ def main():
         secguard_group.update(hero, secguard_group)
         trig1.update(hero)
         platform_group.update(trig1)
+        motsen_group.update(hero)
 
         # Put stuff on the screen yo
         for p in platform_group:
@@ -98,6 +102,9 @@ def main():
             screen.blit(h.image, camera.apply(h))
         for sg in secguard_group:
             screen.blit(sg.image, camera.apply(sg))
+        for ms in motsen_group:
+            if ms.active == True:
+                screen.blit(ms.image, camera.apply(ms))
         screen.blit(trig1.image, camera.apply(trig1))
 
         pygame.display.flip()
