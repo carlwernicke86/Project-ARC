@@ -19,8 +19,9 @@ clock = pygame.time.Clock()            #The clock which can be used to set fps
 beg_time = pygame.time.get_ticks()     #The time the game first begins
 
 def main():
-    intro(screen, clock, fps)
-    hub(screen, clock, fps)
+    TIMER = 0
+    intro(screen, clock, fps, TIMER)
+    hub(screen, clock, fps, TIMER)
 
 
 

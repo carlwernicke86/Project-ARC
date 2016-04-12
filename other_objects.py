@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 from KeyList import key_list
 
 BLACK = (0, 0, 0)
@@ -161,6 +161,27 @@ class Scroll_Text(pygame.sprite.Sprite):
         self.go = go
         self.cur_text = ""
 
+    def Scroll(self, screen, TIMER):
+        self.go = Scroll = True
+        self.cur_text = ""
+        while Scroll:
+            TIMER += 1
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT: sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_t:
+                        Scroll = False
+
+
+            if self.go == True and TIMER%20 == 0:
+                self.cur_text = self.text[0:len(self.cur_text) + 1]
+                self.image = self.font.render(self.cur_text, 1, self.color)
+
+            pygame.draw.rect(screen, BLACK, self.rect, 1)
+            screen.blit(self.image, (self.rect.left + 20, self.rect.top + 20))
+            pygame.display.update()
+
+
 
     def update(self, screen, cur_event, activate_event):
         if cur_event == activate_event:
@@ -168,7 +189,7 @@ class Scroll_Text(pygame.sprite.Sprite):
 
 
     def TextBlit(self, screen, TIMER):
-        if self.go == True and TIMER%10 == 0:
+        if self.go == True and TIMER%1 == 0:
             self.cur_text = self.text[0:len(self.cur_text) + 1]
             self.image = self.font.render(self.cur_text, 1, self.color)
 

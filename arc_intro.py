@@ -3,7 +3,8 @@ from other_objects import *
 from arc_options import options
 from arc_missions import missions
 
-def intro(screen, clock, fps):
+def intro(screen, clock, fps, TIMER):
+    TIMER += 1
 
     #Regular Text Objects, images can be added later
     Title = Regular_Text(80, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Project ARC")
