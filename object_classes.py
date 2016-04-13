@@ -154,10 +154,6 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
         elif self.direction == "right":
             self.rect.x += 1
             self.steps += 1
-        if self.direction == "left":
-            self.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
-        elif self.direction == "right":
-            self.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
         if self.steps == self.range:
             self.steps = 0
             if self.direction == "left":
@@ -166,6 +162,10 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
             elif self.direction == "right":
                 self.rect = pygame.Rect(self.rect.x - 128, self.y, 128, 64)
                 self.direction = "left"
+        if self.direction == "left":
+            self.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+        elif self.direction == "right":
+            self.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
 
 class WinDocs(Platform): #Touch these to win the level
     def __init__(self, x, y):
