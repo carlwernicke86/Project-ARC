@@ -30,31 +30,23 @@ class Hero(pygame.sprite.Sprite):
         key = pygame.key.get_pressed()
         if key[pygame.K_d]:
             self.move_r = True
-            self.moving = True
             self.facing = "right"
         if key[pygame.K_a]:
             self.move_l = True
-            self.moving = True
             self.facing = "left"
         if key[pygame.K_w]:
             self.move_u = True
-            self.moving = True
         if key[pygame.K_s]:
             self.move_d = True
-            self.moving = True
 
         if not key[pygame.K_d]:
             self.move_r = False
-            self.moving = False
         if not key[pygame.K_a]:
             self.move_l = False
-            self.moving = False
         if not key[pygame.K_w]:
             self.move_u = False
-            self.moving = False
         if not key[pygame.K_s]:
             self.move_d = False
-            self.moving = False
 
         if self.move_u:
             if self.grounded:
@@ -71,6 +63,11 @@ class Hero(pygame.sprite.Sprite):
                 self.yvel = 100
         if not self.move_l and not self.move_r:
             self.xvel = 0
+
+        if self.xvel != 0:
+            self.moving = True
+        else:
+            self.moving = False
 
         self.rect.left += self.xvel
         self.collide(self.xvel, 0, platform_group)
