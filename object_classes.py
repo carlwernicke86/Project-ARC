@@ -22,26 +22,39 @@ class Hero(pygame.sprite.Sprite):
         self.move_r = False
         self.move_u = False
         self.move_d = False
+        self.moving = False #For motion triggered sensors
+
+        self.facing = "right"
 
     def update(self, platform_group):
         key = pygame.key.get_pressed()
         if key[pygame.K_d]:
             self.move_r = True
+            self.moving = True
+            self.facing = "right"
         if key[pygame.K_a]:
             self.move_l = True
+            self.moving = True
+            self.facing = "left"
         if key[pygame.K_w]:
             self.move_u = True
+            self.moving = True
         if key[pygame.K_s]:
             self.move_d = True
+            self.moving = True
 
         if not key[pygame.K_d]:
             self.move_r = False
+            self.moving = False
         if not key[pygame.K_a]:
             self.move_l = False
+            self.moving = False
         if not key[pygame.K_w]:
             self.move_u = False
+            self.moving = False
         if not key[pygame.K_s]:
             self.move_d = False
+            self.moving = False
 
         if self.move_u:
             if self.grounded:
@@ -118,14 +131,13 @@ class Camera(object):
 class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 for guard + 96 for flashlight
     def __init__(self, direction, range, x, y): #The full distance a sec guard travels is the range in starting direction then range + 128 in the other direction
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([128,64])
-        self.image.convert()
         self.direction = direction
         self.y = y
         if self.direction == "left":
-            self.image.fill((40, 106, 128))
+            self.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
         elif self.direction == "right":
-            self.image.fill((150, 21, 49))
+            self.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+        self.image.convert()
         self.range = range
         self.rect = pygame.Rect(x, y, 128, 64)
         self.steps = 0
@@ -140,9 +152,9 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
             self.rect.x += 1
             self.steps += 1
         if self.direction == "left":
-            self.image.fill((40, 106, 128))
+            self.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
         elif self.direction == "right":
-            self.image.fill((150, 21, 49))
+            self.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
         if self.steps == self.range:
             self.steps = 0
             if self.direction == "left":
@@ -185,7 +197,7 @@ class TriggerDoor(pygame.sprite.Sprite):
             self.rect.y -= 1
             self.movecount += 1
 
-class MotionSensor(pygame.sprite.Sprite):
+class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk through these to trigger them
     def __init__(self, x, y, ontime, offtime): #Ontime is how long the laser is on, offtime is how long the laser is off
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface([8, 64])
@@ -211,3 +223,31 @@ class MotionSensor(pygame.sprite.Sprite):
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
             print "CAUGHT"
+
+class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
+    def __init__(self, x, y, direction, distance):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([8, 64])
+        self.image.convert()
+        self.image.fill((29, 134, 226))
+        self.rect = pygame.Rect(x, y, 8, 64)
+        self.direction = direction
+        self.distance = distance
+        self.moved = 0 #Measures how much the laser has moved
+        self.speed = 2
+
+    def update(self, hero):
+        if pygame.sprite.collide_rect(self, hero) and hero.moving == True:
+            print "YOU GOT CAUGHT"
+        if self.direction == "left":
+            self.rect.x -= self.speed
+            self.moved += self.speed
+        if self.direction == "right":
+            self.rect.x += self.speed
+            self.moved += self.speed
+        if self.direction == "left" and self.moved == self.distance:
+            self.moved = 0
+            self.direction = "right"
+        if self.direction == "right" and self.moved == self.distance:
+            self.moved = 0
+            self.direction = "left"
