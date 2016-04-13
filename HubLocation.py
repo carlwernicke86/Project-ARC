@@ -16,10 +16,7 @@ def hub(screen, clock, fps, TIMER):
 
     platform_group = pygame.sprite.Group()
     hero_group = pygame.sprite.Group()
-    secguard_group = pygame.sprite.Group()
 
-    sec1 = SecGuard("left", 96, 384, 96)
-    secguard_group.add(sec1)
     hero = Hero(128, 96)
     hero_group.add(hero)
 
@@ -45,7 +42,7 @@ def hub(screen, clock, fps, TIMER):
                 p = Platform([176, 162, 150], x, y)
                 platform_group.add(p)
             if col == "D":
-                d = WinDocs(x, y)
+                d = LaunchDesk(x, y)
                 platform_group.add(d)
             x += 32
         y += 32
@@ -75,7 +72,7 @@ def hub(screen, clock, fps, TIMER):
         #Update
         hero_group.update(platform_group)
         camera.update(hero.rect)
-        secguard_group.update(hero, secguard_group)
+        platform_group.update(hero)
         #dummy_scroll.TextBlit(screen, TIMER)
 
         #Put stuff on the screen yo
@@ -83,7 +80,5 @@ def hub(screen, clock, fps, TIMER):
             screen.blit(p.image, camera.apply(p))
         for h in hero_group:
             screen.blit(h.image, camera.apply(h))
-        for sg in secguard_group:
-            screen.blit(sg.image, camera.apply(sg))
 
         pygame.display.flip()
