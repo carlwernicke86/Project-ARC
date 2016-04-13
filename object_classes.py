@@ -1,4 +1,5 @@
 import pygame
+from arc_missions import missions
 
 #Constants
 WIN_W = 1600
@@ -259,7 +260,8 @@ class LaunchDesk(Platform):
     def __init__(self, x, y):
         Platform.__init__(self, (154, 90, 7), x, y)
 
-    def update(self, hero):
+    def update(self, hero, screen):
         if hero.interact:
-            if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:
-                print "GET INTERACTED WITH"
+            if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:\
+                missions(screen)
+

@@ -19,7 +19,7 @@ def intro(screen, clock, fps, TIMER):
     regular_text_group.add(Title)
 
     click_button_group = pygame.sprite.Group()
-    click_button_group.add(New_Game, Options, Mission_Button)
+    click_button_group.add(New_Game, Options)
 
 
 

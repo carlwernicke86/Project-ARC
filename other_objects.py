@@ -164,13 +164,17 @@ class Scroll_Text(pygame.sprite.Sprite):
     def Scroll(self, screen, TIMER):
         self.go = Scroll = True
         self.cur_text = ""
+        self.image = self.font.render(self.cur_text, 1, self.color)
         while Scroll:
             TIMER += 1
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_t:
-                        Scroll = False
+                        if self.cur_text == self.text:
+                            Scroll = False
+                        elif self.cur_text != self.text:
+                            self.cur_text = self.text
 
 
             if self.go == True and TIMER%20 == 0:
@@ -195,10 +199,3 @@ class Scroll_Text(pygame.sprite.Sprite):
 
         pygame.draw.rect(screen, BLACK, self.rect, 1)
         screen.blit(self.image, (self.rect.left + 20, self.rect.top + 20))
-
-
-
-
-
-
-

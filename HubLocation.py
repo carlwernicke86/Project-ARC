@@ -42,8 +42,8 @@ def hub(screen, clock, fps, TIMER):
                 p = Platform([176, 162, 150], x, y)
                 platform_group.add(p)
             if col == "D":
-                d = LaunchDesk(x, y)
-                platform_group.add(d)
+                desk = LaunchDesk(x, y)
+                platform_group.add(desk)
             x += 32
         y += 32
         x = 0
@@ -72,13 +72,15 @@ def hub(screen, clock, fps, TIMER):
         #Update
         hero_group.update(platform_group)
         camera.update(hero.rect)
-        platform_group.update(hero)
-        #dummy_scroll.TextBlit(screen, TIMER)
+        platform_group.update(hero, screen)
+
+
 
         #Put stuff on the screen yo
         for p in platform_group:
             screen.blit(p.image, camera.apply(p))
         for h in hero_group:
             screen.blit(h.image, camera.apply(h))
+        screen.blit(desk.image, camera.apply(desk))
 
         pygame.display.flip()
