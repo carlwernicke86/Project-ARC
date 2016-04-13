@@ -26,6 +26,8 @@ class Hero(pygame.sprite.Sprite):
 
         self.facing = "right"
 
+        self.interact = False
+
     def update(self, platform_group):
         key = pygame.key.get_pressed()
         if key[pygame.K_d]:
@@ -38,6 +40,8 @@ class Hero(pygame.sprite.Sprite):
             self.move_u = True
         if key[pygame.K_s]:
             self.move_d = True
+        if key[pygame.K_e]:
+            self.interact = True
 
         if not key[pygame.K_d]:
             self.move_r = False
@@ -47,6 +51,8 @@ class Hero(pygame.sprite.Sprite):
             self.move_u = False
         if not key[pygame.K_s]:
             self.move_d = False
+        if not key[pygame.K_e]:
+            self.interact = False
 
         if self.move_u:
             if self.grounded:
@@ -248,3 +254,12 @@ class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the
         if self.direction == "right" and self.moved == self.distance:
             self.moved = 0
             self.direction = "left"
+
+class LaunchDesk(Platform):
+    def __init__(self, x, y):
+        Platform.__init__(self, (154, 90, 7), x, y)
+
+    def update(self, hero):
+        if hero.interact:
+            if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:
+                print "GET INTERACTED WITH"
