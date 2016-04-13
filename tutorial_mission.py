@@ -5,11 +5,16 @@ os.environ["SDL_VIDE_CENTERED"] = '1'
 
 TIMER = 0
 
+#Time Variables are defined below
+clock = pygame.time.Clock()            #The clock which can be used to set fps
+beg_time = pygame.time.get_ticks()     #The time the game first begins
+fps = 60
+
 #Constants
 WIN_W = 1600
 WIN_H = 900
 
-def main():
+def main(clock, fps):
     pygame.init()
 
     #Basic settings
@@ -22,14 +27,17 @@ def main():
     hero_group = pygame.sprite.Group() #The main character
     secguard_group = pygame.sprite.Group() #Security Guards
     motsen_group = pygame.sprite.Group() #Motion sensing lasers
+    movelaser_group = pygame.sprite.Group() #Moving motion sensor lasers
 
     #Object creation
     hero = Hero(96, 288)
     hero_group.add(hero)
     sec1 = SecGuard("right", 128, 640, 288)
     trig1 = Trigger(1248, 224)
+    #movelaser1 = MovingLaser(1056, 288, "left", 128)
 
     secguard_group.add(sec1)
+    #movelaser_group.add(movelaser1)
 
     #Load tutorial level
     tutorial_level = [ #3 space gap is jumpable
@@ -77,6 +85,7 @@ def main():
 
     # Apartment, mostly eye candy and mechanism for 'desk' level selector
     while tutorial:
+        clock.tick(fps)
         screen.fill((255, 255, 255))
         # Quitting the game
         for event in pygame.event.get():
@@ -94,6 +103,7 @@ def main():
         trig1.update(hero)
         platform_group.update(trig1)
         motsen_group.update(hero)
+        #movelaser_group.update(hero)
 
         # Put stuff on the screen yo
         for p in platform_group:
@@ -105,10 +115,12 @@ def main():
         for ms in motsen_group:
             if ms.active == True:
                 screen.blit(ms.image, camera.apply(ms))
+        #for ml in movelaser_group:
+        #    screen.blit(ml.image, camera.apply(ml))
         screen.blit(trig1.image, camera.apply(trig1))
 
         pygame.display.flip()
 
 
 if __name__ == "__main__":
-    main()
+    main(clock, fps)
