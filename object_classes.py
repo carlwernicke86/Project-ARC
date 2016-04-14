@@ -1,5 +1,6 @@
 import pygame
 from arc_missions import missions
+from SpriteSheetFunction import SpriteSheet
 
 #Constants
 WIN_W = 1600
@@ -13,10 +14,7 @@ class Hero(pygame.sprite.Sprite):
         self.yvel = 0
         self.grounded = False
         self.side_speed = 3
-        self.image = pygame.Surface((32, 64))
-        self.image.convert()
-        self.image.fill([108,80,55])
-        self.rect = pygame.Rect((x,y,32,64))
+        self.rect = pygame.Rect((x,y,24,64))
 
         #Other stuff
         self.move_l = False
@@ -26,17 +24,66 @@ class Hero(pygame.sprite.Sprite):
         self.moving = False #For motion triggered sensors
 
         self.facing = "right"
+        self.step_num_right = 0
+        self.step_num_left = 0
 
         self.interact = False
+
+        #Sprite sheet loading
+        right_sprite_sheet = SpriteSheet("Sprites/player_sprite_right.png")
+        left_sprite_sheet = SpriteSheet("Sprites/player_sprite_left.png")
+        self.walking_frames_r = []
+        self.walking_frames_l = []
+        #Loading into a list
+        #RIGHT SIDE
+        image = right_sprite_sheet.get_image(0, 0, 24, 64)
+        self.walking_frames_r.append(image)
+        image = right_sprite_sheet.get_image(32, 0, 24, 64)
+        self.walking_frames_r.append(image)
+        image = right_sprite_sheet.get_image(64, 0, 24, 64)
+        self.walking_frames_r.append(image)
+        image = right_sprite_sheet.get_image(96, 0, 24, 64)
+        self.walking_frames_r.append(image)
+        image = right_sprite_sheet.get_image(128, 0, 24, 64)
+        self.walking_frames_r.append(image)
+        image = right_sprite_sheet.get_image(160, 0, 24, 64)
+        self.walking_frames_r.append(image)
+        image = right_sprite_sheet.get_image(192, 0, 24, 64)
+        self.walking_frames_r.append(image)
+        image = right_sprite_sheet.get_image(224, 0, 24, 64)
+        self.walking_frames_r.append(image)
+        #LEFT SIDE
+        image = left_sprite_sheet.get_image(0, 0, 24, 64)
+        self.walking_frames_l.append(image)
+        image = left_sprite_sheet.get_image(32, 0, 24, 64)
+        self.walking_frames_l.append(image)
+        image = left_sprite_sheet.get_image(64, 0, 24, 64)
+        self.walking_frames_l.append(image)
+        image = left_sprite_sheet.get_image(96, 0, 24, 64)
+        self.walking_frames_l.append(image)
+        image = left_sprite_sheet.get_image(128, 0, 24, 64)
+        self.walking_frames_l.append(image)
+        image = left_sprite_sheet.get_image(192, 0, 24, 64)
+        self.walking_frames_l.append(image)
+        image = left_sprite_sheet.get_image(224, 0, 24, 64)
+        self.walking_frames_l.append(image)
+
+        self.image = self.walking_frames_r[0]
+        self.image.convert()
+
 
     def update(self, platform_group):
         key = pygame.key.get_pressed()
         if key[pygame.K_d]:
             self.move_r = True
             self.facing = "right"
+            self.step_num_right += 1
+            self.step_num_left = 0
         if key[pygame.K_a]:
             self.move_l = True
             self.facing = "left"
+            self.step_num_left += 1
+            self.step_num_right = 0
         if key[pygame.K_w]:
             self.move_u = True
         if key[pygame.K_s]:
@@ -46,8 +93,10 @@ class Hero(pygame.sprite.Sprite):
 
         if not key[pygame.K_d]:
             self.move_r = False
+            self.step_num_right = 0
         if not key[pygame.K_a]:
             self.move_l = False
+            self.step_num_left = 0
         if not key[pygame.K_w]:
             self.move_u = False
         if not key[pygame.K_s]:
@@ -81,6 +130,15 @@ class Hero(pygame.sprite.Sprite):
         self.rect.top += self.yvel
         self.grounded = False
         self.collide(0, self.yvel, platform_group)
+
+        if self.step_num_left == 7:
+            self.step_num_left = 0
+        if self.step_num_right == 7:
+            self.step_num_right = 0
+        if self.facing == "right":
+            self.image = self.walking_frames_r[self.step_num_right]
+        if self.facing == "left":
+            self.image = self.walking_frames_l[self.step_num_left]
 
     def collide(self, xvel, yvel, platform_group):
         for p in platform_group:
@@ -264,4 +322,3 @@ class LaunchDesk(Platform):
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:\
                 missions(screen)
-
