@@ -74,12 +74,15 @@ class Hero(pygame.sprite.Sprite):
 
     def update(self, platform_group):
         key = pygame.key.get_pressed()
-        if key[pygame.K_d]:
+        if key[pygame.K_d] == True and key[pygame.K_a] == True:
+            self.move_r = False
+            self.move_l = False
+        if key[pygame.K_d] == True and key[pygame.K_a] == False:
             self.move_r = True
             self.facing = "right"
             self.step_num_right += 1
             self.step_num_left = 0
-        if key[pygame.K_a]:
+        if key[pygame.K_a] == True and key[pygame.K_d] == False:
             self.move_l = True
             self.facing = "left"
             self.step_num_left += 1
