@@ -1,6 +1,7 @@
 import pygame
 from arc_missions import missions
 from SpriteSheetFunction import SpriteSheet
+from arc_pause import *
 
 #Constants
 WIN_W = 1600
@@ -15,6 +16,7 @@ class Hero(pygame.sprite.Sprite):
         self.grounded = False
         self.side_speed = 3
         self.rect = pygame.Rect((x,y,24,64))
+        self.pause = False
 
         #Other stuff
         self.move_l = False
@@ -93,6 +95,8 @@ class Hero(pygame.sprite.Sprite):
             self.move_d = True
         if key[pygame.K_e]:
             self.interact = True
+        if key[pygame.K_p]:
+            self.pause = True
 
         if not key[pygame.K_d]:
             self.move_r = False
@@ -127,6 +131,10 @@ class Hero(pygame.sprite.Sprite):
             self.moving = True
         else:
             self.moving = False
+
+        if self.pause == True:
+            pause(self)
+            self.pause = False
 
         self.rect.left += self.xvel
         self.collide(self.xvel, 0, platform_group)
