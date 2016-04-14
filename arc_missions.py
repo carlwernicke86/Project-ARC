@@ -14,7 +14,10 @@ def mission_screen(m, screen):                                                  
         for event in pygame.event.get():
             click_button_group.update(screen, event)
             display_mission.update(screen, event)
-            mission_screen_loop = exit.stay
+            if exit.stay == False or display_mission.decline.stay == False:
+                mission_screen_loop = False
+
+
             if event.type == pygame.QUIT: sys.exit()
 
         display_mission.TextBlit(screen)
@@ -27,7 +30,7 @@ def missions(screen):
 
 
 
-    exit = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().bottom - 100), "Main Menu", False)
+    exit = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().bottom - 100), "Back", False)
     click_button_group = pygame.sprite.Group()
     click_button_group.add(exit)
     for m in range(len(mission_list)):                                                                           #The last argument here is the argument that needs to be passed into the button's next_screen method

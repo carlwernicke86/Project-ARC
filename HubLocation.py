@@ -20,7 +20,7 @@ def hub(screen, clock, fps, TIMER):
     hero = Hero(128, 96)
     hero_group.add(hero)
 
-    dummy_scroll = Scroll_Text("THIS IS DUMMY TEXT",BLACK)
+    #dummy_scroll = Scroll_Text("THIS IS DUMMY TEXT",BLACK)
 
     # Load apartment level
     apartment_level = [
@@ -61,9 +61,7 @@ def hub(screen, clock, fps, TIMER):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_t:
-                    dummy_scroll.Scroll(screen, TIMER)
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
