@@ -131,14 +131,14 @@ class Hero(pygame.sprite.Sprite):
         self.grounded = False
         self.collide(0, self.yvel, platform_group)
 
-        if self.step_num_left == 7:
+        if self.step_num_left == 19:
             self.step_num_left = 0
-        if self.step_num_right == 7:
+        if self.step_num_right == 19:
             self.step_num_right = 0
         if self.facing == "right":
-            self.image = self.walking_frames_r[self.step_num_right]
+            self.image = self.walking_frames_r[self.step_num_right//3]
         if self.facing == "left":
-            self.image = self.walking_frames_l[self.step_num_left]
+            self.image = self.walking_frames_l[self.step_num_left//3]
 
     def collide(self, xvel, yvel, platform_group):
         for p in platform_group:

@@ -28,7 +28,6 @@ def main(clock, fps):
     secguard_group = pygame.sprite.Group() #Security Guards
     motsen_group = pygame.sprite.Group() #Motion sensing lasers
     movelaser_group = pygame.sprite.Group() #Moving motion sensor lasers
-    triggerdoor_group = pygame.sprite.Group() #Group for the moving door
 
     #Object creation
     hero = Hero(96, 288)
@@ -71,7 +70,7 @@ def main(clock, fps):
                 platform_group.add(d)
             if col == "O":
                 o = TriggerDoor(x, y)
-                triggerdoor_group.add(o)
+                platform_group.add(o)
             if col == "L":
                 l = MotionSensor(x, y, 180, 180)
                 motsen_group.add(l)
@@ -102,7 +101,7 @@ def main(clock, fps):
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group)
         trig1.update(hero)
-        triggerdoor_group.update(trig1)
+        platform_group.update(trig1)
         motsen_group.update(hero)
         #movelaser_group.update(hero)
 
@@ -116,8 +115,6 @@ def main(clock, fps):
         for ms in motsen_group:
             if ms.active == True:
                 screen.blit(ms.image, camera.apply(ms))
-        for td in triggerdoor_group:
-            screen.blit(td.image, camera.apply(td))
         #for ml in movelaser_group:
         #    screen.blit(ml.image, camera.apply(ml))
         screen.blit(trig1.image, camera.apply(trig1))
