@@ -20,7 +20,11 @@ def options(screen):
     while option:
         mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
-            option_text_group.update(event, option_text_group, mouse_pos)
+            jump_button = jump.update(event, option_text_group,mouse_pos)
+            left_button = left.update(event, option_text_group,mouse_pos)
+            right_button = right.update(event, option_text_group,mouse_pos)
+            interact_button = interact.update(event, option_text_group,mouse_pos)
+
             click_button_group.update(screen, event)
             option = exit.stay
             if event.type == pygame.QUIT: sys.exit()
