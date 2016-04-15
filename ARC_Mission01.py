@@ -28,18 +28,26 @@ def mission01(clock, fps):
     movelaser_group = pygame.sprite.Group()
 
     #Object creation
-    hero = Hero(64, 64)
+    hero = Hero(64, 160)
+    sec1 = SecGuard("right", 256, 608, 160) #Farthest right is 1152 [36] (end of flashlight)
+    sec2 = SecGuard("left", 352, 1504, 160) #Farthest right is 1856 [58]
+    trig1 = Trigger(160,192)
+    triggerdoor1 = TriggerDoor(192, 160) #Just triggerdoor1 is updated later, independent of the platform_group.
+                                        # We can use this method for future objects that need collision but have different update arguments.
     hero_group.add(hero)
+    secguard_group.add(sec1)
+    secguard_group.add(sec2)
+    platform_group.add(triggerdoor1)
 
     #Load the level
     mission01_level = [
-        "I     I       PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
-        "I     I       P                                                   P"
-        "I     I       P                                                   P"
-        "I     PPPPPPPPP  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P"
-        "I     P                                                     P     P"
-        "I     L         P                                           P     P"
-        "I              PP                                           P     P"
+        "I     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "I     PPPPPPPPP                                                   P",
+        "I     PPPPPPPPP                                                   P",
+        "I     PPPPPPPPP  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",
+        "I     PPPPPPPPP                                             P     P",
+        "I             L                                             O     P",
+        "I               P                                                 P",
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
     ]   #0123456789012345678901234567890123456789012345678901234567890123456
         #          1         2         3         4         5         6
@@ -59,7 +67,7 @@ def mission01(clock, fps):
                 o = TriggerDoor(x, y)
                 platform_group.add(o)
             if col == "L":
-                l = MotionSensor(x, y, 120, 120)
+                l = MotionSensor(x, y, 370, 45)
                 motsen_group.add(l)
             if col == "I":
                 i = InvisibleWall(x, y)
@@ -86,8 +94,9 @@ def mission01(clock, fps):
         hero_group.update(platform_group)
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group)
-        #trig1.update(hero)
-        #platform_group.update(trig1)
+        trig1.update(hero)
+        triggerdoor1.update(trig1)
+        #platform_group.update()
         motsen_group.update(hero)
         movelaser_group.update(hero)
 
@@ -101,6 +110,7 @@ def mission01(clock, fps):
         for ms in motsen_group:
             if ms.active == True:
                 screen.blit(ms.image, camera.apply(ms))
+        screen.blit(trig1.image, camera.apply(trig1))
 
         pygame.display.flip()
 

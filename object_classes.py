@@ -256,6 +256,16 @@ class Trigger(pygame.sprite.Sprite):
         if self.active: #This is formatted like this in case we want timed triggers
             self.image.fill((243, 252, 63))
 
+
+class InvisibleWall(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([32, 64])
+        self.image.convert()
+        self.image.fill((255, 255, 255))
+        self.image.set_colorkey((255,255,255))
+        self.rect = pygame.Rect(x, y, 32, 64)
+
 class TriggerDoor(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
