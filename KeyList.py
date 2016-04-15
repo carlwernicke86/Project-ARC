@@ -61,8 +61,8 @@ key_list = [
     (pygame.K_KP7, "KEYPAD 7"),
     (pygame.K_KP8, "KEYPAD 8"),
     (pygame.K_KP9, "KEYPAD 9"),
-    (pygame.K_KP_MULTIPLY, "KP MULTIPLY"),
-    (pygame.K_KP_DIVIDE, "KP DIVIDE"),
+    (pygame.K_KP_MULTIPLY, "KP MULT"),
+    (pygame.K_KP_DIVIDE, "KP DIV"),
     (pygame.K_KP_MINUS, "KP MINUS"),
     (pygame.K_KP_PLUS, "KP PLUS"),
     (pygame.K_KP_ENTER, "KP ENTER"),
@@ -93,8 +93,8 @@ key_list = [
     (pygame.K_SCROLLOCK, "SCROLLOCK"),
     (pygame.K_RSHIFT, "RIGHT SHIFT"),
     (pygame.K_LSHIFT, "LEFT SHIFT"),
-    (pygame.K_RCTRL, "RIGHT CONTROL"),
-    (pygame.K_LCTRL, "LEFT CONTROL"),
+    (pygame.K_RCTRL, "RIGHT CTRL"),
+    (pygame.K_LCTRL, "LEFT CTRL"),
     (pygame.K_RALT, "RIGHT ALT"),
     (pygame.K_LALT, "LEFT ALT")
 ]

@@ -34,6 +34,7 @@ def mission01(clock, fps):
     trig1 = Trigger(160,192)
     triggerdoor1 = TriggerDoor(192, 160) #Just triggerdoor1 is updated later, independent of the platform_group.
                                         # We can use this method for future objects that need collision but have different update arguments.
+    trig2 = Trigger(1888, 192)
     hero_group.add(hero)
     secguard_group.add(sec1)
     secguard_group.add(sec2)
@@ -46,8 +47,8 @@ def mission01(clock, fps):
         "I     PPPPPPPPP                                                   P",
         "I     PPPPPPPPP  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",
         "I     PPPPPPPPP                                             P     P",
-        "I             L                                             O     P",
-        "I               P                                                 P",
+        "I      dddddddL                                             O     P",
+        "I               P                                             D   P",
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
     ]   #0123456789012345678901234567890123456789012345678901234567890123456
         #          1         2         3         4         5         6
@@ -67,8 +68,11 @@ def mission01(clock, fps):
                 o = TriggerDoor(x, y)
                 platform_group.add(o)
             if col == "L":
-                l = MotionSensor(x, y, 370, 45)
+                l = MotionSensor(x, y, 370, 45, False)
                 motsen_group.add(l)
+            if col == "d":
+                l2 = MotionSensor(x, y, 999999999999, 370 + 45 + 10, True)
+                motsen_group.add(l2)
             if col == "I":
                 i = InvisibleWall(x, y)
                 platform_group.add(i)
@@ -111,6 +115,7 @@ def mission01(clock, fps):
             if ms.active == True:
                 screen.blit(ms.image, camera.apply(ms))
         screen.blit(trig1.image, camera.apply(trig1))
+        screen.blit(trig2.image, camera.apply(trig2))
 
         pygame.display.flip()
 

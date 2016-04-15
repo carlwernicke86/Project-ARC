@@ -281,15 +281,18 @@ class TriggerDoor(pygame.sprite.Sprite):
             self.movecount += 1
 
 class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk through these to trigger them
-    def __init__(self, x, y, ontime, offtime): #Ontime is how long the laser is on, offtime is how long the laser is off
-        pygame.sprite.Sprite.__init__(self)
+    def __init__(self, x, y, ontime, offtime, delayed): #Ontime is how long the laser is on, offtime is how long the laser is off
+        pygame.sprite.Sprite.__init__(self) #delayed determines if the laser starts in the on or off position, usually it will be False
         self.image = pygame.Surface([8, 64])
         self.image.convert()
         self.image.fill((247, 29, 29))
         self.rect = pygame.Rect(x, y, 8, 64)
         self.ontime = ontime
         self.offtime = offtime
-        self.active = True
+        if delayed:
+            self.active = False
+        else:
+            self.active = True
         self.ontimer = 0 #Counts how long the laser is on
         self.offtimer = 0 #Counts how long the laser is off
 

@@ -72,7 +72,7 @@ def main(clock, fps):
                 o = TriggerDoor(x, y)
                 platform_group.add(o)
             if col == "L":
-                l = MotionSensor(x, y, 180, 180)
+                l = MotionSensor(x, y, 180, 180, False)
                 motsen_group.add(l)
             x += 32
         y += 32
