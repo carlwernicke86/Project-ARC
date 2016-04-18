@@ -1,7 +1,7 @@
 import pygame
-from arc_missions import missions
 from SpriteSheetFunction import SpriteSheet
 from arc_pause import *
+from arc_lose import lose
 
 #Constants
 WIN_W = 1600
@@ -224,7 +224,7 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
 
     def update(self, hero, secguard_group):
         if pygame.sprite.spritecollideany(hero, secguard_group, collided = None) != None:
-            print "GAME OVER"
+            lose()
         if self.direction == "left":
             self.rect.x -= 1
             self.steps += 1
@@ -315,7 +315,7 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
             self.offtimer = 0
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
-            print "CAUGHT"
+            lose()
 
 class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
     def __init__(self, x, y, direction, distance):
@@ -349,7 +349,7 @@ class LaunchDesk(Platform):
     def __init__(self, x, y):
         Platform.__init__(self, (154, 90, 7), x, y)
 
-    def update(self, hero, screen):
+    def update(self, hero, screen, missions):
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:\
                 missions(screen)
