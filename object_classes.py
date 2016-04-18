@@ -30,6 +30,8 @@ class Hero(pygame.sprite.Sprite):
         self.step_num_left = 0
 
         self.interact = False
+        
+        self.hidden = False
 
         #Sprite sheet loading
         right_sprite_sheet = SpriteSheet("Sprites/player_sprite_right.png")
@@ -150,6 +152,11 @@ class Hero(pygame.sprite.Sprite):
             self.image = self.walking_frames_r[self.step_num_right//3]
         if self.facing == "left":
             self.image = self.walking_frames_l[self.step_num_left//3]
+            
+        if self.hidden:
+            print "HIDDEN"
+            if self.move_r or self.move_l or self.move_u or self.move_d:
+                self.hidden = False
 
     def collide(self, xvel, yvel, platform_group):
         for p in platform_group:
@@ -346,3 +353,15 @@ class LaunchDesk(Platform):
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:\
                 missions(screen)
+                
+class HidingSpot():
+    def __init__(self, x, y):
+        self.image = pygame.Surface([32, 64])
+        self.image.convert()
+        self.image.fill((86,250,53))
+        self.rect = pygame.Rect(x, y, 32, 64)
+
+    def update(self, hero):
+        if hero.interact:
+            if abs(hero.rect.centerx - self.rect.centerx) < 10 and hero.rect.centery == self.rect.centery:
+                hero.hidden = True
