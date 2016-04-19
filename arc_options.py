@@ -1,4 +1,4 @@
-from other_objects import *
+from object_classes import *
 import pygame, sys
 
 def options(screen):
