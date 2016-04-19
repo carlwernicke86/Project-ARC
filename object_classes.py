@@ -356,6 +356,8 @@ class Hero(pygame.sprite.Sprite):
             print "HIDDEN"
             if self.move_r or self.move_l or self.move_u or self.move_d:
                 self.hidden = False
+            self.step_num_left = 0
+            self.step_num_right = 0
 
     def collide(self, xvel, yvel, platform_group):
         for p in platform_group:
@@ -550,11 +552,12 @@ class LaunchDesk(Platform):
 
     def update(self, hero, screen, missions):
         if hero.interact:
-            if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:\
+            if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:
                 missions(screen)
                 
-class HidingSpot():
+class HidingSpot(pygame.sprite.Sprite):
     def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface([32, 64])
         self.image.convert()
         self.image.fill((86,250,53))
@@ -562,5 +565,11 @@ class HidingSpot():
 
     def update(self, hero):
         if hero.interact:
-            if abs(hero.rect.centerx - self.rect.centerx) < 10 and hero.rect.centery == self.rect.centery:
-                hero.hidden = True
+            if abs(hero.rect.centerx - self.rect.centerx) < 5 and hero.rect.centery == self.rect.centery:
+                distance = hero.rect.centerx - self.rect.centerx
+                if distance != 0:
+                    hero.rect.centerx = self.rect.centerx
+
+                    hero.hidden = True
+                else: #If the distance is 0, perfectly lined up
+                    hero.hidden = True
