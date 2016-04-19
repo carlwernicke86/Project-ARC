@@ -1,5 +1,5 @@
 import pygame, sys
-from other_objects import *
+from object_classes import *
 
 WIN_W = 1600
 WIN_H = 900
