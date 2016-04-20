@@ -99,7 +99,6 @@ class Option_Text(pygame.sprite.Sprite):
         self.button_text_rect.y = self.rect.y
         self.selected = False
         self.back_outline = pygame.Rect(self.back_rect.x - 1, self.back_rect.top - 4, self.back_rect.height + 2, self.back_rect.width + 2)
-        self.button_text = ""
 
     def update(self, event, option_text_group, mouse_pos):
         if event.type == pygame.MOUSEBUTTONDOWN and mouse_pos[0] > self.back_outline.left and mouse_pos[0] < self.back_outline.right and mouse_pos[1] > self.back_outline.top and mouse_pos[1] < self.back_outline.bottom:
