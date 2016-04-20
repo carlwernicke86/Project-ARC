@@ -115,6 +115,8 @@ class Option_Text(pygame.sprite.Sprite):
                     self.button = k[0]
                     self.button_text = k[1]
                     self.button_text_image = self.font.render(self.button_text, 1, self.color)
+                    
+        return self.button
 
     def TextBlit(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
