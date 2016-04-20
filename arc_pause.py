@@ -1,5 +1,6 @@
 __author__ = 'cardg_000'
-from other_ojbects import *
+import pygame
+from other_objects import *
 
 
 
