@@ -1,6 +1,7 @@
 import pygame, os, sys, math
 from object_classes import *
 from other_objects import *
+from arc_missions import missions
 
 os.environ["SDL_VIDEO_CENTERED"] = '1'
 
