@@ -1,5 +1,5 @@
 __author__ = 'cardg_000'
-from object_classes import *
+from other_ojbects import *
 
 
 
