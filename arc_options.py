@@ -24,6 +24,12 @@ def options(screen):
             left_button = left.update(event, option_text_group,mouse_pos)
             right_button = right.update(event, option_text_group,mouse_pos)
             interact_button = interact.update(event, option_text_group,mouse_pos)
+            ControlOptions = open('ControlOptions.txt', 'w')
+            ControlOptions.write(jump_button+"\n")
+            ControlOptions.write(left_button+"\n")
+            ControlOptions.write(right_button+"\n")
+            ControlOptions.write(interact_button)
+            ControlOptions.close()
 
             click_button_group.update(screen, event)
             option = exit.stay
