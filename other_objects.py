@@ -64,7 +64,7 @@ class Click_Button(pygame.sprite.Sprite):
             elif self.object != None:
                 self.next_screen(self.object, screen)
             else:
-                self.next_screen(screen)
+                self.next_screen()
             self.gray = False
 
 
