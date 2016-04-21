@@ -23,9 +23,15 @@ class Hacker(pygame.sprite.Sprite):
         self.rect = pygame.Rect((x, y, 32, 32))
 
         self.pause = False
+        self.timer = 1
+        self.enabled = False
 
     def update(self, wall_group, exit_group):
         key = pygame.key.get_pressed()
+        if self.enabled is False:
+            self.timer +=1
+        if self.timer == 60:
+            self.enabled = True
         if key[pygame.K_w] == True and self.facing != "down":
             self.facing = "up"
         if key[pygame.K_a] == True and self.facing != "right":
@@ -35,13 +41,13 @@ class Hacker(pygame.sprite.Sprite):
         if key[pygame.K_s] == True and self.facing != "up":
             self.facing = "down"
 
-        if self.facing == "up":
+        if self.facing == "up" and self.enabled:
             self.rect.y -= self.speed
-        if self.facing == "down":
+        if self.facing == "down" and self.enabled:
             self.rect.y += self.speed
-        if self.facing == "left":
+        if self.facing == "left" and self.enabled:
             self.rect.x -= self.speed
-        if self.facing == "right":
+        if self.facing == "right" and self.enabled:
             self.rect.x += self.speed
 
         for w in wall_group:
