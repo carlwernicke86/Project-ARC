@@ -4,6 +4,7 @@ from arc_pause import *
 from arc_lose import lose
 from KeyList import key_list
 from KeyList import key_decoder
+from MazePuzzle1 import *
 
 #Constants
 BLACK = (0, 0, 0)
@@ -255,9 +256,9 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
         self.rect = pygame.Rect(x, y, 128, 64)
         self.steps = 0
 
-    def update(self, hero, secguard_group, cur_level):
+    def update(self, hero, secguard_group):
         if pygame.sprite.spritecollideany(hero, secguard_group, collided = None) != None:
-            lose(cur_level)
+            lose()
         if self.direction == "left":
             self.rect.x -= 1
             self.steps += 1
@@ -336,7 +337,7 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
         self.ontimer = 0 #Counts how long the laser is on
         self.offtimer = 0 #Counts how long the laser is off
 
-    def update(self, hero, cur_level):
+    def update(self, hero):
         if self.active == True:
             self.ontimer += 1
         elif self.active == False:
@@ -348,7 +349,7 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
             self.offtimer = 0
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
-            lose(cur_level)
+            lose()
 
 class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
     def __init__(self, x, y, direction, distance):
@@ -362,9 +363,9 @@ class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the
         self.moved = 0 #Measures how much the laser has moved
         self.speed = 2
 
-    def update(self, hero, cur_level):
+    def update(self, hero):
         if pygame.sprite.collide_rect(self, hero) and hero.moving == True:
-            lose(cur_level)
+            print "YOU GOT CAUGHT"
         if self.direction == "left":
             self.rect.x -= self.speed
             self.moved += self.speed
@@ -382,10 +383,10 @@ class LaunchDesk(Platform):
     def __init__(self, x, y):
         Platform.__init__(self, (154, 90, 7), x, y)
 
-    def update(self, hero, missions):
+    def update(self, hero, screen, missions):
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:
-                missions()
+                missions(screen)
                 
 class HidingSpot(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -405,3 +406,31 @@ class HidingSpot(pygame.sprite.Sprite):
                     hero.hidden = True
                 else: #If the distance is 0, perfectly lined up
                     hero.hidden = True
+
+class PuzzleDoor(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([32, 64])
+        self.image.convert()
+        self.image.fill((255, 0, 255))
+        self.rect = pygame.Rect(x, y, 32, 64)
+        self.movecount = 0
+
+    def update(self, PuzzleDoorTrigger):
+        if PuzzleDoorTrigger.active == True and self.movecount < 64:
+            self.rect.y -= 1
+            self.movecount += 1
+
+class PuzzleDoorTrigger(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([32, 64])
+        self.image.convert()
+        self.image.fill((255, 153, 255))
+        self.rect = pygame.Rect(x, y, 32, 64)
+        self.active = False
+
+    def update(self, hero):
+        if hero.interact:
+            if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 10:
+                self.active = True

@@ -29,26 +29,31 @@ def main(clock, fps):
     motsen_group = pygame.sprite.Group() #Motion sensing lasers
     movelaser_group = pygame.sprite.Group() #Moving motion sensor lasers
     hidingspot_group = pygame.sprite.Group() #Potted plants, places the hero can hide
+    puzzletrigger_group = pygame.sprite.Group() #Triggers puzzles that are required to open puzzle doors
 
     #Object creation
     hero = Hero(96, 288)
     hero_group.add(hero)
+    puzzletrigger = PuzzleDoorTrigger(896, 288)
+    puzzletrigger_group.add(puzzletrigger)
+    puzzledoor = PuzzleDoor(960, 288)
+    platform_group.add(puzzledoor)
 
     #Load tutorial level
     test_level = [ #3 space gap is jumpable
-        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
-        "P                                                          P",
-        "P                                                          P",
-        "P                                                          P",
-        "P                                                          P",
-        "P                                                          P",
-        "P                                                          P",
-        "P                                                          P",
-        "P                                                          P",
-        "P          H                                               P",
-        "P                                                          P",#288 y value
-        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
-    ]   #01234567890123456789012345678901234567890123456789012345678
+        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP", #0
+        "P                                                          P", #1
+        "P                                                          P", #2
+        "P                                                          P", #3
+        "P                                                          P", #4
+        "P                                                          P", #5
+        "P                                                          P", #6
+        "P                                                          P", #7
+        "P                                                          P", #8
+        "P          H                  /                            P", #9
+        "P                                                          P", #10
+        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"  #11
+    ]   #012345678901234567890123456789012345678901234567890123456789
         #          1         2         3         4         5
          #Multiply by 32 to get x placement value
 
@@ -97,12 +102,16 @@ def main(clock, fps):
         motsen_group.update(hero)
         #movelaser_group.update(hero)
         hidingspot_group.update(hero)
+        puzzletrigger.update(hero)
+        puzzledoor.update(puzzletrigger)
 
         # Put stuff on the screen yo
         for hs in hidingspot_group:
             screen.blit(hs.image, camera.apply(hs))
         for p in platform_group:
             screen.blit(p.image, camera.apply(p))
+        for pt in puzzletrigger_group:
+            screen.blit(pt.image, camera.apply(pt))
         for h in hero_group:
             screen.blit(h.image, camera.apply(h))
         for sg in secguard_group:

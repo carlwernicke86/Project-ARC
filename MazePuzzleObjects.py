@@ -25,7 +25,7 @@ class Hacker(pygame.sprite.Sprite):
         self.pause = False
         self.timer = 1
         self.enabled = False
-        
+
         self.deactived = False
 
     def update(self, wall_group, exit_group):
@@ -61,7 +61,7 @@ class Hacker(pygame.sprite.Sprite):
             if pygame.sprite.collide_rect(self, e):
                 self.kill()
                 print "HACKED"
-                self.deactivated = True
+                self.deactived = True
 
 class ExitBlock(pygame.sprite.Sprite):
     def __init__(self, x, y):
