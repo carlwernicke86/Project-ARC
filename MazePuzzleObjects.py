@@ -11,60 +11,6 @@ class Wall(pygame.sprite.Sprite):
         self.image.fill((226, 18, 18))
         self.rect = pygame.Rect(x, y, 32 ,32)
 
-"""class Hacker(pygame.sprite.Sprite):
-    def __init__(self, x, y, speed, facing):
-        pygame.sprite.Sprite.__init__(self)
-        self.facing = facing
-        self.speed = speed
-
-        self.image = pygame.Surface([32, 32])
-        self.image.convert()
-        self.image.fill((4, 74, 238))
-        self.rect = pygame.Rect((x, y, 32, 32))
-
-        self.pause = False
-
-        self.move_l = False
-        self.move_r = False
-        self.move_u = False
-        self.move_d = False
-
-    def update(self, wall_group):
-        key = pygame.key.get_pressed()
-        if key[pygame.K_w] == True and not self.move_d:
-            self.move_u = True
-            self.move_r = False
-            self.move_d = False
-            self.move_l = False
-            self.facing = "up"
-        if key[pygame.K_a] == True and not self.move_r:
-            self.move_l = True
-            self.move_r = False
-            self.move_d = False
-            self.move_u = False
-            self.facing = "left"
-        if key[pygame.K_d] == True and not self.move_l:
-            self.move_r = True
-            self.move_d = False
-            self.move_u = False
-            self.move_l = False
-            self.facing = "right"
-        if key[pygame.K_s] == True and not self.move_u:
-            self.move_d = True
-            self.move_r = False
-            self.move_u = False
-            self.move_l = False
-            self.facing = "down"
-
-        if self.move_u:
-            self.rect.y -= self.speed
-        if self.move_d:
-            self.rect.y += self.speed
-        if self.move_l:
-            self.rect.x -= self.speed
-        if self.move_r:
-            self.rect.x += self.speed
-"""
 class Hacker(pygame.sprite.Sprite):
     def __init__(self, x, y, speed, facing):
         pygame.sprite.Sprite.__init__(self)
@@ -78,7 +24,7 @@ class Hacker(pygame.sprite.Sprite):
 
         self.pause = False
 
-    def update(self, wall_group):
+    def update(self, wall_group, exit_group):
         key = pygame.key.get_pressed()
         if key[pygame.K_w] == True and self.facing != "down":
             self.facing = "up"
@@ -97,3 +43,21 @@ class Hacker(pygame.sprite.Sprite):
             self.rect.x -= self.speed
         if self.facing == "right":
             self.rect.x += self.speed
+
+        for w in wall_group:
+            if pygame.sprite.collide_rect(self, w):
+                self.kill()
+                print "GAME OVER"
+
+        for e in exit_group:
+            if pygame.sprite.collide_rect(self, e):
+                self.kill()
+                print "HACKED"
+
+class ExitBlock(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([32, 32])
+        self.image.convert()
+        self.image.fill((18, 226, 18))
+        self.rect = pygame.Rect(x, y, 32, 32)
