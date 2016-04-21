@@ -12,7 +12,7 @@ fps = 60
 WIN_W = 1600
 WIN_H = 900
 
-def mission01(clock, fps):
+def mission01():
     pygame.init()
 
     #Basic settings
@@ -97,12 +97,12 @@ def mission01(clock, fps):
         # Update
         hero_group.update(platform_group)
         camera.update(hero.rect)
-        secguard_group.update(hero, secguard_group)
+        secguard_group.update(hero, secguard_group, mission01)
         trig1.update(hero)
         triggerdoor1.update(trig1)
         #platform_group.update()
-        motsen_group.update(hero)
-        movelaser_group.update(hero)
+        motsen_group.update(hero, mission01)
+        movelaser_group.update(hero, mission01)
 
         #Draw something
         for p in platform_group:
