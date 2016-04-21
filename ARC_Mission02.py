@@ -99,8 +99,8 @@ def mission02(clock, fps):
         x = 0
 
     #Set Up Camera
-    total_width_app = len(mission01_level[0]) * 32
-    total_height_app = len(mission01_level) * 32
+    total_width_app = len(mission02_level[0]) * 32
+    total_height_app = len(mission02_level) * 32
     camera = Camera(total_width_app, total_height_app)
 
     while mission02:
