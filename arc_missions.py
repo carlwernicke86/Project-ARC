@@ -2,7 +2,9 @@ import sys
 from other_objects import *
 from arc_missionList import mission_list
 
-def mission_screen(m, screen):                                                               #mission_goto initiates the level for the mission
+screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
+
+def mission_screen(m):                                                               #mission_goto initiates the level for the mission
     display_mission = Mission(screen, m[0], m[1],m[2], m[3], m[4], m[5])                     #Gives the displayed mission the properties it holds (screen, employer, building, difficulty, requirements, reward, mission_goto)
     exit = Click_Button(40, BLACK, LIGHT_GREY, (100, screen.get_rect().bottom - 100), "Missions", False)
     click_button_group = pygame.sprite.Group()
@@ -26,7 +28,7 @@ def mission_screen(m, screen):                                                  
         pygame.display.update()
 
 
-def missions(screen):
+def missions():
 
 
 
