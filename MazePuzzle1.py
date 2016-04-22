@@ -90,7 +90,7 @@ def MazePuzzle1(clock, fps):
             screen.blit(e.image, (e.rect.x, e.rect.y))
         screen.blit(hacker.image, (hacker.rect.x, hacker.rect.y))
 
-        pygame.display.flip()
+        if hacker.deactivated:
+            break
 
-if __name__ == "__main__":
-    MazePuzzle1(clock, fps)
+        pygame.display.flip()

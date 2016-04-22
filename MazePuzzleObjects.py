@@ -1,4 +1,6 @@
 import pygame
+from arc_lose import lose
+
 from arc_pause import *
 WIN_W = 1600
 WIN_H = 900
@@ -26,7 +28,7 @@ class Hacker(pygame.sprite.Sprite):
         self.timer = 1
         self.enabled = False
 
-        self.deactived = False
+        self.deactivated = False
 
     def update(self, wall_group, exit_group):
         key = pygame.key.get_pressed()
@@ -55,13 +57,12 @@ class Hacker(pygame.sprite.Sprite):
         for w in wall_group:
             if pygame.sprite.collide_rect(self, w):
                 self.kill()
-                print "GAME OVER"
+                lose()
 
         for e in exit_group:
             if pygame.sprite.collide_rect(self, e):
                 self.kill()
-                print "HACKED"
-                self.deactived = True
+                self.deactivated = True
 
 class ExitBlock(pygame.sprite.Sprite):
     def __init__(self, x, y):

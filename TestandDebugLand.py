@@ -1,5 +1,6 @@
 import pygame, os, sys, math
 from object_classes import *
+from MazePuzzle1 import *
 
 os.environ["SDL_VIDE_CENTERED"] = '1'
 
@@ -102,7 +103,7 @@ def main(clock, fps):
         motsen_group.update(hero)
         #movelaser_group.update(hero)
         hidingspot_group.update(hero)
-        puzzletrigger.update(hero)
+        puzzletrigger.update(hero, MazePuzzle1)
         puzzledoor.update(puzzletrigger)
 
         # Put stuff on the screen yo

@@ -4,7 +4,6 @@ from arc_pause import *
 from arc_lose import lose
 from KeyList import key_list
 from KeyList import key_decoder
-from MazePuzzle1 import *
 
 #Constants
 BLACK = (0, 0, 0)
@@ -16,6 +15,9 @@ RED =(200, 50, 50)
 
 WIN_W = 1600
 WIN_H = 900
+
+clock = pygame.time.Clock()
+fps = 60
 
 #Position is a tuple of (x, y)
 
@@ -430,7 +432,8 @@ class PuzzleDoorTrigger(pygame.sprite.Sprite):
         self.rect = pygame.Rect(x, y, 32, 64)
         self.active = False
 
-    def update(self, hero):
+    def update(self, hero, puzzle_function):
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 10:
+                puzzle_function(clock, fps)
                 self.active = True
