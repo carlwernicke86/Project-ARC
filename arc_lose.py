@@ -3,7 +3,7 @@ from other_objects import *
 
 WIN_W = 1600
 WIN_H = 900
-def lose():
+def lose(cur_level):
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
     clock = pygame.time.Clock()
 
@@ -26,6 +26,8 @@ def lose():
             if event.type == pygame.QUIT: sys.exit()
             for c in click_button_group:
                 c.update(screen, event)
+                
+            lose = retry.stay
 
         for c in click_button_group:
             c.TextBlit(screen)
@@ -33,5 +35,8 @@ def lose():
             r.update(screen)
 
         pygame.display.flip()
+        
+    if retry.stay == False:
+        cur_level()
 
 
