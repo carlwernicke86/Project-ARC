@@ -2,6 +2,34 @@ from other_objects import *
 import pygame, sys
 
 def options(screen):
+    ControlOptions = open('ControlOptions.txt', 'r')
+    jump_button = ControlOptions.readline()
+    left_button = ControlOptions.readline()
+    right_button = ControlOptions.readline()
+    interact_button = ControlOptions.readline()
+    ControlOptions.close()
+
+    jump_button = jump_button[0:len(jump_button) - 1]
+    left_button = left_button[0:len(left_button) - 1]
+    right_button = right_button[0:len(right_button) - 1]
+    interact_button = interact_button[0]
+
+
+    for k in key_list:
+        if jump_button == k[1]:
+            jump_button = k[0]
+        if left_button == k[1]:
+            left_button = k[0]
+        if right_button == k[1]:
+            right_button = k[0]
+        if interact_button == k[1]:
+            interact_button = k[0]
+
+    #These are all the options buttons
+    jump = Option_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2 - 150), "Jump:", jump_button)
+    right = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 125), "Right:", right_button)
+    left = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 250), "Left: ", left_button)
+    interact = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 375), "Interact: ", interact_button)
     #These are all the options buttons
     jump = Option_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2 - 150), "Jump:", pygame.K_w)
     right = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 125), "Right:", pygame.K_d)
