@@ -261,9 +261,9 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
         self.rect = pygame.Rect(x, y, 128, 64)
         self.steps = 0
 
-    def update(self, hero, secguard_group):
+    def update(self, hero, secguard_group, cur_level):
         if pygame.sprite.spritecollideany(hero, secguard_group, collided = None) != None:
-            lose()
+            lose(cur_level)
         if self.direction == "left":
             self.rect.x -= 1
             self.steps += 1
@@ -342,7 +342,7 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
         self.ontimer = 0 #Counts how long the laser is on
         self.offtimer = 0 #Counts how long the laser is off
 
-    def update(self, hero):
+    def update(self, hero, cur_level):
         if self.active == True:
             self.ontimer += 1
         elif self.active == False:
@@ -354,7 +354,7 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
             self.offtimer = 0
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
-            lose()
+            lose(cur_level)
 
 class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
     def __init__(self, x, y, direction, distance):
@@ -368,9 +368,9 @@ class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the
         self.moved = 0 #Measures how much the laser has moved
         self.speed = 2
 
-    def update(self, hero):
+    def update(self, hero, cur_level):
         if pygame.sprite.collide_rect(self, hero) and hero.moving == True:
-            print "YOU GOT CAUGHT"
+            lose(cur_level)
         if self.direction == "left":
             self.rect.x -= self.speed
             self.moved += self.speed
