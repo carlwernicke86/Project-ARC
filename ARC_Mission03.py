@@ -29,7 +29,7 @@ def mission03(clock, fps):
     movelaser_group = pygame.sprite.Group()
 
     #Object creation
-    hero = Hero(64, 160)
+    hero = Hero(64, 2144)
     sec1 = SecGuard("right", 384, (38*32), 160) #Farthest right is 1152 [36] (end of flashlight)
     sec2 = SecGuard("left", 352, 2912, 160) #Farthest right is 1856 [58]
     '''
@@ -53,92 +53,105 @@ def mission03(clock, fps):
     secguard_group.add(sec2)
     #platform_group.add(triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor4, triggerdoor5)
 
+    #CREATE THE ELEVATOR BABY CHOO CHOO
+    edoor = ElevatorDoor(160, 2144)
+    eroof = ElevatorRoof(64, 2080)
+    efloor = ElevatorFloor(64, 2208)
+    ewall = ElevatorWall(32, 2080)
+    edoorframe = ElevatorDoorFrame(160, 2112)
+
+    platform_group.add(eroof)
+    platform_group.add(efloor)
+    platform_group.add(ewall)
+    platform_group.add(edoorframe)
+    platform_group.add(edoor)
+
     #Load the level
     mission03_level = [
-        "IPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#0
-        "I                                                               P",
-        "I                                                               P",
-        "I                                                               P",
-        "I                                                               P",
-        "IPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#5
-        "I                                                               P",
-        "I                                                               P",
-        "I                                                               P",
-        "I                                                               P",
-        "IPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP      P",#10
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P            PPPPPPPPPPPPPPPPPPPP",
-        "P                               P                               P",
-        "P                               P                               P",#15
-        "P                               P               PPPPPPPPPPPPPPPPP",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P              PPPPPPPP         P",
-        "P                               P                            PPPP",#20
-        "P                               P      PPPPPPPP                 P",
-        "P                               P                               P",
-        "P                               PPPPPPPPPPPPPPPPPPPPPPPPPPPPPP  P",
-        "P                               P                               P",
-        "P                               P                               P",#25
-        "P                               PPPPPPPPPPP            PPPPPPPPPP",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#30
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#35
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#40
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#45
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#50
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#55
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#60
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#65
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",
-        "P                               P                               P",#70
-        "I                               P                               P",
-        "P                               P                               P",
-        "I                               P                               P",
-        "I                               P                               P",
-        "I                               P                               P",#75
-        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#0
+        "P                                                               P",
+        "P                                                               P",
+        "P                                                               P",
+        "P                                                               P",
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#5
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         PPPPPPPPPPPPPPPPPPPPPPPPPP      P",#10
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P            PPPPPPPPPPPPPPPPPPPP",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#15
+        "P     P                         P               PPPPPPPPPPPPPPPPP",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P              PPPPPPPP         P",
+        "P     P                         P                            PPPP",#20
+        "P     P                         P      PPPPPPPP                 P",
+        "P     P                         P                               P",
+        "P     P                         PPPPPPPPPPPPPPPPPPPPPPPPPPPPPP  P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#25
+        "P     P                         PPPPPPPPPPP            PPPPPPPPPP",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#30
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#35
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#40
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#45
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#50
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#55
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#60
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "PE    P                         P                               P",#65 #'E' simply denotes where the elevator roof is, does not spawn anything
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#70
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",
+        "P     P                         P                               P",#75
+        "PIIIIIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
     ]   #01234567890123456789012345678901234567890123456789012345678901234
         #          1         2         3         4         5         6
 
     #Build level
     x = y = 0
     platforms = []
-    for row in mission02_level:
+    for row in mission03_level:
         for col in row:
             if col == "P":
                 p = Platform([61, 61, 61], x, y)
@@ -169,8 +182,8 @@ def mission03(clock, fps):
         x = 0
 
     #Set Up Camera
-    total_width_app = len(mission02_level[0]) * 32
-    total_height_app = len(mission02_level) * 32
+    total_width_app = len(mission03_level[0]) * 32
+    total_height_app = len(mission03_level) * 32
     camera = Camera(total_width_app, total_height_app)
 
     while mission03_loop:
@@ -184,6 +197,8 @@ def mission03(clock, fps):
 
         # Update
         hero_group.update(platform_group)
+        #if efloor.climbing:
+        #    hero.rect.y -= 2
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group)
         '''
@@ -199,7 +214,11 @@ def mission03(clock, fps):
         triggerdoor5.update(trig5)
         '''
 
-        #platform_group.update()
+        eroof.update()
+        efloor.update(hero)
+        ewall.update()
+        edoorframe.update(hero)
+        edoor.update(hero)
         motsen_group.update(hero)
         movelaser_group.update(hero)
 
@@ -213,13 +232,13 @@ def mission03(clock, fps):
         for ms in motsen_group:
             if ms.active == True:
                 screen.blit(ms.image, camera.apply(ms))
-        screen.blit(trig1.image, camera.apply(trig1))
-        screen.blit(trig2.image, camera.apply(trig2))
-        screen.blit(trig3.image, camera.apply(trig3))
-        screen.blit(trig4.image, camera.apply(trig4))
-        screen.blit(trig5.image, camera.apply(trig5))
+        #screen.blit(trig1.image, camera.apply(trig1))
+        #screen.blit(trig2.image, camera.apply(trig2))
+        #screen.blit(trig3.image, camera.apply(trig3))
+        #screen.blit(trig4.image, camera.apply(trig4))
+        #screen.blit(trig5.image, camera.apply(trig5))
 
         pygame.display.flip()
 
 if __name__ == "__main__":
-    mission02(clock, fps)
+    mission03(clock, fps)
