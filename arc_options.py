@@ -30,11 +30,7 @@ def options(screen):
     right = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 125), "Right:", right_button)
     left = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 250), "Left: ", left_button)
     interact = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 375), "Interact: ", interact_button)
-    #These are all the options buttons
-    jump = Option_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2 - 150), "Jump:", pygame.K_w)
-    right = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 125), "Right:", pygame.K_d)
-    left = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 250), "Left: ", pygame.K_a)
-    interact = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 375), "Interact: ", pygame.K_e)
+    
 
     option_text_group = pygame.sprite.Group()
     option_text_group.add(jump, right, left, interact)
