@@ -1,6 +1,7 @@
 from other_objects import *
 import pygame, sys
 
+screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 def options(screen):
     ControlOptions = open('ControlOptions.txt', 'r')
     jump_button = ControlOptions.readline()
