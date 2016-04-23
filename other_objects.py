@@ -106,12 +106,16 @@ class Option_Text(pygame.sprite.Sprite):
                 o.selected = False
             self.selected = True
 
-        if self.selected == True:
+         if self.selected == True:
              for k in key_list:
                  if event.type == pygame.KEYDOWN and event.key == k[0]:
                     self.button = k[0]
-                    self.button_text = k[1]
-                    self.button_text_image = self.font.render(self.button_text, 1, self.color)
+
+        for k in key_list:
+            if k[0] == self.button:
+                self.button_text = k[1]
+        self.button_text_image = self.font.render(self.button_text, 1, self.color)
+
         return self.button_text
 
     def TextBlit(self, screen):
