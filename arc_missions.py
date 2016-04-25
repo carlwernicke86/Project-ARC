@@ -30,8 +30,6 @@ def mission_screen(m):                                                          
 
 def missions():
 
-
-
     exit = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().bottom - 100), "Back", False)
     click_button_group = pygame.sprite.Group()
     click_button_group.add(exit)

@@ -384,10 +384,10 @@ class LaunchDesk(Platform):
     def __init__(self, x, y):
         Platform.__init__(self, (154, 90, 7), x, y)
 
-    def update(self, hero, screen, missions):
+    def update(self, hero, missions):
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:
-                missions(screen)
+                missions()
                 
 class HidingSpot(pygame.sprite.Sprite):
     def __init__(self, x, y):
