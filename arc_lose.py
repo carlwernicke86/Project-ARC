@@ -43,6 +43,7 @@ def lose(cur_level, hero):
     if hub_go == False:         #Returns to the Mission Screen
         hero.dead = True
     if menu == False:           #Returns to the Main Menu
-        x = 1
+        hero.dead = True
+        hero.menu = True
 
 
