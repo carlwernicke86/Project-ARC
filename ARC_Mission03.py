@@ -249,7 +249,9 @@ def mission03(clock, fps):
         #screen.blit(trig3.image, camera.apply(trig3))
         #screen.blit(trig4.image, camera.apply(trig4))
         #screen.blit(trig5.image, camera.apply(trig5))
-
+        
+        if hero.dead == True:
+            break
         pygame.display.flip()
 
 if __name__ == "__main__":
