@@ -3,7 +3,7 @@ from other_objects import *
 
 WIN_W = 1600
 WIN_H = 900
-def lose(cur_level):
+def lose(cur_level, hero):
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
     clock = pygame.time.Clock()
 
@@ -19,15 +19,17 @@ def lose(cur_level):
     click_button_group.add(retry, apartment, exit)
 
 
-    while lose:
+    while lose and hub_go and menu:
         clock.tick(60)
         screen.fill(WHITE)
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
             for c in click_button_group:
                 c.update(screen, event)
-                
+
             lose = retry.stay
+            hub_go = apartment.stay
+            menu = exit.stay
 
         for c in click_button_group:
             c.TextBlit(screen)
@@ -35,8 +37,12 @@ def lose(cur_level):
             r.update(screen)
 
         pygame.display.flip()
-        
-    if retry.stay == False:
+
+    if retry.stay == False:     #Retrys the mission
         cur_level()
+    if hub_go == False:         #Returns to the Mission Screen
+        hero.dead = True
+    if menu == False:           #Returns to the Main Menu
+        x = 1
 
 
