@@ -35,6 +35,8 @@ def mission03(clock, fps):
     hero = Hero(64, 2144)
     sec1 = SecGuard("right", 384, (38*32), 160) #Farthest right is 1152 [36] (end of flashlight)
     sec2 = SecGuard("left", 352, 2912, 160) #Farthest right is 1856 [58]
+    invisDoor = TriggerDoor(192, 160)
+    invisTrig = Trigger(256, 128)
     '''
     trig1 = Trigger(288, 192)
     triggerdoor1 = TriggerDoor(320, 160) #Just triggerdoor1 is updated later, independent of the platform_group.
