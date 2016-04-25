@@ -175,10 +175,10 @@ class Hero(pygame.sprite.Sprite):
             self.pause = False
 
         self.rect.left += self.xvel
-        self.collide(self.xvel, 0, platform_group)
+          self.collide(self.xvel, 0, platform_group, cur_level)
         self.rect.top += self.yvel
         self.grounded = False
-        self.collide(0, self.yvel, platform_group)
+        self.collide(0, self.yvel, platform_group, cur_level)
 
         if self.step_num_left == 19:
             self.step_num_left = 0
@@ -196,11 +196,11 @@ class Hero(pygame.sprite.Sprite):
             self.step_num_left = 0
             self.step_num_right = 0
 
-    def collide(self, xvel, yvel, platform_group):
+    def collide(self, xvel, yvel, platform_group, cur_level):
         for p in platform_group:
             if pygame.sprite.collide_rect(self, p):
                 if isinstance(p, WinDocs):
-                    x = 1
+                    win(self, cur_level)
                 if xvel > 0:
                     self.rect.right = p.rect.left
                 if xvel < 0:
