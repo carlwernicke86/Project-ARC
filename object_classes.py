@@ -201,13 +201,14 @@ class Hero(pygame.sprite.Sprite):
                     x = 1
                 if xvel > 0:
                     self.rect.right = p.rect.left
+                    print "COLLIDING: HERO RIGHT HITTING PLATFORM LEFT"
                 if xvel < 0:
                     self.rect.left = p.rect.right
+                    print "COLLIDING: HERO LEFT HITTING PLATFORM RIGHT"
                 if yvel > 0:
                     self.rect.bottom = p.rect.top
                     self.grounded = True
                     self.yvel = 0
-                    print "TOUCHING THE FLOOR"
                 if yvel < 0:
                     self.yvel = 0
                     self.rect.top = p.rect.bottom
@@ -313,9 +314,8 @@ class InvisibleWall(pygame.sprite.Sprite):
 class TriggerDoor(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 64])
+        self.image = pygame.image.load("Sprites/triggerdoor.png").convert_alpha()
         self.image.convert()
-        self.image.fill((237, 147, 50))
         self.rect = pygame.Rect(x, y, 32, 64)
         self.movecount = 0
 
@@ -452,10 +452,6 @@ class ElevatorFloor(pygame.sprite.Sprite):
         self.falling = False
         self.fallspeed = 2
     def update(self, hero):
-        print "FLOOR TOP", self.rect.top
-        print "HERO BOTTOM", hero.rect.bottom
-        print "HERO YVEL", hero.yvel
-        print "_____________________________________"
         if self.climbing:
             if self.climbtime < 2048:
                 self.rect.y -= 2
@@ -525,7 +521,7 @@ class ElevatorDoorFrame(pygame.sprite.Sprite):
         self.image = pygame.Surface([32, 32])
         self.image.convert()
         self.image.fill((212, 184, 144))
-        self.rect = pygame.Rect(x, y, 32, 64)
+        self.rect = pygame.Rect(x, y, 32, 32)
         self.climbing = True
         self.climbtime = 0
         self.falling = False
@@ -543,8 +539,8 @@ class ElevatorDoorFrame(pygame.sprite.Sprite):
                 self.fallspeed += 2
         if self.rect.y > 2464:
             self.kill()
-        if hero.rect.y < self.rect.right:
-            hero.rect.y = self.rect.right
+        #if hero.rect.y < self.rect.right:
+        #    hero.rect.y = self.rect.right
 
 class ElevatorDoor(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -558,7 +554,8 @@ class ElevatorDoor(pygame.sprite.Sprite):
         self.falling = False
         self.fallspeed = 2
         self.opentimer = 0
-        self.stay = True
+        self.opennow = False
+        self.opendelay = 0
     def update(self, hero):
         if self.climbing:
             if self.climbtime < 2048:
@@ -566,46 +563,18 @@ class ElevatorDoor(pygame.sprite.Sprite):
                 self.climbtime += 2
             elif self.climbtime >= 2048:
                 self.climbing = False
-            hero.rect.y = self.rect.y
-        if self.climbing == False and self.opentimer < 65:
+        if self.climbing == False and self.opendelay <= 30:
+            self.opendelay += 1
+        if self.opendelay == 30:
+            self.opennow = True
+        if self.climbing == False and self.opentimer < 65 and self.opennow == True:
             self.rect.y -= 1
             self.opentimer += 1
-        if self.opentimer == 64:
-            self.stay = False
         if self.falling:
             self.rect.y += self.fallspeed
             if self.fallspeed < 100:
                 self.fallspeed += 2
         if self.rect.y > 2464:
             self.kill()
-
-class TestElevator(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32,32])
-        self.image.convert()
-        self.image.fill((100, 255, 166))
-        self.rect = pygame.Rect(x, y, 32, 64)
-        self.ascending = True
-        self.descending = False
-        self.climbtimer = 0
-        self.falltimer = 0
-
-    def update(self):
-        if self.ascending:
-            self.rect.y -= 1
-            self.climbtimer += 1
-
-        if self.descending:
-            self.rect.y += 1
-            self.falltimer += 1
-
-        if self.climbtimer == 96:
-            self.ascending = False
-            self.descending = True
-            self.climbtimer = 0
-
-        if self.falltimer == 96:
-            self.descending = False
-            self.ascending = True
-            self.falltimer = 0
+#I HAVE NO IDEA WHY THE ELEVATOR WORKS, I JUST KNOW THAT IT DOES
+#END ELEVATOR CODE
