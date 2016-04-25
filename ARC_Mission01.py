@@ -117,6 +117,8 @@ def mission01():
         screen.blit(trig1.image, camera.apply(trig1))
         screen.blit(trig2.image, camera.apply(trig2))
 
+        if hero.dead == True:
+            break
         pygame.display.flip()
 
 if __name__ == "__main__":
