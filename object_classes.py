@@ -211,8 +211,6 @@ class Hero(pygame.sprite.Sprite):
                 if yvel < 0:
                     self.yvel = 0
                     self.rect.top = p.rect.bottom
-                if yvel == 0:
-                    self.rect.bottom = p.rect.top
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, color, x, y):
