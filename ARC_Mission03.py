@@ -144,9 +144,13 @@ def mission03(clock, fps):
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#70
         "P     P                                              P                               P",
         "P     P                                              P                               P",
+        "P                                                    P                               P",
+        "P                                                    P                               P",
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#75
+        "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P                                                    P                               P",
-        "P                                                    P                               P",#75
+        "P                                                    P                               P",
         "PIIIIIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
     ]   #01234567890123456789012345678901234567890123456789012345678901234
         #          1         2         3         4         5         6
@@ -208,8 +212,6 @@ def mission03(clock, fps):
         else:
             onElevator = False
         if onElevator == True:
-            print "FLOOR RECT X", efloor.rect.x
-            print "HERO RECT X", hero.rect.x
             hero.rect.y = efloor.rect.y - 64
         '''
         trig1.update(hero)

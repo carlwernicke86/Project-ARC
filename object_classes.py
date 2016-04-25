@@ -201,10 +201,8 @@ class Hero(pygame.sprite.Sprite):
                     x = 1
                 if xvel > 0:
                     self.rect.right = p.rect.left
-                    print "COLLIDING: HERO RIGHT HITTING PLATFORM LEFT"
                 if xvel < 0:
                     self.rect.left = p.rect.right
-                    print "COLLIDING: HERO LEFT HITTING PLATFORM RIGHT"
                 if yvel > 0:
                     self.rect.bottom = p.rect.top
                     self.grounded = True
