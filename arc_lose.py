@@ -12,11 +12,12 @@ def lose(cur_level, hero):
     retry = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx/2, screen.get_rect().centery), "Retry", False)
     apartment = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery), "Back to Apartment", False)
     exit = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx * 1.5, screen.get_rect().centery), "Main Menu", False)
-
+    exit_game = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery * 1.5), "Exit Game", sys.exit)
+    
     regular_button_group = pygame.sprite.Group()
     regular_button_group.add(game_over)
     click_button_group = pygame.sprite.Group()
-    click_button_group.add(retry, apartment, exit)
+    click_button_group.add(retry, apartment, exit, exit_game)
 
 
     while lose and hub_go and menu:
