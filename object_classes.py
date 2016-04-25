@@ -95,6 +95,8 @@ class Hero(pygame.sprite.Sprite):
 
         self.image = self.walking_frames_r[0]
         self.image.convert()
+        self.dead = False
+        self.menu = False
 
     def update(self, platform_group):
         ControlOptions = open('ControlOptions.txt', 'r')
