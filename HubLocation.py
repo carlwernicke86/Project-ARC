@@ -77,5 +77,11 @@ def hub(screen, clock, fps, TIMER):
         for h in hero_group:
             screen.blit(h.image, camera.apply(h))
         screen.blit(desk.image, camera.apply(desk))
+        
+        if hero.menu == True:
+            break
 
         pygame.display.flip()
+
+    if hero.menu == True:
+        return True
