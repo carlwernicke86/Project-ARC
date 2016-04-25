@@ -48,7 +48,7 @@ def mission01():
         "I     PPPPPPPPP  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",
         "I     PPPPPPPPP                                             P     P",
         "I      dddddddL                                             O     P",
-        "I               P                                             D   P",
+        "I               P                                              D  P",
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
     ]   #0123456789012345678901234567890123456789012345678901234567890123456
         #          1         2         3         4         5         6
