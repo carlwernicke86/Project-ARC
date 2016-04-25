@@ -30,7 +30,7 @@ class Regular_Text(pygame.sprite.Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
 class Click_Button(pygame.sprite.Sprite):
-    def __init__(self, size, color, box_color, position, text, next_screen, object = None,font = None):
+     def __init__(self, size, color, box_color, position, text, next_screen, object = None, object2 = None, font = None):
         pygame.sprite.Sprite.__init__(self)
         self.size = size
         self.color = color
@@ -49,6 +49,8 @@ class Click_Button(pygame.sprite.Sprite):
         self.next_screen = next_screen
         self.stay = True
         self.object = object
+        self.object2 = object2
+        self.went_to_screen = False
 
 
     def update(self, screen, event):
@@ -61,9 +63,14 @@ class Click_Button(pygame.sprite.Sprite):
                 self.stay = self.next_screen
             elif self.next_screen == None:
                 return None
+            elif self.object2 != None:
+                self.went_to_screen = True
+                self.next_screen(self.object, self.object2)
             elif self.object != None:
-                self.next_screen(self.object, screen)
+                self.went_to_screen = True
+                self.next_screen(self.object)
             else:
+                self.went_to_screen = True
                 self.next_screen()
             self.gray = False
 
