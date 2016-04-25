@@ -20,8 +20,10 @@ beg_time = pygame.time.get_ticks()     #The time the game first begins
 
 def main():
     TIMER = 0
-    intro(screen, clock, fps, TIMER)
-    hub(screen, clock, fps, TIMER)
+    structure_loop = True
+    while structure_loop:
+        intro(screen, clock, fps, TIMER)
+        structure_loop = hub(screen, clock, fps, TIMER)
 
 
 
