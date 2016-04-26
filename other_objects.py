@@ -52,7 +52,6 @@ class Click_Button(pygame.sprite.Sprite):
          self.object2 = object2
          self.went_to_screen = False
 
-
      def update(self, screen, event):
         self.gray = False
         mouse_pos = pygame.mouse.get_pos()
@@ -73,7 +72,6 @@ class Click_Button(pygame.sprite.Sprite):
                 self.went_to_screen = True
                 self.next_screen()
             self.gray = False
-
 
      def TextBlit(self, screen):
         if self.gray == True:
@@ -113,7 +111,7 @@ class Option_Text(pygame.sprite.Sprite):
                 o.selected = False
             self.selected = True
 
-         if self.selected == True:
+        if self.selected == True:
              for k in key_list:
                  if event.type == pygame.KEYDOWN and event.key == k[0]:
                     self.button = k[0]
