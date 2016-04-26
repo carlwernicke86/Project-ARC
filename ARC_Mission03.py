@@ -70,6 +70,7 @@ def mission03(clock, fps):
     platform_group.add(ewall)
     platform_group.add(edoorframe)
     platform_group.add(edoor)
+    platform_group.add(invisDoor)
 
     #Load the level
     mission03_level = [
@@ -235,10 +236,15 @@ def mission03(clock, fps):
         edoor.update(hero)
         motsen_group.update(hero)
         movelaser_group.update(hero)
+        invisDoor.update(invisTrig)
+        invisTrig.update(hero)
 
         #Draw something
         for p in platform_group:
-            screen.blit(p.image, camera.apply(p))
+            if p == invisDoor:
+                pass
+            else:
+                screen.blit(p.image, camera.apply(p))
         for h in hero_group:
             screen.blit(h.image, camera.apply(h))
         for sg in secguard_group:
