@@ -7,7 +7,7 @@ def lose(cur_level, hero):
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
     clock = pygame.time.Clock()
 
-    lose = True
+    lose = hub_go = menu = True
     game_over = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "GAME OVER")
     retry = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx/2, screen.get_rect().centery), "Retry", False)
     apartment = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery), "Back to Apartment", False)
