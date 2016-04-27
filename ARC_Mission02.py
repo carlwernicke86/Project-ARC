@@ -113,7 +113,7 @@ def mission02(clock, fps):
                 sys.exit()
 
         # Update
-        hero_group.update(platform_group, mission02)
+        hero_group.update(platform_group)
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group, mission02)
         trig1.update(hero)
@@ -129,7 +129,7 @@ def mission02(clock, fps):
 
         #platform_group.update()
         motsen_group.update(hero, mission02)
-        movelaser_group.update(hero, mission02)
+        movelaser_group.update(hero)
 
         #Draw something
         for p in platform_group:
@@ -147,8 +147,10 @@ def mission02(clock, fps):
         screen.blit(trig4.image, camera.apply(trig4))
         screen.blit(trig5.image, camera.apply(trig5))
 
+
         if hero.dead == True:
             break
+
         pygame.display.flip()
 
 if __name__ == "__main__":

@@ -98,7 +98,7 @@ class Hero(pygame.sprite.Sprite):
         self.dead = False
         self.menu = False
 
-    def update(self, platform_group, cur_level = None):
+    def update(self, platform_group):
         ControlOptions = open('ControlOptions.txt', 'r')
         CtrlOp_jump = ControlOptions.readline()
         CtrlOp_left = ControlOptions.readline()
@@ -175,10 +175,10 @@ class Hero(pygame.sprite.Sprite):
             self.pause = False
 
         self.rect.left += self.xvel
-        self.collide(self.xvel, 0, platform_group, cur_level)
+        self.collide(self.xvel, 0, platform_group)
         self.rect.top += self.yvel
         self.grounded = False
-        self.collide(0, self.yvel, platform_group, cur_level)
+        self.collide(0, self.yvel, platform_group)
 
         if self.step_num_left == 19:
             self.step_num_left = 0
@@ -196,11 +196,11 @@ class Hero(pygame.sprite.Sprite):
             self.step_num_left = 0
             self.step_num_right = 0
 
-    def collide(self, xvel, yvel, platform_group, cur_level):
+    def collide(self, xvel, yvel, platform_group):
         for p in platform_group:
             if pygame.sprite.collide_rect(self, p):
                 if isinstance(p, WinDocs):
-                    win(self, cur_level)
+                    x = 1
                 if xvel > 0:
                     self.rect.right = p.rect.left
                 if xvel < 0:
@@ -289,9 +289,9 @@ class WinDocs(Platform): #Touch these to win the level
 class Trigger(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("Sprites/trigger.png").convert_alpha()
+        self.image = pygame.Surface([32, 8])
         self.image.convert()
-        self.y = y
+        self.image.fill((168, 30, 186))
         self.rect = pygame.Rect(x, y + 24, 32, 8)
         self.active = False
 
@@ -299,8 +299,7 @@ class Trigger(pygame.sprite.Sprite):
         if pygame.sprite.collide_rect(self, hero):
             self.active = True
         if self.active: #This is formatted like this in case we want timed triggers
-            self.rect.y = self.y + 28
-            self.image = pygame.image.load("Sprites/triggerpressed.png").convert_alpha()
+            self.image.fill((243, 252, 63))
 
 
 class InvisibleWall(pygame.sprite.Sprite):
@@ -354,36 +353,6 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
             lose(cur_level)
-            
-class HorMotSen(pygame.sprite.Sprite): #Pretty self explanatory, it's a horizontal version of the above MotionSensor class
-    def __init__(self, x, y, ontime, offtime, delayed, length):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([length, 8])
-        self.image.convert()
-        self.image.fill((247, 29, 29))
-        self.rect = pygame.Rect(x, y, length, 8)
-        self.ontime = ontime
-        self.offtime = offtime
-        if delayed:
-            self.active = False
-        else:
-            self.active = True
-        self.ontimer = 0
-        self.offtimer = 0
-
-    def update(self, hero, cur_level):
-        if self.active == True:
-            self.ontimer += 1
-        elif self.active == False:
-            self.offtimer += 1
-        if self.ontimer == self.ontime:
-            self.ontimer = 0
-            self.active = False
-        if self.offtimer == self.offtime:
-            self.offtimer = 0
-            self.active = True
-        if pygame.sprite.collide_rect(self, hero) and self.active == True:
-            lose(cur_level, hero)
 
 class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
     def __init__(self, x, y, direction, distance):
@@ -420,7 +389,7 @@ class LaunchDesk(Platform):
     def update(self, hero, missions):
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 40:
-                missions(hero)
+                missions()
                 
 class HidingSpot(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -609,3 +578,19 @@ class ElevatorDoor(pygame.sprite.Sprite):
             self.kill()
 #I HAVE NO IDEA WHY THE ELEVATOR WORKS, I JUST KNOW THAT IT DOES
 #END ELEVATOR CODE
+
+class Event(pygame.sprite.Sprite):
+    def __init__(self, x, y, x_range, y_range, id):
+        pygame.sprite.Sprite.__init__(self)
+        self.x = x
+        self.y = y
+        self.image = pygame.Surface((x_range*self.x, y_range*self.y)).convert()
+        self.rect = self.image.get_rect
+        self.id = id
+
+    def update(self, hero, event_list):
+
+         collision = pygame.sprite.collide_rect(self, hero)
+
+         if collision == True:
+             event_list[self.id-1] = 1

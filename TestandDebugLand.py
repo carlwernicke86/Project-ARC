@@ -38,7 +38,11 @@ def main(clock, fps):
     puzzletrigger = PuzzleDoorTrigger(960, 224) #Original x value at 896, y 288
     puzzletrigger_group.add(puzzletrigger)
     puzzledoor = PuzzleDoor(960, 288)
+    testelevator = TestElevator(160, 320)
+    testelevator2 = TestElevator(192, 320)
+    testelevator3 = TestElevator(128, 320)
     platform_group.add(puzzledoor)
+    platform_group.add(testelevator, testelevator2, testelevator3)
 
     #Load tutorial level
     test_level = [ #3 space gap is jumpable
@@ -105,6 +109,9 @@ def main(clock, fps):
         hidingspot_group.update(hero)
         puzzletrigger.update(hero, MazePuzzle1)
         puzzledoor.update(puzzletrigger)
+        testelevator.update()
+        testelevator2.update()
+        testelevator3.update()
 
         # Put stuff on the screen yo
         for hs in hidingspot_group:

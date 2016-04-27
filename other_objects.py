@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 from KeyList import key_list
 
 #Constants
@@ -30,29 +30,28 @@ class Regular_Text(pygame.sprite.Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
 class Click_Button(pygame.sprite.Sprite):
-     def __init__(self, size, color, box_color, position, text, next_screen, object = None, object2 = None, font = None):
-         pygame.sprite.Sprite.__init__(self)
-         self.size = size
-         self.color = color
-         self.text = text
-         self.font = pygame.font.Font(font, size)
-         self.image = self.font.render(self.text, 1, self.color)
-         self.rect = self.image.get_rect()
-         self.rect.center = position
-         self.outline = pygame.Rect(self.rect.x - 6, self.rect.y - 6, self.rect.width + 12, self.rect.height + 12)
-         self.box = pygame.Surface((self.rect.width + 10, self.rect.height + 10))
-         self.box.convert()
-         self.box.fill((box_color))
-         self.box_x = self.outline.x + 1
-         self.box_y = self.outline.y + 1
-         self.gray = False
-         self.next_screen = next_screen
-         self.stay = True
-         self.object = object
-         self.object2 = object2
-         self.went_to_screen = False
+    def __init__(self, size, color, box_color, position, text, next_screen, object = None,font = None):
+        pygame.sprite.Sprite.__init__(self)
+        self.size = size
+        self.color = color
+        self.text = text
+        self.font = pygame.font.Font(font, size)
+        self.image = self.font.render(self.text, 1, self.color)
+        self.rect = self.image.get_rect()
+        self.rect.center = position
+        self.outline = pygame.Rect(self.rect.x - 6, self.rect.y - 6, self.rect.width + 12, self.rect.height + 12)
+        self.box = pygame.Surface((self.rect.width + 10, self.rect.height + 10))
+        self.box.convert()
+        self.box.fill((box_color))
+        self.box_x = self.outline.x + 1
+        self.box_y = self.outline.y + 1
+        self.gray = False
+        self.next_screen = next_screen
+        self.stay = True
+        self.object = object
 
-     def update(self, screen, event):
+
+    def update(self, screen, event):
         self.gray = False
         mouse_pos = pygame.mouse.get_pos()
         if mouse_pos[0] > self.outline.left and mouse_pos[0] < self.outline.right and mouse_pos[1] > self.outline.top and mouse_pos[1] < self.outline.bottom:
@@ -62,18 +61,14 @@ class Click_Button(pygame.sprite.Sprite):
                 self.stay = self.next_screen
             elif self.next_screen == None:
                 return None
-            elif self.object2 != None:
-                self.went_to_screen = True
-                self.next_screen(self.object, self.object2)
             elif self.object != None:
-                self.went_to_screen = True
-                self.next_screen(self.object)
+                self.next_screen(self.object, screen)
             else:
-                self.went_to_screen = True
                 self.next_screen()
             self.gray = False
 
-     def TextBlit(self, screen):
+
+    def TextBlit(self, screen):
         if self.gray == True:
             screen.blit(self.box, (self.box_x, self.box_y))
         screen.blit(self.image, (self.rect.x, self.rect.y))

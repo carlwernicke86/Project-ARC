@@ -13,7 +13,10 @@ fps = 60
 WIN_W = 1600
 WIN_H = 900
 
-def mission03(clock, fps):
+#Events
+event_list = [0]              #This will help trigger events; # of 0's dictate amount of events in level
+
+def mission03():
     pygame.init()
 
     #Basic settings
@@ -27,16 +30,15 @@ def mission03(clock, fps):
     secguard_group = pygame.sprite.Group()
     motsen_group = pygame.sprite.Group()
     movelaser_group = pygame.sprite.Group()
+    event_group = pygame.sprite.Group()
 
     #BUT SPOOKY THINGS HAPPEN IN THE MIDDLE OF NOWHERE
     onElevator = True
 
     #Object creation
     hero = Hero(64, 2144)
-    sec1 = SecGuard("right", 384, (38*32), 160) #Farthest right is 1152 [36] (end of flashlight)
+    sec1 = SecGuard("right", 416, (68*32),21*32) #Farthest right is 1152 [36] (end of flashlight)
     sec2 = SecGuard("left", 352, 2912, 160) #Farthest right is 1856 [58]
-    invisDoor = TriggerDoor(192, 160)
-    invisTrig = Trigger(256, 128)
     '''
     trig1 = Trigger(288, 192)
     triggerdoor1 = TriggerDoor(320, 160) #Just triggerdoor1 is updated later, independent of the platform_group.
@@ -70,93 +72,92 @@ def mission03(clock, fps):
     platform_group.add(ewall)
     platform_group.add(edoorframe)
     platform_group.add(edoor)
-    platform_group.add(invisDoor)
 
     #Load the level
     mission03_level = [
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#0
         "P     P                                                                              P",
         "P     P                                                                              P",
-        "P                                                                                    P",
-        "P                                                                                    P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#5
+        "P     l                                                                              P",
+        "P              1                                                                     P",
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",#5
+        "P     P                                              P                              bP",
         "P     P                                              P                               P",
-        "P     P                                              P                               P",
+        "P     l                                              P      a                        P",
         "P                                                    P                               P",
-        "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP      P",#10
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP      PPPPPPPPPPPPPPPPPPPPPPPPPP",#10
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P            PPPPPPPPPPPPPPPPPPPP",
+        "P     l                                              P            PPPPPPPPPPPPPPPPPPPP",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#15
         "P     P                                              P               PPPPPPPPPPPPPPPPP",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P              PPPPPPPP         P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                            PPPP",#20
         "P     P                                              P      PPPPPPPP                 P",
         "P     P                                              P                               P",
-        "P                                                    PPPPPPPPPPPPPPPPPPPPPPPPPPPPPP  P",
+        "P     l                                              PPPPPPPPPPPPPPPPPPPPPPPPPPPPPP  P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#25
         "P     P                                              PPPPPPPPPPP            PPPPPPPPPP",
         "P     P                                              P                               P",
+        "P     l                                              PPPPPPPPPPPP          PPPPPPPPPPP",
         "P                                                    P                               P",
-        "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#30
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP        PPPPPPPPPPPP",#30
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#35
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#40
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#45
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#50
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#55
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#60
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "PE    PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#65 #'E' simply denotes where the elevator roof is, does not spawn anything
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#70
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#75
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P                                                    P                               P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "PIIIIIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
-    ]   #01234567890123456789012345678901234567890123456789012345678901234
-        #          1         2         3         4         5         6
+    ]   #012345678901234567890123456789012345678901234567890123456789012345678901234567890123456
+        #          1         2         3         4         5         6         7         8
 
     #Build level
     x = y = 0
@@ -176,7 +177,7 @@ def mission03(clock, fps):
                 L = MotionSensor(x, y, 45, 60, False)
                 motsen_group.add(L)
             if col == "l":
-                l = MotionSensor(x,y,45,60, True)
+                l = MotionSensor(x, y, 9999999999, 0, True)
                 motsen_group.add(l)
             if col == "d":
                 l2 = MotionSensor(x, y, 20, 60, False)
@@ -187,6 +188,15 @@ def mission03(clock, fps):
             if col == "I":
                 i = InvisibleWall(x, y)
                 platform_group.add(i)
+            if col == "a":
+                a = MovingLaser(x, y, "right", 768)
+                movelaser_group.add(a)
+            if col == "b":
+                b = MovingLaser(x,y,"left",768)
+                movelaser_group.add(b)
+            if col == "1":
+                e = Event(x, y, 1, 4, 1)
+                event_group.add(e)
             x += 32
         y += 32
         x = 0
@@ -234,17 +244,15 @@ def mission03(clock, fps):
         ewall.update()
         edoorframe.update(hero)
         edoor.update(hero)
-        motsen_group.update(hero, cur_level)
-        movelaser_group.update(hero, cur_level)
-        invisDoor.update(invisTrig)
-        invisTrig.update(hero)
+        movelaser_group.update(hero, mission03)
+        event_group.update(hero, event_list)
+
+        if event_list[0] == 1:
+            motsen_group.update(hero, mission03)
 
         #Draw something
         for p in platform_group:
-            if p == invisDoor:
-                pass
-            else:
-                screen.blit(p.image, camera.apply(p))
+            screen.blit(p.image, camera.apply(p))
         for h in hero_group:
             screen.blit(h.image, camera.apply(h))
         for sg in secguard_group:
@@ -252,15 +260,18 @@ def mission03(clock, fps):
         for ms in motsen_group:
             if ms.active == True:
                 screen.blit(ms.image, camera.apply(ms))
+        for mvs in movelaser_group:
+            screen.blit(mvs.image, camera.apply(mvs))
         #screen.blit(trig1.image, camera.apply(trig1))
         #screen.blit(trig2.image, camera.apply(trig2))
         #screen.blit(trig3.image, camera.apply(trig3))
         #screen.blit(trig4.image, camera.apply(trig4))
         #screen.blit(trig5.image, camera.apply(trig5))
-        
+
         if hero.dead == True:
             break
+
         pygame.display.flip()
 
 if __name__ == "__main__":
-    mission03(clock, fps)
+    mission03()
