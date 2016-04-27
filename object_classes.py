@@ -263,7 +263,7 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
 
     def update(self, hero, secguard_group, cur_level):
         if pygame.sprite.spritecollideany(hero, secguard_group, collided = None) != None:
-            lose(cur_level)
+            lose(cur_level, hero)
         if self.direction == "left":
             self.rect.x -= 1
             self.steps += 1
@@ -353,7 +353,7 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
             self.offtimer = 0
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
-            lose(cur_level)
+            lose(cur_level, hero)
 
 class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
     def __init__(self, x, y, direction, distance):
