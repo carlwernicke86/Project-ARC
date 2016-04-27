@@ -98,7 +98,7 @@ class Hero(pygame.sprite.Sprite):
         self.dead = False
         self.menu = False
 
-    def update(self, platform_group):
+    def update(self, platform_group, cur_level = None):
         ControlOptions = open('ControlOptions.txt', 'r')
         CtrlOp_jump = ControlOptions.readline()
         CtrlOp_left = ControlOptions.readline()
