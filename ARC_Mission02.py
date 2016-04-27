@@ -16,7 +16,7 @@ def mission02(clock, fps):
     pygame.init()
 
     #Basic settings
-    mission02 = True
+    mission02_loop = True
     pygame.display.set_caption("Project ARC")
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 
@@ -103,7 +103,7 @@ def mission02(clock, fps):
     total_height_app = len(mission02_level) * 32
     camera = Camera(total_width_app, total_height_app)
 
-    while mission02:
+    while mission02_loop:
         clock.tick(fps)
         screen.fill((255, 255, 255))
 
@@ -113,7 +113,7 @@ def mission02(clock, fps):
                 sys.exit()
 
         # Update
-        hero_group.update(platform_group)
+        hero_group.update(platform_group, mission02)
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group)
         trig1.update(hero)
