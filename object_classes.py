@@ -175,7 +175,7 @@ class Hero(pygame.sprite.Sprite):
             self.pause = False
 
         self.rect.left += self.xvel
-          self.collide(self.xvel, 0, platform_group, cur_level)
+        self.collide(self.xvel, 0, platform_group, cur_level)
         self.rect.top += self.yvel
         self.grounded = False
         self.collide(0, self.yvel, platform_group, cur_level)
