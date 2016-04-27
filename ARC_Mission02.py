@@ -115,7 +115,7 @@ def mission02(clock, fps):
         # Update
         hero_group.update(platform_group, mission02)
         camera.update(hero.rect)
-        secguard_group.update(hero, secguard_group)
+        secguard_group.update(hero, secguard_group, mission02)
         trig1.update(hero)
         triggerdoor1.update(trig1)
         trig2.update(hero)
@@ -128,8 +128,8 @@ def mission02(clock, fps):
         triggerdoor5.update(trig5)
 
         #platform_group.update()
-        motsen_group.update(hero)
-        movelaser_group.update(hero)
+        motsen_group.update(hero, mission02)
+        movelaser_group.update(hero, mission02)
 
         #Draw something
         for p in platform_group:
