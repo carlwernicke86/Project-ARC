@@ -14,11 +14,11 @@ fps = 60
 WIN_W = 1600
 WIN_H = 900
 
-def main(clock, fps):
+def tutorial(clock, fps):
     pygame.init()
 
     #Basic settings
-    intro = tutorial = True
+    tutorial_loop = True
     pygame.display.set_caption("Project ARC")
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 
@@ -84,7 +84,7 @@ def main(clock, fps):
     camera = Camera(total_width_app, total_height_app)
 
     # Apartment, mostly eye candy and mechanism for 'desk' level selector
-    while tutorial:
+    while tutorial_loop:
         clock.tick(fps)
         screen.fill((255, 255, 255))
         # Quitting the game
@@ -93,12 +93,12 @@ def main(clock, fps):
                 sys.exit()
 
         # Update
-        hero_group.update(platform_group)
+        hero_group.update(platform_group, tutorial)
         camera.update(hero.rect)
-        secguard_group.update(hero, secguard_group)
+        secguard_group.update(hero, secguard_group, tutorial)
         trig1.update(hero)
         platform_group.update(trig1)
-        motsen_group.update(hero)
+        motsen_group.update(hero, tutorial)
         #movelaser_group.update(hero)
 
         # Put stuff on the screen yo
@@ -119,4 +119,4 @@ def main(clock, fps):
 
 
 if __name__ == "__main__":
-    main(clock, fps)
+    tutorial(clock, fps)
