@@ -21,12 +21,16 @@ beg_time = pygame.time.get_ticks()     #The time the game first begins
 
 
 def main():
-    ControlOptions = open('ControlOptions.txt', 'w')
-    ControlOptions.write("W"+"\n")
-    ControlOptions.write("A"+"\n")
-    ControlOptions.write("D"+"\n")
-    ControlOptions.write("E")
+    ControlOptions = open('ControlOptions.txt', 'r')
+    if ControlOptions.readline() == "W" and ControlOptions.readline() == "A" and ControlOptions.readline() == "D" and ControlOptions.readline() == "E":
+        ControlOptions.close()
+        ControlOptions = open(ControlOptions.txt, "w")
+        ControlOptions.write("W"+"\n")
+        ControlOptions.write("A"+"\n")
+        ControlOptions.write("D"+"\n")
+        ControlOptions.write("E")
     ControlOptions.close()
+
 
     TIMER = 0
     structure_loop = True
