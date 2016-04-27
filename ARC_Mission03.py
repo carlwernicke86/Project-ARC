@@ -234,8 +234,8 @@ def mission03(clock, fps):
         ewall.update()
         edoorframe.update(hero)
         edoor.update(hero)
-        motsen_group.update(hero)
-        movelaser_group.update(hero)
+        motsen_group.update(hero, cur_level)
+        movelaser_group.update(hero, cur_level)
         invisDoor.update(invisTrig)
         invisTrig.update(hero)
 
