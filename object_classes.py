@@ -2,6 +2,7 @@ import pygame
 from SpriteSheetFunction import SpriteSheet
 from arc_pause import *
 from arc_lose import lose
+from arc_win import win
 from KeyList import key_list
 from KeyList import key_decoder
 
