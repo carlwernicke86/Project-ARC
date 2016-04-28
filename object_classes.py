@@ -354,6 +354,36 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
             lose(cur_level, hero)
+            
+class HotMotSen(pygame.sprite.Sprite):
+    def __init__(self, x, y, ontime, offtime, delayed, length):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([length, 8])
+        self.image.convert()
+        self.image.fill((247, 29, 29))
+        self.rect = pygame.Rect(x, y, length, 8)
+        self.ontime = ontime
+        self.offtime = offtime
+        if delayed:
+            self.active = False
+        else:
+            self.active = True
+        self.ontimer = 0
+        self.offtimer = 0
+        
+    def update(self, hero, cur_level):
+        if self.active == True:
+            self.ontimer += 1
+        elif self.active == False:
+            self.offtimer += 1
+        if self.ontimer == self.ontime:
+            self.ontimer = 0
+            self.active = False
+        if self.offtimer == self.offtime:
+            self.offtimer = 0
+            self.active = True
+        if pygame.sprite.collide_rect(self, hero) and self.active == True:
+            lose(cur_level, hero)
 
 class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
     def __init__(self, x, y, direction, distance):
