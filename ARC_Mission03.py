@@ -38,7 +38,7 @@ def mission03():
     #Object creation
     hero = Hero(64, 2144)
     sec1 = SecGuard("right", 416, (68*32),21*32) #Farthest right is 1152 [36] (end of flashlight)
-    sec2 = SecGuard("left", 352, 2912, 160) #Farthest right is 1856 [58]
+    #sec2 = SecGuard("left", 352, 2912, 160) #Farthest right is 1856 [58]
     '''
     trig1 = Trigger(288, 192)
     triggerdoor1 = TriggerDoor(320, 160) #Just triggerdoor1 is updated later, independent of the platform_group.
@@ -57,7 +57,7 @@ def mission03():
     '''
     hero_group.add(hero)
     secguard_group.add(sec1)
-    secguard_group.add(sec2)
+    #secguard_group.add(sec2)
     #platform_group.add(triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor4, triggerdoor5)
 
     #CREATE THE ELEVATOR BABY CHOO CHOO
@@ -101,41 +101,41 @@ def mission03():
         "P     l                                              PPPPPPPPPPPPPPPPPPPPPPPPPPPPPP  P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#25
-        "P     P                                              PPPPPPPPPPP            PPPPPPPPPP",
-        "P     P                                              P                               P",
-        "P     l                                              PPPPPPPPPPPP          PPPPPPPPPPP",
-        "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP        PPPPPPPPPPPP",#30
+        "P     P                                              PPPPPPPPPPPPPq       PPPPPPPPPPPP",
+        "P     P                                              P                           b   P",
+        "P     l                                              PPPPPPPPPPPPw         PPPPPPPPPPP",
+        "P                                                    P   a                           P",
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPe           PPPPPPPPPP",#30
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
-        "P                                                    P                               P",
+        "P                                                    P                   PPPPPPPPPPPPP",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#35
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P                               P",
+        "P     l                                              PPPPPPPPPPPPPPPP                P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#40
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
         "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#45
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP           PPPPPPPPPP",#45
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
         "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#50
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP      P",#50
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
         "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#55
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP       PPPPPPPPPPPPPPPPPPPPPPPPP",#55
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
-        "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#60
+        "P                                                    P                               D",
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#60
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
@@ -170,14 +170,11 @@ def mission03():
             if col == "D":
                 d = WinDocs(x, y)
                 platform_group.add(d)
-            if col == "O":
-                o = TriggerDoor(x, y)
-                platform_group.add(o)
             if col == "L":
                 L = MotionSensor(x, y, 45, 60, False)
                 motsen_group.add(L)
             if col == "l":
-                l = MotionSensor(x, y, 9999999999, 0, True)
+                l = MotionSensor(x, y, 9999999999, 1, True)
                 motsen_group.add(l)
             if col == "d":
                 l2 = MotionSensor(x, y, 20, 60, False)
@@ -195,8 +192,18 @@ def mission03():
                 b = MovingLaser(x,y,"left",768)
                 movelaser_group.add(b)
             if col == "1":
-                e = Event(x, y, 1, 4, 1)
+                e = Event_Mission03(x, y, 1, 4, 1)
                 event_group.add(e)
+            if col == "q" or col == "w" or col == "e":
+                if col == "q":
+                    q = HotMotSen(x, y, 1, 120, False, 8*32)
+                    motsen_group.add(q)
+                if col == "w":
+                    w = HotMotSen(x,y,30,120,False, 320)
+                    motsen_group.add(w)
+                if col == "e":
+                    e = HotMotSen(x,y,60,120,False, 12*32)
+                    motsen_group.add(e)
             x += 32
         y += 32
         x = 0
@@ -262,6 +269,7 @@ def mission03():
                 screen.blit(ms.image, camera.apply(ms))
         for mvs in movelaser_group:
             screen.blit(mvs.image, camera.apply(mvs))
+
         #screen.blit(trig1.image, camera.apply(trig1))
         #screen.blit(trig2.image, camera.apply(trig2))
         #screen.blit(trig3.image, camera.apply(trig3))
