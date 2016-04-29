@@ -549,33 +549,6 @@ class ElevatorWall(pygame.sprite.Sprite):
         if self.rect.y > 2464:
             self.kill()
 
-class ElevatorDoorFrame(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 32])
-        self.image.convert()
-        self.image.fill((212, 184, 144))
-        self.rect = pygame.Rect(x, y, 32, 32)
-        self.climbing = True
-        self.climbtime = 0
-        self.falling = False
-        self.fallspeed = 2
-    def update(self, hero):
-        if self.climbing:
-            if self.climbtime < 2048:
-                self.rect.y -= 2
-                self.climbtime += 2
-            elif self.climbtime >= 2048:
-                self.climbing = False
-        if self.falling:
-            self.rect.y += self.fallspeed
-            if self.fallspeed < 100:
-                self.fallspeed += 2
-        if self.rect.y > 2464:
-            self.kill()
-        #if hero.rect.y < self.rect.right:
-        #    hero.rect.y = self.rect.right
-
 class ElevatorDoor(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
@@ -588,9 +561,10 @@ class ElevatorDoor(pygame.sprite.Sprite):
         self.falling = False
         self.fallspeed = 2
         self.opentimer = 0
+        self.closetimer = 0
         self.opennow = False
         self.opendelay = 0
-    def update(self, hero):
+    def update(self, invisTrig):
         if self.climbing:
             if self.climbtime < 2048:
                 self.rect.y -= 2
@@ -604,6 +578,9 @@ class ElevatorDoor(pygame.sprite.Sprite):
         if self.climbing == False and self.opentimer < 65 and self.opennow == True:
             self.rect.y -= 1
             self.opentimer += 1
+        if invisTrig.active and self.closetimer < 65:
+            self.rect.y += 1
+            self.closetimer += 1
         if self.falling:
             self.rect.y += self.fallspeed
             if self.fallspeed < 100:
