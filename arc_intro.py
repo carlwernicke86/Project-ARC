@@ -21,7 +21,11 @@ def intro(screen, clock, fps, TIMER):
     click_button_group = pygame.sprite.Group()
     click_button_group.add(New_Game, Options)
 
+    bg = pygame.image.load("Sprites/MainBack.png")
 
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load("Sounds/YourCellarSong.mp3")
+    pygame.mixer.music.play(-1)
 
     intro = True
     while intro:
@@ -32,7 +36,7 @@ def intro(screen, clock, fps, TIMER):
             intro = New_Game.stay
             if event.type == pygame.QUIT: sys.exit()
 
-        screen.fill(WHITE)
+        screen.blit(bg, (0, 0))
         regular_text_group.draw(screen)
         for i in click_button_group:
             i.TextBlit(screen)
