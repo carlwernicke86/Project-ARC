@@ -46,6 +46,8 @@ def options():
     right_button = right.button
     interact_button = interact.button
     
+    bg = pygame.image.load("Sprites/MainBack.png")
+    
     option = True
     while option:
         mouse_pos = pygame.mouse.get_pos()
@@ -108,7 +110,7 @@ def options():
                 if event.key == pygame.K_ESCAPE:
                     option = False
 
-        screen.fill(WHITE)
+        screen.blit(bg, (0, 0))
         for o in option_text_group:
             o.TextBlit(screen)
         for c in click_button_group:
