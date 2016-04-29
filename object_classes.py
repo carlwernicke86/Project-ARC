@@ -165,6 +165,9 @@ class Hero(pygame.sprite.Sprite):
                 self.yvel = 100
         if not self.move_l and not self.move_r:
             self.xvel = 0
+            
+        if self.yvel > 0.7:
+            self.moving = True
 
         if self.xvel != 0:
             self.moving = True
