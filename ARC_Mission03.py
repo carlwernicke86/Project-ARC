@@ -39,22 +39,7 @@ def mission03():
     hero = Hero(64, 2144)
     sec1 = SecGuard("right", 416, (68*32),21*32) #Farthest right is 1152 [36] (end of flashlight)
     #sec2 = SecGuard("left", 352, 2912, 160) #Farthest right is 1856 [58]
-    '''
-    trig1 = Trigger(288, 192)
-    triggerdoor1 = TriggerDoor(320, 160) #Just triggerdoor1 is updated later, independent of the platform_group.
-                                        # We can use this method for future objects that need collision but have different update arguments.
-    trig2 = Trigger(1056, 192)
-    triggerdoor2 = TriggerDoor(1088, 160)
-
-    trig3 = Trigger(1632, 192)
-    triggerdoor3 = TriggerDoor(1664,160)
-
-    trig4 = Trigger(2304, 192)
-    triggerdoor4 = TriggerDoor(2336, 160)
-
-    trig5 = Trigger(92*32, 192)
-    triggerdoor5 = TriggerDoor(106*32, 64)
-    '''
+    invisTrig = Trigger(256, 128)
     hero_group.add(hero)
     secguard_group.add(sec1)
     #secguard_group.add(sec2)
@@ -233,24 +218,13 @@ def mission03():
             onElevator = False
         if onElevator == True:
             hero.rect.y = efloor.rect.y - 64
-        '''
-        trig1.update(hero)
-        triggerdoor1.update(trig1)
-        trig2.update(hero)
-        triggerdoor2.update(trig2)
-        trig3.update(hero)
-        triggerdoor3.update(trig3)
-        trig4.update(hero)
-        triggerdoor4.update(trig4)
-        trig5.update(hero)
-        triggerdoor5.update(trig5)
-        '''
 
+        invisTrig.update(hero)
         eroof.update()
         efloor.update(hero)
         ewall.update()
         edoorframe.update(hero)
-        edoor.update(hero)
+        edoor.update(invisTrig)
         movelaser_group.update(hero, mission03)
         event_group.update(hero, event_list)
 
