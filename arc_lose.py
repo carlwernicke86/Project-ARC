@@ -11,7 +11,6 @@ def lose(cur_level, hero):
     game_over = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "GAME OVER")
     retry = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx/2, screen.get_rect().centery), "Retry", False)
     apartment = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery), "Back to Apartment", False)
-    exit = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx * 1.5, screen.get_rect().centery), "Main Menu", False)
     exit_game = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery * 1.5), "Exit Game", sys.exit)
     
     regular_button_group = pygame.sprite.Group()
@@ -30,7 +29,6 @@ def lose(cur_level, hero):
 
             lose = retry.stay
             hub_go = apartment.stay
-            menu = exit.stay
 
         for c in click_button_group:
             c.TextBlit(screen)
@@ -42,9 +40,6 @@ def lose(cur_level, hero):
     if retry.stay == False:     #Retrys the mission
         cur_level()
     if hub_go == False:         #Returns to the Apartment
-        hero.dead = True
-        hero.hub_go = True
-    elif menu == False:           #Returns to the Main Menu
         hero.dead = True
         hero.menu = True
 
