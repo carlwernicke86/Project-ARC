@@ -64,7 +64,7 @@ def mission03():
         "P     P                                                                              P",
         "P     P                                                                              P",
         "P     l                                                                              P",
-        "P              1                                                                     P",
+        "P                          1                                                         P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",#5
         "P     P                                              P                              bP",
         "P     P                                              P                               P",
@@ -93,29 +93,29 @@ def mission03():
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPe           PPPPPPPPPP",#30
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P                               P",
-        "P                                                    P                   PPPPPPPPPPPPP",
+        "P     l                                              P          a                    P",
+        "P                                                    Pw         PPPPPPPPPPPPPPPPPPPPPP",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#35
         "P     P                                              P                               P",
-        "P     P                                              P                               P",
-        "P     l                                              PPPPPPPPPPPPPPPP                P",
+        "P     P                                              P                    b          P",
+        "P     l                                              PPPPPPPPPPPPPPPPPPPPPPw         P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#40
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
-        "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP           PPPPPPPPPP",#45
+        "P                                                    Pa                             bP",
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPe          PPPPPPPPPP",#45
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
         "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP      P",#50
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq       P",#50
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
         "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP       PPPPPPPPPPPPPPPPPPPPPPPPP",#55
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq        PPPPPPPPPPPPPPPPPPPPPPP",#55
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
