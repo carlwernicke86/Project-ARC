@@ -16,7 +16,7 @@ def lose(cur_level, hero):
     regular_button_group = pygame.sprite.Group()
     regular_button_group.add(game_over)
     click_button_group = pygame.sprite.Group()
-    click_button_group.add(retry, apartment, exit, exit_game)
+    click_button_group.add(retry, apartment, exit_game)
 
 
     while lose and hub_go and menu:
