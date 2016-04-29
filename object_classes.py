@@ -204,7 +204,7 @@ class Hero(pygame.sprite.Sprite):
         for p in platform_group:
             if pygame.sprite.collide_rect(self, p):
                 if isinstance(p, WinDocs):
-                    win(hero, cur_level)
+                    win(self, cur_level)
                 if xvel > 0:
                     self.rect.right = p.rect.left
                 if xvel < 0:
