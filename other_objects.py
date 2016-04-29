@@ -30,17 +30,18 @@ class Regular_Text(pygame.sprite.Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
 class Click_Button(pygame.sprite.Sprite):
-    def __init__(self, size, color, box_color, position, text, next_screen, object = None,font = None):
+    def __init__(self, size, color, box_color, position, text, next_screen, object = None, object2 = None, font = None, default_fill = None):
         pygame.sprite.Sprite.__init__(self)
         self.size = size
         self.color = color
         self.text = text
-        self.font = pygame.font.Font(font, size)
+        self.font = pygame.font.Font(font, self.size)
         self.image = self.font.render(self.text, 1, self.color)
         self.rect = self.image.get_rect()
         self.rect.center = position
         self.outline = pygame.Rect(self.rect.x - 6, self.rect.y - 6, self.rect.width + 12, self.rect.height + 12)
         self.box = pygame.Surface((self.rect.width + 10, self.rect.height + 10))
+        self.box_color = box_color
         self.box.convert()
         self.box.fill((box_color))
         self.box_x = self.outline.x + 1
@@ -51,7 +52,7 @@ class Click_Button(pygame.sprite.Sprite):
         self.object = object
         self.object2 = object2
         self.went_to_screen = False
-
+        self.default_fill = default_fill
 
     def update(self, screen, event):
         self.gray = False
