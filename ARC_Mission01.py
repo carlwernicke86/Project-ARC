@@ -104,6 +104,9 @@ def mission01():
         motsen_group.update(hero, mission01)
         movelaser_group.update(hero, mission01)
 
+        if hero.dead == True:
+            break
+        
         #Draw something
         for p in platform_group:
             screen.blit(p.image, camera.apply(p))
@@ -116,9 +119,6 @@ def mission01():
                 screen.blit(ms.image, camera.apply(ms))
         screen.blit(trig1.image, camera.apply(trig1))
         screen.blit(trig2.image, camera.apply(trig2))
-
-        if hero.dead == True:
-            break
 
         pygame.display.flip()
 
