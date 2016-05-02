@@ -105,7 +105,7 @@ def mission03():
         "P     P                                              P                               P",
         "P     l                                              P                               P",
         "P                                                    Pa                             bP",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPe          PPPPPPPPPP",#45
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPe           PPPPPPPPPP",#45
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
@@ -115,7 +115,7 @@ def mission03():
         "P     P                                              P                               P",
         "P     l                                              P                               P",
         "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq        PPPPPPPPPPPPPPPPPPPPPPP",#55
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq       PPPPPPPPPPPPPPPPPPPPPPPP",#55
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
@@ -181,13 +181,13 @@ def mission03():
                 event_group.add(e)
             if col == "q" or col == "w" or col == "e":
                 if col == "q":
-                    q = HotMotSen(x, y, 1, 120, False, 8*32)
+                    q = HotMotSen(x, y, 30, 120, False, 8*32)
                     motsen_group.add(q)
                 if col == "w":
-                    w = HotMotSen(x,y,30,120,False, 320)
+                    w = HotMotSen(x,y,60,90,False, 320)
                     motsen_group.add(w)
                 if col == "e":
-                    e = HotMotSen(x,y,60,120,False, 12*32)
+                    e = HotMotSen(x,y,90,60,False, 12*32)
                     motsen_group.add(e)
             x += 32
         y += 32
