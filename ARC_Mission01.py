@@ -95,7 +95,7 @@ def mission01():
                 sys.exit()
 
         # Update
-        hero_group.update(platform_group)
+        hero_group.update(platform_group, mission01)
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group, mission01)
         trig1.update(hero)
