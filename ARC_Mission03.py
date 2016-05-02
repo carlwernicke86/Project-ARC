@@ -220,11 +220,12 @@ def mission03():
             hero.rect.y = efloor.rect.y - 64
 
         invisTrig.update(hero)
-        eroof.update()
-        efloor.update(hero)
-        ewall.update()
-        edoorframe.update(hero)
-        edoor.update(invisTrig)
+        for e in event_group:
+            eroof.update(e)
+            efloor.update(e)
+            ewall.update(e)
+            edoorframe.update(e)
+            edoor.update(invisTrig, e)
         movelaser_group.update(hero, mission03)
         event_group.update(hero, event_list)
 
