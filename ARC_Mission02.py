@@ -113,7 +113,7 @@ def mission02(clock, fps):
                 sys.exit()
 
         # Update
-        hero_group.update(platform_group)
+        hero_group.update(platform_group, mission02)
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group, mission02)
         trig1.update(hero)
