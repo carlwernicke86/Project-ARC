@@ -293,9 +293,8 @@ class WinDocs(Platform): #Touch these to win the level
 class Trigger(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 8])
+        self.image = pygame.image.load("Sprites/trigger.png").convert_alpha()
         self.image.convert()
-        self.image.fill((168, 30, 186))
         self.rect = pygame.Rect(x, y + 24, 32, 8)
         self.active = False
 
@@ -303,7 +302,7 @@ class Trigger(pygame.sprite.Sprite):
         if pygame.sprite.collide_rect(self, hero):
             self.active = True
         if self.active: #This is formatted like this in case we want timed triggers
-            self.image.fill((243, 252, 63))
+            self.image = pygame.image.load("Sprites/triggerpressed.png").convert_alpha()
 
 
 class InvisibleWall(pygame.sprite.Sprite):
