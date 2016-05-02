@@ -5,9 +5,11 @@ from KeyList import key_list
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 LIGHT_GREY = (200, 200, 200)
+DARK_GREY = (150, 150, 150)
 GREEN = (50, 200, 50)
 BLUE = (50, 50, 200)
 RED =(200, 50, 50)
+ORANGE = (255, 100, 0)
 
 WIN_W = 1600
 WIN_H = 900
@@ -54,6 +56,7 @@ class Click_Button(pygame.sprite.Sprite):
         self.went_to_screen = False
         self.default_fill = default_fill
 
+
     def update(self, screen, event):
         self.gray = False
         mouse_pos = pygame.mouse.get_pos()
@@ -77,10 +80,14 @@ class Click_Button(pygame.sprite.Sprite):
 
 
     def TextBlit(self, screen):
+        if self.default_fill!= None:
+            self.box.fill(self.default_fill)
+            screen.blit(self.box, (self.box_x, self.box_y))
         if self.gray == True:
+            self.box.fill(self.box_color)
             screen.blit(self.box, (self.box_x, self.box_y))
         screen.blit(self.image, (self.rect.x, self.rect.y))
-        pygame.draw.rect(screen, BLACK, self.outline, 1)
+        pygame.draw.rect(screen, self.color, self.outline, 1)
 
 
 class Option_Text(pygame.sprite.Sprite):

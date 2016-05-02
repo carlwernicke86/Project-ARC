@@ -7,11 +7,11 @@ def lose(cur_level, hero):
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
     clock = pygame.time.Clock()
 
-    lose = hub_go = menu = True
+    lose = hub_go = True
     game_over = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "GAME OVER")
     retry = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx/2, screen.get_rect().centery), "Retry", False)
     apartment = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery), "Back to Apartment", False)
-    exit_game = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery * 1.5), "Exit Game", sys.exit)
+    exit_game = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx * 1.5, screen.get_rect().centery), "Exit Game", sys.exit)
     
     regular_button_group = pygame.sprite.Group()
     regular_button_group.add(game_over)
@@ -19,7 +19,7 @@ def lose(cur_level, hero):
     click_button_group.add(retry, apartment, exit_game)
 
 
-    while lose and hub_go and menu:
+    while lose and hub_go:
         clock.tick(60)
         screen.fill(WHITE)
         for event in pygame.event.get():
