@@ -19,6 +19,7 @@ event_list = [0]              #This will help trigger events; # of 0's dictate a
 def mission03():
     pygame.init()
 
+    event_list[0] = 0
     #Basic settings
     mission03_loop = True
     pygame.display.set_caption("Project ARC")
@@ -38,11 +39,22 @@ def mission03():
     #Object creation
     hero = Hero(64, 2144)
     sec1 = SecGuard("right", 416, (68*32),21*32) #Farthest right is 1152 [36] (end of flashlight)
-    #sec2 = SecGuard("left", 352, 2912, 160) #Farthest right is 1856 [58]
+    sec2 = SecGuard("right", 8*32, 54*32, 24*32) #Farthest right is 1856 [58]
+    sec3 = SecGuard("left", 12*32, 85*32, 32*32)
+
     invisTrig = Trigger(256, 128)
+
+    trig1 = Trigger(82*32, 15*32)
+    triggerdoor1 = TriggerDoor(81*32, 21*32)
+
+    trig2 = Trigger(73*32, 22*32)
+    triggerdoor2 = TriggerDoor(80*32 ,14*32)
+
+
+
+
     hero_group.add(hero)
-    secguard_group.add(sec1)
-    #secguard_group.add(sec2)
+    secguard_group.add(sec1,sec2)
     #platform_group.add(triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor4, triggerdoor5)
 
     #CREATE THE ELEVATOR BABY CHOO CHOO
@@ -52,11 +64,7 @@ def mission03():
     ewall = ElevatorWall(32, 2080)
     edoorframe = ElevatorDoorFrame(160, 2112)
 
-    platform_group.add(eroof)
-    platform_group.add(efloor)
-    platform_group.add(ewall)
-    platform_group.add(edoorframe)
-    platform_group.add(edoor)
+    platform_group.add(eroof, efloor, ewall, edoorframe, edoor, triggerdoor1, triggerdoor2)
 
     #Load the level
     mission03_level = [
@@ -73,15 +81,15 @@ def mission03():
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP      PPPPPPPPPPPPPPPPPPPPPPPPPP",#10
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P            PPPPPPPPPPPPPPPPPPPP",
+        "P     l                                              Pe           PPPPPPPPPPPPPPPPPPPP",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#15
-        "P     P                                              P               PPPPPPPPPPPPPPPPP",
-        "P     P                                              P                               P",
+        "P     P                                              P                PPPPPPPPPPPPPPPP",
+        "P     P                                              P      PPPP                     P",
         "P     l                                              P                               P",
-        "P                                                    P              PPPPPPPP         P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                            PPPP",#20
-        "P     P                                              P      PPPPPPPP                 P",
+        "P                                                    P             PPPP              P",
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                     PPPPPPPPPPP",#20
+        "P     P                                              P      PPPP                     P",
         "P     P                                              P                               P",
         "P     l                                              PPPPPPPPPPPPPPPPPPPPPPPPPPPPPP  P",
         "P                                                    P                               P",
@@ -92,19 +100,19 @@ def mission03():
         "P                                                    P   a                           P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPe           PPPPPPPPPP",#30
         "P     P                                              P                               P",
-        "P     P                                              P                               P",
-        "P     l                                              P          a                    P",
+        "P     P                                              P          a                    P",
+        "P     l                                              P                               P",
         "P                                                    Pw         PPPPPPPPPPPPPPPPPPPPPP",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#35
-        "P     P                                              P                               P",
         "P     P                                              P                    b          P",
+        "P     P                                              P                               P",
         "P     l                                              PPPPPPPPPPPPPPPPPPPPPPw         P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#40
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P                               P",
-        "P                                                    Pa                             bP",
+        "P     l                                              Pa                             bP",
+        "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPe           PPPPPPPPPP",#45
         "P     P                                              P                               P",
         "P     P                                              P                               P",
@@ -225,9 +233,13 @@ def mission03():
             efloor.update(e)
             ewall.update(e)
             edoorframe.update(e)
-            edoor.update(invisTrig, e)
+            edoor.update(invisTrig,e)
         movelaser_group.update(hero, mission03)
         event_group.update(hero, event_list)
+        trig1.update(hero)
+        triggerdoor1.update(trig1)
+        trig2.update(hero)
+        triggerdoor2.update(trig2)
 
         if event_list[0] == 1:
             motsen_group.update(hero, mission03)
@@ -245,8 +257,8 @@ def mission03():
         for mvs in movelaser_group:
             screen.blit(mvs.image, camera.apply(mvs))
 
-        #screen.blit(trig1.image, camera.apply(trig1))
-        #screen.blit(trig2.image, camera.apply(trig2))
+        screen.blit(trig1.image, camera.apply(trig1))
+        screen.blit(trig2.image, camera.apply(trig2))
         #screen.blit(trig3.image, camera.apply(trig3))
         #screen.blit(trig4.image, camera.apply(trig4))
         #screen.blit(trig5.image, camera.apply(trig5))
