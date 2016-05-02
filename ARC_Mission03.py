@@ -209,7 +209,7 @@ def mission03():
 
         # Update
         if not efloor.climbing:
-            hero_group.update(platform_group)
+            hero_group.update(platform_group, mission03)
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group, mission03)
         if hero.rect.x >= eroof.rect.x - 32 and hero.rect.x <= eroof.rect.x + 128:
