@@ -39,6 +39,8 @@ def lose(cur_level, hero):
 
     if retry.stay == False:     #Retrys the mission
         cur_level()
+        hero.dead = True
+        hero.menu = True
     if hub_go == False:         #Returns to the Apartment
         hero.dead = True
         hero.menu = True
