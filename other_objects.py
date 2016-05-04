@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 from KeyList import key_list
 
 #Constants
