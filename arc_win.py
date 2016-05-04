@@ -40,6 +40,7 @@ def win(hero, cur_level):
     MissionSave.write(str(level1) + "\n")
     MissionSave.write(str(level2) + "\n")
     MissionSave.write(str(level3))
+    MissionSave.close()
     
     win = True
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
