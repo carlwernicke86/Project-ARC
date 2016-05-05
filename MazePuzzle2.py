@@ -96,5 +96,3 @@ def MazePuzzle2(clock, fps):
             return "Fail"
 
         pygame.display.flip()
-
-MazePuzzle2(clock,fps)
