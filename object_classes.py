@@ -471,7 +471,6 @@ class PuzzleDoorTrigger(pygame.sprite.Sprite):
     def update(self, hero, puzzle_function, cur_level):
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 10:
-                puzzle_result = puzzle_function(clock, fps)
                 if puzzle_result == "Fail":
                     lose(cur_level, hero)
                 else:
