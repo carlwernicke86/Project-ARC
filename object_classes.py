@@ -303,7 +303,7 @@ class Trigger(pygame.sprite.Sprite):
         if pygame.sprite.collide_rect(self, hero):
             self.active = True
         if self.active: #This is formatted like this in case we want timed triggers
-            self.rect.y = self.y + 4
+            self.rect.y = self.y + 24 + 4
             self.image = pygame.image.load("Sprites/triggerpressed.png").convert_alpha()
 
 
