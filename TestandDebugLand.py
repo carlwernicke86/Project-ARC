@@ -103,7 +103,7 @@ def main(clock, fps):
         motsen_group.update(hero)
         #movelaser_group.update(hero)
         hidingspot_group.update(hero)
-        puzzletrigger.update(hero, MazePuzzle1)
+        puzzletrigger.update(hero, MazePuzzle1, main)
         puzzledoor.update(puzzletrigger)
 
         # Put stuff on the screen yo
