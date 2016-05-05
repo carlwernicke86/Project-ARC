@@ -29,6 +29,7 @@ class Hacker(pygame.sprite.Sprite):
         self.enabled = False
 
         self.deactivated = False
+        self.fail = False
 
     def update(self, wall_group, exit_group):
         key = pygame.key.get_pressed()
@@ -57,7 +58,7 @@ class Hacker(pygame.sprite.Sprite):
         for w in wall_group:
             if pygame.sprite.collide_rect(self, w):
                 self.kill()
-                lose()
+                self.fail = True
 
         for e in exit_group:
             if pygame.sprite.collide_rect(self, e):

@@ -92,6 +92,8 @@ def MazePuzzle2(clock, fps):
 
         if hacker.deactivated:
             break
+        if hacker.fail:
+            return "Fail"
 
         pygame.display.flip()
 
