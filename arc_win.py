@@ -9,7 +9,7 @@ def win(hero, cur_level):
     level2 = False
     level3 = False
 
-    MissionSave = open('MissionSaveFile', 'r')
+    MissionSave = open('MissionSaveFile.rtf', 'r')
     readlvl1 = MissionSave.readline()
     readlvl2 = MissionSave.readline()
     readlvl3 = MissionSave.readline()
@@ -36,7 +36,7 @@ def win(hero, cur_level):
     if level == "mission03":
         level3 = True
 
-    MissionSave = open('MissionSaveFile', 'w')
+    MissionSave = open('MissionSaveFile.rtf', 'w')
     MissionSave.write(str(level1) + "\n")
     MissionSave.write(str(level2) + "\n")
     MissionSave.write(str(level3))
