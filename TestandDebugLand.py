@@ -97,7 +97,7 @@ def main(clock, fps):
                 sys.exit()
 
         # Update
-        hero_group.update(platform_group)
+        hero_group.update(platform_group, main)
         camera.update(hero.rect)
         secguard_group.update(hero, secguard_group)
         motsen_group.update(hero)
