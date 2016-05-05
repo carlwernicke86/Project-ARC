@@ -96,6 +96,3 @@ def MazePuzzle1(clock, fps):
             return "Fail"
 
         pygame.display.flip()
-
-shouldfail = MazePuzzle1(clock, fps)
-print shouldfail
