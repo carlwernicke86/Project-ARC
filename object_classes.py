@@ -403,7 +403,7 @@ class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the
 
     def update(self, hero, cur_level):
         if pygame.sprite.collide_rect(self, hero) and hero.moving == True:
-            lose(cur_level)
+            lose(hero, cur_level)
         if self.direction == "left":
             self.rect.x -= self.speed
             self.moved += self.speed
