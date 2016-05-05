@@ -475,6 +475,32 @@ class PuzzleDoorTrigger(pygame.sprite.Sprite):
                     lose(cur_level, hero)
                 else:
                     self.active = True
+                    
+class HMovPlat(pygame.sprite.Sprite): #Horizontal Moving Platforms
+    def __init__(self, x, y, length, facing, movetime, speed): #x, y, length are ints; facing is str; movetime, speed are ints
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([length, 32])
+        self.image.convert()
+        self.image.fill((169, 30, 210))
+        self.rect = pygame.Rect(x, y, length, 64)
+        self.movetime = movetime
+        self.timer = 0
+        self.direction = facing #must be "left" or "right"
+        self.speed = speed
+
+    def update(self):
+        if self.direction == "left":
+            self.rect.x -= self.speed
+            self.timer += 1
+        if self.direction == "right":
+            self.rect.x += self.speed
+            self.timer += 1
+        if self.direction == "right" and self.timer == self.movetime:
+            self.direction = "left"
+            self.timer = 0
+        if self.direction == "left" and self.timer == self.movetime:
+            self.direction = "right"
+            self.timer = 0
 
 #ELEVATOR OBJECTS
 class ElevatorFloor(pygame.sprite.Sprite):
