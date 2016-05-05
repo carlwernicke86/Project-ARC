@@ -12,7 +12,7 @@ fps = 60
 WIN_W = 1600
 WIN_H = 900
 
-def mission02(clock, fps):
+def mission02():
     pygame.init()
 
     #Basic settings
