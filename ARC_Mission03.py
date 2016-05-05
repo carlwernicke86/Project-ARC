@@ -1,6 +1,7 @@
 __author__ = 'cardg_000'
 import pygame, os, sys, math
 from object_classes import *
+from MazePuzzle1 import *
 
 TIMER = 0
 
@@ -32,15 +33,16 @@ def mission03():
     motsen_group = pygame.sprite.Group()
     movelaser_group = pygame.sprite.Group()
     event_group = pygame.sprite.Group()
+    puzzle_group = pygame.sprite.Group()
 
     #BUT SPOOKY THINGS HAPPEN IN THE MIDDLE OF NOWHERE
     onElevator = True
 
     #Object creation
     hero = Hero(64, 2144)
-    sec1 = SecGuard("right", 416, (68*32),21*32) #Farthest right is 1152 [36] (end of flashlight)
-    sec2 = SecGuard("right", 8*32, 54*32, 24*32) #Farthest right is 1856 [58]
-    sec3 = SecGuard("left", 12*32, 85*32, 32*32)
+    sec1 = SecGuard("right", 416, (67*32), 21*32) #Farthest right is 1152 [36] (end of flashlight)
+    sec2 = SecGuard("left", 7*32, 84*32, 32*32) #Farthest right is 1856 [58]
+    sec3 = SecGuard("left", 6*32, 63*32, 48*32)
 
     invisTrig = Trigger(256, 128)
 
@@ -50,11 +52,20 @@ def mission03():
     trig2 = Trigger(73*32, 22*32)
     triggerdoor2 = TriggerDoor(80*32 ,14*32)
 
+    trig3 = Trigger(68*32, 49*32)
+    triggerdoor3 = TriggerDoor(57*32, 48*32)
 
+    trig4 = Trigger(60*32, 49*32)
+    triggerdoor4 = TriggerDoor(75*32, 42*32)
+
+    puzzletrigger = PuzzleDoorTrigger(83*32, 58*32) #Original x value at 896, y 288
+    puzzle_group.add(puzzletrigger)
+    puzzledoor = PuzzleDoor(84*32, 58*32)
+    platform_group.add(puzzledoor)
 
 
     hero_group.add(hero)
-    secguard_group.add(sec1,sec2)
+    secguard_group.add(sec1,sec2,sec3)
     #platform_group.add(triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor4, triggerdoor5)
 
     #CREATE THE ELEVATOR BABY CHOO CHOO
@@ -64,7 +75,7 @@ def mission03():
     ewall = ElevatorWall(32, 2080)
     edoorframe = ElevatorDoorFrame(160, 2112)
 
-    platform_group.add(eroof, efloor, ewall, edoorframe, edoor, triggerdoor1, triggerdoor2)
+    platform_group.add(eroof, efloor, ewall, edoorframe, edoor, triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor4, puzzledoor)
 
     #Load the level
     mission03_level = [
@@ -109,25 +120,25 @@ def mission03():
         "P     l                                              PPPPPPPPPPPPPPPPPPPPPPw         P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#40
-        "P     P                                              P                               P",
-        "P     P                                              P                               P",
-        "P     l                                              Pa                             bP",
-        "P                                                    P                               P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPe           PPPPPPPPPP",#45
-        "P     P                                              P                               P",
+        "P     P                                              P   PPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
         "P     P                                              P                               P",
         "P     l                                              P                               P",
-        "P                                                    P                               P",
+        "P                                                    P                     PP        P",
+        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                    PPP        P",#45
+        "P     P                                              P                      P        P",
+        "P     P                                              PP  PPPPPPPPPPPPPPPP   P        P",
+        "P     l                                              P                      P        P",
+        "P                                                    P                      P        P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq       P",#50
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P                               P",
+        "P     l                                              P       a                       P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq       PPPPPPPPPPPPPPPPPPPPPPPP",#55
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P                               P",
-        "P                                                    P                               D",
+        "P     l                                              P                        b     ZD",
+        "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#60
         "P     P                                              P                               P",
         "P     P                                              P                               P",
@@ -240,13 +251,24 @@ def mission03():
         triggerdoor1.update(trig1)
         trig2.update(hero)
         triggerdoor2.update(trig2)
+        trig3.update(hero)
+        triggerdoor3.update(trig3)
+        trig4.update(hero)
+        triggerdoor4.update(trig4)
+        puzzletrigger.update(hero, MazePuzzle1)
+        puzzledoor.update(puzzletrigger)
 
         if event_list[0] == 1:
             motsen_group.update(hero, mission03)
 
+        if hero.dead == True:
+            break
+
         #Draw something
         for p in platform_group:
             screen.blit(p.image, camera.apply(p))
+        for z in puzzle_group:
+            screen.blit(z.image, camera.apply(z))
         for h in hero_group:
             screen.blit(h.image, camera.apply(h))
         for sg in secguard_group:
@@ -259,12 +281,9 @@ def mission03():
 
         screen.blit(trig1.image, camera.apply(trig1))
         screen.blit(trig2.image, camera.apply(trig2))
-        #screen.blit(trig3.image, camera.apply(trig3))
-        #screen.blit(trig4.image, camera.apply(trig4))
-        #screen.blit(trig5.image, camera.apply(trig5))
+        screen.blit(trig3.image, camera.apply(trig3))
+        screen.blit(trig4.image, camera.apply(trig4))
 
-        if hero.dead == True:
-            break
 
         pygame.display.flip()
 
