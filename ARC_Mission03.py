@@ -490,6 +490,9 @@ def mission03check():
                 sys.exit()
 
         # Update
+        hero_group.update(platform_group, mission03check)
+        camera.update(hero.rect)
+        secguard_group.update(hero, secguard_group, mission03check)
         movelaser_group.update(hero, mission03check)
         event_group.update(hero, event_list)
         trig1.update(hero)
