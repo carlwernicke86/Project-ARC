@@ -255,7 +255,7 @@ def mission03():
         triggerdoor3.update(trig3)
         trig4.update(hero)
         triggerdoor4.update(trig4)
-        puzzletrigger.update(hero, MazePuzzle1)
+        puzzletrigger.update(hero, MazePuzzle1, mission03)
         puzzledoor.update(puzzletrigger)
 
         if event_list[0] == 1:
