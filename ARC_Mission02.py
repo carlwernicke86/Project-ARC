@@ -154,4 +154,4 @@ def mission02():
         pygame.display.flip()
 
 if __name__ == "__main__":
-    mission02(clock, fps)
+    mission02()
