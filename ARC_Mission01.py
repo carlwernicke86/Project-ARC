@@ -12,7 +12,7 @@ fps = 60
 WIN_W = 1600
 WIN_H = 900
 
-def mission01():
+def mission01(intro_flag = False):
     pygame.init()
 
     #Basic settings
@@ -86,33 +86,36 @@ def mission01():
     total_width_app = len(mission01_level[0]) * 32
     total_height_app = len(mission01_level) * 32
     camera = Camera(total_width_app, total_height_app)
-    pre_level_loop_in = True
-    while pre_level_loop_in:
-        clock.tick(60)
-        for event in pygame.event.get():                    #Fading in Loop
-            if event.type == pygame.QUIT: sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+    if intro_flag == False:
+
+        pre_level_loop_in = True
+        while pre_level_loop_in:
+            clock.tick(60)
+            for event in pygame.event.get():                    #Fading in Loop
+                if event.type == pygame.QUIT: sys.exit()
+                if event.type == pygame.KEYDOWN:
                     pre_level_loop_in = False
 
-        screen.fill(BLACK)
-        level1.fade_in(screen)
+            screen.fill(BLACK)
+            level1.fade_in(screen)
 
-        pygame.display.update()
+            pygame.display.update()
 
-    for i in range(150):
-        clock.tick(60)                                      #Fading out Loop
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT: sys.exit()
+        for i in range(150):
+            clock.tick(60)                                      #Fading out Loop
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT: sys.exit()
 
-        screen.fill(BLACK)
-        level1.fade_out(screen)
+            screen.fill(BLACK)
+            level1.fade_out(screen)
 
-        pygame.display.update()
+            pygame.display.update()
 
     fade_in_screen = pygame.Surface((WIN_W, WIN_H))
+
     fade_in_screen.set_alpha(255)
-    
+    if intro_flag == True:
+        fade_in_screen.set_alpha(0)
     while mission01_loop:
         clock.tick(fps)
         screen.fill((255, 255, 255))
