@@ -11,7 +11,7 @@ clock = pygame.time.Clock()            #The clock which can be used to set fps
 beg_time = pygame.time.get_ticks()     #The time the game first begins
 fps = 60
 
-def MazePuzzle1(clock, fps):
+def MazePuzzle1():
     pygame.init()
 
     mpuzzle1 = True
