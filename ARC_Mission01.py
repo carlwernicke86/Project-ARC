@@ -19,6 +19,8 @@ def mission01():
     mission01_loop = True
     pygame.display.set_caption("Project ARC")
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
+    
+     level1 = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Level 1")
 
     #Group creation
     platform_group = pygame.sprite.Group()
