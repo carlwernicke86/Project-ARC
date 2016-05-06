@@ -38,7 +38,7 @@ def lose(cur_level, hero):
         pygame.display.flip()
 
     if retry.stay == False:     #Retrys the mission
-        cur_level()
+        cur_level(True)
         hero.dead = True
         hero.menu = True
     if hub_go == False:         #Returns to the Apartment
