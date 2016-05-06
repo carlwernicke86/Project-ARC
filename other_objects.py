@@ -27,12 +27,31 @@ class Regular_Text(pygame.sprite.Sprite):
         self.image = self.font.render(self.text, 1, self.color)
         self.rect = self.image.get_rect()
         self.rect.center = position
+        self.red = 0
+        self.blue = 0
+        self.green = 0
 
     def update(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
+    def fade_in(self, screen):
+        if self.red <254:
+            self.red += 2
+            self.blue += 2
+            self.green += 2
+        self.image = self.font.render(self.text, 1, (self.red, self.green, self.blue))
+        screen.blit(self.image, (self.rect.x, self.rect.y))
+
+    def fade_out(self, screen):
+        if self.red > 0:
+            self.red -= 2
+            self.blue -= 2
+            self.green -= 2
+        self.image = self.font.render(self.text, 1, (self.red, self.green, self.blue))
+        screen.blit(self.image, (self.rect.x, self.rect.y))
+
 class Click_Button(pygame.sprite.Sprite):
-    def __init__(self, size, color, box_color, position, text, next_screen, object = None, object2 = None, font = None, default_fill = None):
+    def __init__(self, size, color, box_color, position, text, next_screen, object = None, object2 = None, font = None, default_fill = None, fade = False):
         pygame.sprite.Sprite.__init__(self)
         self.size = size
         self.color = color
@@ -55,6 +74,7 @@ class Click_Button(pygame.sprite.Sprite):
         self.object2 = object2
         self.went_to_screen = False
         self.default_fill = default_fill
+        self.fade = fade
 
 
     def update(self, screen, event):
@@ -64,17 +84,27 @@ class Click_Button(pygame.sprite.Sprite):
             self.gray = True
         if event.type == pygame.MOUSEBUTTONUP and self.gray == True:
             if self.next_screen == False or self.next_screen == True:
+                if self.fade == True:
+                    fade(screen)
                 self.stay = self.next_screen
             elif self.next_screen == None:
+                if self.fade == True:
+                    fade(screen)
                 return None
             elif self.object2 != None:
+                if self.fade == True:
+                    fade(screen)
                 self.went_to_screen = True
                 self.next_screen(self.object, self.object2)
             elif self.object != None:
+                if self.fade == True:
+                    fade(screen)
                 self.went_to_screen = True
                 self.next_screen(self.object)
             else:
                 self.went_to_screen = True
+                if self.fade == True:
+                    fade(screen)
                 self.next_screen()
             self.gray = False
 
