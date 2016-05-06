@@ -1,5 +1,6 @@
 import pygame, sys
 from KeyList import key_list
+from arc_fade import fade
 
 #Constants
 BLACK = (0, 0, 0)
