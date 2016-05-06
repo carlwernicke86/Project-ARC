@@ -19,6 +19,8 @@ def mission02():
     mission02_loop = True
     pygame.display.set_caption("Project ARC")
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
+    
+    level2 = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Level 2")
 
     #Group creation
     platform_group = pygame.sprite.Group()
@@ -102,7 +104,31 @@ def mission02():
     total_width_app = len(mission02_level[0]) * 32
     total_height_app = len(mission02_level) * 32
     camera = Camera(total_width_app, total_height_app)
+    pre_level_loop_in = True
+    while pre_level_loop_in:
+        clock.tick(60)
+        for event in pygame.event.get():                    #Fading in Loop
+            if event.type == pygame.QUIT: sys.exit()
+            if event.type == pygame.KEYDOWN and level2.red >= 254:
+                pre_level_loop_in = False
 
+        screen.fill(BLACK)
+        level2.fade_in(screen)
+
+        pygame.display.update()
+
+    for i in range(150):
+        clock.tick(60)                                      #Fading out Loop
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+
+        screen.fill(BLACK)
+        level2.fade_out(screen)
+
+        pygame.display.update()
+
+    fade_in_screen = pygame.Surface((WIN_W, WIN_H))
+    fade_in_screen.set_alpha(255)
     while mission02_loop:
         clock.tick(fps)
         screen.fill((255, 255, 255))
@@ -131,6 +157,9 @@ def mission02():
         motsen_group.update(hero, mission02)
         movelaser_group.update(hero)
 
+        if hero.dead == True:
+            break
+        
         #Draw something
         for p in platform_group:
             screen.blit(p.image, camera.apply(p))
@@ -147,9 +176,9 @@ def mission02():
         screen.blit(trig4.image, camera.apply(trig4))
         screen.blit(trig5.image, camera.apply(trig5))
 
-
-        if hero.dead == True:
-            break
+        screen.blit(fade_in_screen, (0, 0))
+        if fade_in_screen.get_alpha() != 0:
+            fade_in_screen.set_alpha(fade_in_screen.get_alpha() - 3)
 
         pygame.display.flip()
 
