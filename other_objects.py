@@ -182,7 +182,7 @@ class Mission():
         self.requirements_text = Regular_Text(40, BLACK, (screen.get_rect().centerx, 400), ("Requirements: "))
         self.reward = reward
         self.reward_text = Regular_Text(40, BLACK, ((screen.get_rect().centerx), 500), ("Reward: " + str(reward)))
-        self.accept = Click_Button(40, GREEN, LIGHT_GREY, (screen.get_rect().centerx - 100, 600), "Accept", mission_goto)
+       self.accept = Click_Button(40, GREEN, LIGHT_GREY, (screen.get_rect().centerx - 100, 600), "Accept", mission_goto, None, None, None, None, True)
         self.decline = Click_Button(40, RED, LIGHT_GREY, (screen.get_rect().centerx + 100, 600), "Decline", False)
 
     def update(self, screen, event):
