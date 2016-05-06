@@ -175,7 +175,7 @@ class Option_Text(pygame.sprite.Sprite):
 class Mission():
     def __init__(self, screen, employer, building, difficulty, requirements, reward, mission_goto):
         self.employer = employer
-        self.employer_text = Regular_Text(40, BLACK, (screen.get_rect().centerx, 100), ("Employer: " + str(employer)))
+        self.employer_text = Regular_Text(40, BLACK, (screen.get_rect().centerx, 100), ("Contractor: " + str(employer)))
         self.building = building
         self.building_text = Regular_Text(40, BLACK, ((screen.get_rect().centerx), 200), ("Location: " + str(building)))
         self.difficulty = Regular_Text(40, BLACK, ((screen.get_rect().centerx), 300), ("Difficulty: " + str(difficulty)))
@@ -183,7 +183,7 @@ class Mission():
         self.requirements_text = Regular_Text(40, BLACK, (screen.get_rect().centerx, 400), ("Requirements: "))
         self.reward = reward
         self.reward_text = Regular_Text(40, BLACK, ((screen.get_rect().centerx), 500), ("Reward: " + str(reward)))
-       self.accept = Click_Button(40, GREEN, LIGHT_GREY, (screen.get_rect().centerx - 100, 600), "Accept", mission_goto, None, None, None, None, True)
+        self.accept = Click_Button(40, GREEN, LIGHT_GREY, (screen.get_rect().centerx - 100, 600), "Accept", mission_goto, None, None, None, None, True)
         self.decline = Click_Button(40, RED, LIGHT_GREY, (screen.get_rect().centerx + 100, 600), "Decline", False)
 
     def update(self, screen, event):
