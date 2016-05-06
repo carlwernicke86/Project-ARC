@@ -482,13 +482,13 @@ class HMovPlat(pygame.sprite.Sprite): #Horizontal Moving Platforms
         self.image = pygame.Surface([length, 32])
         self.image.convert()
         self.image.fill((169, 30, 210))
-        self.rect = pygame.Rect(x, y, length, 64)
+        self.rect = pygame.Rect(x, y, length, 32)
         self.movetime = movetime
         self.timer = 0
         self.direction = facing #must be "left" or "right"
         self.speed = speed
 
-    def update(self):
+    def update(self, hero):
         if self.direction == "left":
             self.rect.x -= self.speed
             self.timer += 1
@@ -501,6 +501,12 @@ class HMovPlat(pygame.sprite.Sprite): #Horizontal Moving Platforms
         if self.direction == "left" and self.timer == self.movetime:
             self.direction = "right"
             self.timer = 0
+
+        if hero.rect.x > self.rect.x and hero.rect.x < self.rect.right and hero.rect.y - self.rect.y == -64:
+            if self.direction == "left":
+                hero.rect.x -= self.speed
+            if self.direction == "right":
+                hero.rect.x += self.speed
 
 #ELEVATOR OBJECTS
 class ElevatorFloor(pygame.sprite.Sprite):
