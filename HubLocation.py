@@ -56,6 +56,7 @@ def hub(screen, clock, fps, TIMER):
 
     #Apartment, mostly eye candy and mechanism for 'desk' level selector
     while apartment:
+        hero.menu = False
         TIMER += 1
         clock.tick(fps)
         #Quitting the game
