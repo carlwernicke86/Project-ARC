@@ -66,7 +66,7 @@ def hub(screen, clock, fps, TIMER):
 
         screen.fill((255,255,255))
         #Update
-        hero_group.update(platform_group. hub)
+        hero_group.update(platform_group, hub)
         camera.update(hero.rect)
         platform_group.update(hero, missions)
 
