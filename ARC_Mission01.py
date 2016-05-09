@@ -21,6 +21,7 @@ def mission01(intro_flag = False):
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
     
     level1 = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Level 1")
+    press_continue = Regular_Text(50, (200, 200, 200), (screen.get_rect().centerx, screen.get_rect().centery), "- Press any button to Proceed -")
 
     #Group creation
     platform_group = pygame.sprite.Group()
@@ -98,7 +99,9 @@ def mission01(intro_flag = False):
 
             screen.fill(BLACK)
             level1.fade_in(screen)
-
+            if level1.red > 252:
+                cur_time = pygame.time.get_ticks()
+                press_continue.blink(screen, cur_time, beg_time)
             pygame.display.update()
 
         for i in range(150):
