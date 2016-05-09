@@ -40,7 +40,7 @@ def hub(screen, clock, fps, TIMER):
     for row in apartment_level:
         for col in row:
             if col == "P":
-                p = Platform([176, 162, 150], x, y)
+                p = Platform("Sprites/BlackBlock.png", x, y)
                 platform_group.add(p)
             if col == "D":
                 desk = LaunchDesk(x, y)
