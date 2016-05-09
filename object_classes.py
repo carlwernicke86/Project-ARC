@@ -218,11 +218,10 @@ class Hero(pygame.sprite.Sprite):
                     self.rect.top = p.rect.bottom
 
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, color, x, y):
+    def __init__(self, image_path, x, y): #image_path "Sprites/something.png"
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32,32])
+        self.image = pygame.image.load(image_path).convert_alpha()
         self.image.convert()
-        self.image.fill(color)
         self.rect = pygame.Rect(x,y,32,32)
 
 class Camera(object):
@@ -288,7 +287,7 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
 
 class WinDocs(Platform): #Touch these to win the level
     def __init__(self, x, y):
-        Platform.__init__(self, (200, 200, 200), x, y)
+        Platform.__init__(self, "Sprites/WinDocs.png", x, y)
 
 class Trigger(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -418,7 +417,7 @@ class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the
 
 class LaunchDesk(Platform):
     def __init__(self, x, y):
-        Platform.__init__(self, (154, 90, 7), x, y)
+        Platform.__init__(self, "Sprites/Desk.png", x, y)
 
     def update(self, hero, missions):
         if hero.interact:
