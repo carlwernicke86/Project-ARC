@@ -22,5 +22,4 @@ def fade(screen):
         screen.fill((255, 255, 255))
         screen.blit(fade_in_screen, (0,0))
         pygame.display.flip()
-        print fade_frame
 
