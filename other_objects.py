@@ -42,6 +42,10 @@ class Regular_Text(pygame.sprite.Sprite):
             self.green += 2
         self.image = self.font.render(self.text, 1, (self.red, self.green, self.blue))
         screen.blit(self.image, (self.rect.x, self.rect.y))
+        
+    def blink(self, screen, cur_time, beg_time):
+        if (cur_time - beg_time) % 1000 < 500:
+            screen.blit(self.image, (self.rect.x, self.rect.y))
 
     def fade_out(self, screen):
         if self.red > 0:
