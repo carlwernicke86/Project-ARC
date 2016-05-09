@@ -170,7 +170,7 @@ def mission03(intro_flag = False):
     for row in mission03_level:
         for col in row:
             if col == "P":
-                p = Platform([61, 61, 61], x, y)
+                p = Platform("Sprites/BlackBlock.png", x, y)
                 platform_group.add(p)
             if col == "D":
                 d = WinDocs(x, y)
