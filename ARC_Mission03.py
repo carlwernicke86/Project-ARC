@@ -17,7 +17,7 @@ WIN_H = 900
 #Events
 event_list = [0]              #This will help trigger events; # of 0's dictate amount of events in level
 
-def mission03():
+def mission03(intro_flag = False):
     pygame.init()
 
     event_list[0] = 0
@@ -26,6 +26,7 @@ def mission03():
     pygame.display.set_caption("Project ARC")
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 
+    level3 = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Level 2")
     #Group creation
     platform_group = pygame.sprite.Group()
     hero_group = pygame.sprite.Group()
@@ -216,6 +217,37 @@ def mission03():
     total_width_app = len(mission03_level[0]) * 32
     total_height_app = len(mission03_level) * 32
     camera = Camera(total_width_app, total_height_app)
+    
+    if intro_flag == False:
+
+        pre_level_loop_in = True
+        while pre_level_loop_in:
+            clock.tick(60)
+            for event in pygame.event.get():                    #Fading in Loop
+                if event.type == pygame.QUIT: sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    pre_level_loop_in = False
+
+            screen.fill(BLACK)
+            level3.fade_in(screen)
+
+            pygame.display.update()
+
+        for i in range(150):
+            clock.tick(60)                                      #Fading out Loop
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT: sys.exit()
+
+            screen.fill(BLACK)
+            level3.fade_out(screen)
+
+            pygame.display.update()
+
+    fade_in_screen = pygame.Surface((WIN_W, WIN_H))
+
+    fade_in_screen.set_alpha(255)
+    if intro_flag == True:
+        fade_in_screen.set_alpha(0)
 
     while mission03_loop:
         clock.tick(fps)
@@ -284,7 +316,9 @@ def mission03():
         screen.blit(trig3.image, camera.apply(trig3))
         screen.blit(trig4.image, camera.apply(trig4))
 
-
+        screen.blit(fade_in_screen, (0, 0))
+        if fade_in_screen.get_alpha() != 0:
+            fade_in_screen.set_alpha(fade_in_screen.get_alpha() - 3)
         pygame.display.flip()
 
 def mission03check():
