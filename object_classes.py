@@ -505,6 +505,19 @@ class HMovPlat(pygame.sprite.Sprite): #Horizontal Moving Platforms
                 hero.rect.x -= self.speed
             if self.direction == "right":
                 hero.rect.x += self.speed
+                
+class GenericTrigger(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface([32, 32])
+        self.image.convert()
+        self.image.fill((124, 231, 34))
+        self.rect = pygame.Rect(x, y, 32 , 32)
+        self.active = False
+
+    def update(self, hero):
+        if pygame.sprite.collide_rect(self, hero):
+            self.active = True #[TRIGGERED]
 
 #ELEVATOR OBJECTS
 class ElevatorFloor(pygame.sprite.Sprite):
