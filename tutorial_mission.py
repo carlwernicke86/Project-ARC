@@ -42,7 +42,7 @@ def tutorial(clock, fps):
     ScrollTextIntroTrig = GenericTrigger(128, 322)
 
     #Text creation
-    ScrollTextIntro = Scroll_Text("Welcome to Project ARC! Default movement keys are W for Jump, A for Left, D for Right", (0,0,0))
+    ScrollTextIntro = Scroll_Text("Welcome to Project ARC! Default movement keys are W for Jump, A for Left, D for Right.", (0,0,0))
 
     trigger_group.add(ScrollTextIntroTrig)
     ScrollText_group.add(ScrollTextIntro)
@@ -113,8 +113,6 @@ def tutorial(clock, fps):
         #movelaser_group.update(hero)
         trigger_group.update(hero)
         ScrollTextIntro.update(screen, True, ScrollTextIntroTrig.active)
-        for ST in ScrollText_group:
-            ST.Scroll(screen, TIMER)
 
         # Put stuff on the screen yo
         for p in platform_group:
@@ -130,6 +128,7 @@ def tutorial(clock, fps):
         #    screen.blit(ml.image, camera.apply(ml))
         screen.blit(trig1.image, camera.apply(trig1))
         for ST in ScrollText_group:
+            ST.Scroll(screen, TIMER)
             ST.TextBlit(screen, TIMER)
         for t in trigger_group:
             screen.blit(t.image, camera.apply(t))
