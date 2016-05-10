@@ -28,6 +28,8 @@ def tutorial(clock, fps):
     secguard_group = pygame.sprite.Group() #Security Guards
     motsen_group = pygame.sprite.Group() #Motion sensing lasers
     movelaser_group = pygame.sprite.Group() #Moving motion sensor lasers
+    trigger_group = pygame.sprite.Group() #CAN ONLY TAKE ARGUMENT Hero
+    ScrollText_group = pygame.sprite.Group()
 
     #Object creation
     hero = Hero(96, 288)
@@ -35,6 +37,15 @@ def tutorial(clock, fps):
     sec1 = SecGuard("right", 128, 640, 288)
     trig1 = Trigger(1248, 224)
     #movelaser1 = MovingLaser(1056, 288, "left", 128)
+
+    #Trigger creation (mostly for scroll text)
+    ScrollTextIntroTrig = GenericTrigger(128, 322)
+
+    #Text creation
+    ScrollTextIntro = Scroll_Text("Welcome to Project ARC! Default movement keys are W for Jump, A for Left, D for Right", (0,0,0))
+
+    trigger_group.add(ScrollTextIntroTrig)
+    ScrollText_group.add(ScrollTextIntro)
 
     secguard_group.add(sec1)
     #movelaser_group.add(movelaser1)
@@ -100,6 +111,10 @@ def tutorial(clock, fps):
         platform_group.update(trig1)
         motsen_group.update(hero, tutorial)
         #movelaser_group.update(hero)
+        trigger_group.update(hero)
+        ScrollTextIntro.update(screen, True, ScrollTextIntroTrig.active)
+        for ST in ScrollText_group:
+            ST.Scroll(screen, TIMER)
 
         # Put stuff on the screen yo
         for p in platform_group:
@@ -114,6 +129,10 @@ def tutorial(clock, fps):
         #for ml in movelaser_group:
         #    screen.blit(ml.image, camera.apply(ml))
         screen.blit(trig1.image, camera.apply(trig1))
+        for ST in ScrollText_group:
+            ST.TextBlit(screen, TIMER)
+        for t in trigger_group:
+            screen.blit(t.image, camera.apply(t))
 
         pygame.display.flip()
 
