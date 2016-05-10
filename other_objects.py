@@ -207,7 +207,7 @@ class Mission():
 
 
 class Scroll_Text(pygame.sprite.Sprite):
-    def __init__(self, text, color, font = None, go = False):
+    def __init__(self, text, color, font = None, go = False): #text is str, color is rgb, font is the font value, if go is True, text will scroll
         pygame.sprite.Sprite.__init__(self)
         self.text = text
         self.color = color
@@ -219,7 +219,7 @@ class Scroll_Text(pygame.sprite.Sprite):
         self.cur_text = ""
 
     def Scroll(self, screen, TIMER):
-        self.go = Scroll = True
+        Scroll = self.go
         self.cur_text = ""
         self.image = self.font.render(self.cur_text, 1, self.color)
         while Scroll:
@@ -230,11 +230,12 @@ class Scroll_Text(pygame.sprite.Sprite):
                     if event.key == pygame.K_t:
                         if self.cur_text == self.text:
                             Scroll = False
+                            self.kill()
                         elif self.cur_text != self.text:
                             self.cur_text = self.text
 
 
-            if self.go == True and TIMER%20 == 0:
+            if self.go == True and TIMER%3 == 0:
                 self.cur_text = self.text[0:len(self.cur_text) + 1]
                 self.image = self.font.render(self.cur_text, 1, self.color)
 
@@ -242,15 +243,13 @@ class Scroll_Text(pygame.sprite.Sprite):
             screen.blit(self.image, (self.rect.left + 20, self.rect.top + 20))
             pygame.display.update()
 
-
-
     def update(self, screen, cur_event, activate_event):
         if cur_event == activate_event:
             self.go = True
 
 
     def TextBlit(self, screen, TIMER):
-        if self.go == True and TIMER%1 == 0:
+        if self.go == True and TIMER % 1 == 0:
             self.cur_text = self.text[0:len(self.cur_text) + 1]
             self.image = self.font.render(self.cur_text, 1, self.color)
 
