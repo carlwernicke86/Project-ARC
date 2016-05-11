@@ -9,9 +9,10 @@ def intro(screen, clock, fps, TIMER):
     Title = Regular_Text(80, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Project ARC")
 
     #Click Text Objects
-    New_Game = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery/1.5), "New Game", False, None, None, None, WHITE)
+    Continue = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery/1.5), "Continue", False, None, None, None, WHITE)
+    New_Game = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, Continue.rect.y + 65), "New Game", False, None, None, None, WHITE)
     Options = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, New_Game.rect.y + 65), "Options", options, None, None, None, WHITE)
-
+    
     #Groups and adding things to groups
     regular_text_group = pygame.sprite.Group()
     regular_text_group.add(Title)
