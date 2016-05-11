@@ -36,16 +36,16 @@ def MazePuzzle3():
         "W        W     WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
         "W  WWWWWWW                W                      W",
         "W        W                W                      W",#10
-        "WWW  WWWWW    W   W       W    WWWWWWWWWWWWW     W",
-        "W        W        W       W    W                 W",
+        "W        W    W   W       W    WWWWWWWWWWWWW     W",
+        "WWW  WWWWW        W       W    W                 W",
         "W        W      WWW       W    W                 W",
         "W        W   W  W         W    W      WWWWWWWWWWWW",
         "W        W      W         W    W      W          W",#15
-        "WWWWWWWW W      W         W    W      W          W",
+        "WW  WWWWWW      W         W    W      W          W",
         "W        W           WWWWWW    W      W     W    W",
         "W        W           W         W            W    W",
         "W        W           W         W            W    W",
-        "W WWWWWW WWWWWWWW    W   WWWWWWWWWWWWWWWWWWWW    W",#20
+        "W WWWWW  WWWWWWWW    W   WWWWWWWWWWWWWWWWWWWW    W",#20
         "W        W      W    W   W     W                 W",
         "W               W    W   W     W                 W",
         "W               W        W     W     WWWWWWWWWWWWW",
