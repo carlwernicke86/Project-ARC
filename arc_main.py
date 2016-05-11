@@ -31,13 +31,10 @@ def main():
         ControlOptions.write("E")
     ControlOptions.close()
 
-
     TIMER = 0
     structure_loop = True
     while structure_loop:
         intro(screen, clock, fps, TIMER)
         structure_loop = hub(screen, clock, fps, TIMER)
-
-
 
 main()
