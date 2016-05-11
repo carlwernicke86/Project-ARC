@@ -326,7 +326,7 @@ def mission03(intro_flag = False):
             fade_in_screen.set_alpha(fade_in_screen.get_alpha() - 3)
         pygame.display.flip()
 
-def mission03check():
+def mission03check(intro_flag = True):
     pygame.init()
 
     event_list[0] = 1
