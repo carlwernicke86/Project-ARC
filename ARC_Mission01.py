@@ -21,7 +21,7 @@ def mission01(intro_flag = False):
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
     
     level1 = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Level 1")
-    press_continue = Regular_Text(50, (200, 200, 200), (screen.get_rect().centerx, screen.get_rect().centery), "- Press any button to Proceed -")
+    press_continue = Regular_Text(50, (200, 200, 200), (screen.get_rect().centerx, screen.get_rect().centery), "- Press Any Button to Proceed -")
 
     #Group creation
     platform_group = pygame.sprite.Group()
