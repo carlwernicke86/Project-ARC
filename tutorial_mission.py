@@ -39,13 +39,21 @@ def tutorial(clock, fps):
     #movelaser1 = MovingLaser(1056, 288, "left", 128)
 
     #Trigger creation (mostly for scroll text)
-    ScrollTextIntroTrig = GenericTrigger(128, 322)
+    ScrollTextIntroTrig = GenericTrigger(96, 200, 200)
+    SecGuardTextTrig = GenericTrigger(224, 200, 200)
+    LaserTextTrig = GenericTrigger(1152, 200, 200)
+    DoorTextTrig = GenericTrigger(1376, 200, 200)
+    WinDocsTrig = GenericTrigger(1664, 200, 200)
 
     #Text creation
-    ScrollTextIntro = Scroll_Text("Welcome to Project ARC! Default movement keys are W for Jump, A for Left, D for Right.", (0,0,0))
+    ScrollTextIntro = Scroll_Text("Default movement keys are W for Jump, A for Left, D for Right. Press T to continue.", (0, 0, 0))
+    SecGuardText = Scroll_Text("This is a security guard, avoid coming in contact with him and his flashlight!", (0, 0, 0))
+    LaserText = Scroll_Text("Avoid touching laser sensors! They will turn on and off periodically.", (0, 0, 0))
+    DoorText = Scroll_Text("Activate the trigger in order to open the door.", (0, 0, 0))
+    WinDocText = Scroll_Text("Collect the documents to complete the mission.", (0, 0, 0))
 
-    trigger_group.add(ScrollTextIntroTrig)
-    ScrollText_group.add(ScrollTextIntro)
+    trigger_group.add(ScrollTextIntroTrig, SecGuardTextTrig, LaserTextTrig, DoorTextTrig, WinDocsTrig)
+    ScrollText_group.add(ScrollTextIntro, SecGuardText, LaserText, DoorText, WinDocText)
 
     secguard_group.add(sec1)
     #movelaser_group.add(movelaser1)
@@ -113,6 +121,10 @@ def tutorial(clock, fps):
         #movelaser_group.update(hero)
         trigger_group.update(hero)
         ScrollTextIntro.update(screen, True, ScrollTextIntroTrig.active)
+        SecGuardText.update(screen, True, SecGuardTextTrig.active)
+        LaserText.update(screen, True, LaserTextTrig.active)
+        DoorText.update(screen, True, DoorTextTrig.active)
+        WinDocText.update(screen, True, WinDocsTrig.active)
 
         # Put stuff on the screen yo
         for p in platform_group:
@@ -130,8 +142,8 @@ def tutorial(clock, fps):
         for ST in ScrollText_group:
             ST.Scroll(screen, TIMER)
             ST.TextBlit(screen, TIMER)
-        for t in trigger_group:
-            screen.blit(t.image, camera.apply(t))
+        #for t in trigger_group:
+        #    screen.blit(t.image, camera.apply(t))
 
         pygame.display.flip()
 
