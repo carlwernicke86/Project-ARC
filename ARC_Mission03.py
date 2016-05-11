@@ -44,7 +44,7 @@ def mission03(intro_flag = False):
     #Object creation
     hero = Hero(64, 2144)
     sec1 = SecGuard("right", 416, (67*32), 21*32) #Farthest right is 1152 [36] (end of flashlight)
-    sec2 = SecGuard("left", 7*32, 84*32, 32*32) #Farthest right is 1856 [58]
+    sec2 = SecGuard("left", 6*32, 82*32, 32*32) #Farthest right is 1856 [58]
     sec3 = SecGuard("left", 6*32, 63*32, 48*32)
 
     invisTrig = Trigger(256, 128)
@@ -350,7 +350,7 @@ def mission03check(intro_flag = True):
     #Object creation
     hero = Hero(1280, 96)
     sec1 = SecGuard("right", 416, (67*32), 21*32) #Farthest right is 1152 [36] (end of flashlight)
-    sec2 = SecGuard("left", 7*32, 84*32, 32*32) #Farthest right is 1856 [58]
+    sec2 = SecGuard("left", 6*32, 82*32, 32*32) #Farthest right is 1856 [58]
     sec3 = SecGuard("left", 6*32, 63*32, 48*32)
 
     invisTrig = Trigger(256, 128)
