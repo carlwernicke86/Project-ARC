@@ -42,9 +42,9 @@ def mission03(intro_flag = False):
     onElevator = True
 
     #Object creation
-    hero = Hero(64, 2144)
+    hero = Hero(64, 2133) #64, 2133
     sec1 = SecGuard("right", 416, (67*32), 21*32) #Farthest right is 1152 [36] (end of flashlight)
-    sec2 = SecGuard("left", 6*32, 82*32, 32*32) #Farthest right is 1856 [58]
+    sec2 = SecGuard("left", 6*32, 71*32, 32*32) #Farthest right is 1856 [58]
     sec3 = SecGuard("left", 6*32, 63*32, 48*32)
 
     invisTrig = Trigger(256, 128)
@@ -83,14 +83,14 @@ def mission03(intro_flag = False):
     #Load the level
     mission03_level = [
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#0
-        "P     P                                                                              P",
-        "P     P                                                                              P",
-        "P     l                                                                              P",
-        "P                          1                                                         P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",#5
-        "P     P                                              P                              bP",
+        "PI    P                                                                              P",
+        "PI    P                                                                              P",
+        "PI    l                                                                              P",
+        "PI                         1                                                         P",
+        "PI    PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",#5
+        "PI    P                                              P                              bP",
         "P     P                                              P                               P",
-        "P     l                                              P      a                        P",
+        "P     l                                              P          a                    P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP      PPPPPPPPPPPPPPPPPPPPPPPPPP",#10
         "P     P                                              P                               P",
@@ -193,10 +193,10 @@ def mission03(intro_flag = False):
                 i = InvisibleWall(x, y)
                 platform_group.add(i)
             if col == "a":
-                a = MovingLaser(x, y, "right", 768)
+                a = MovingLaser(x, y, "right", 640)
                 movelaser_group.add(a)
             if col == "b":
-                b = MovingLaser(x,y,"left",768)
+                b = MovingLaser(x,y,"left",640)
                 movelaser_group.add(b)
             if col == "1":
                 e = Event_Mission03(x, y, 1, 4, 1)
@@ -350,7 +350,7 @@ def mission03check(intro_flag = True):
     #Object creation
     hero = Hero(1280, 96)
     sec1 = SecGuard("right", 416, (67*32), 21*32) #Farthest right is 1152 [36] (end of flashlight)
-    sec2 = SecGuard("left", 6*32, 82*32, 32*32) #Farthest right is 1856 [58]
+    sec2 = SecGuard("left", 6 * 32, 71 * 32, 32 * 32) #Farthest right is 1856 [58]
     sec3 = SecGuard("left", 6*32, 63*32, 48*32)
 
     invisTrig = Trigger(256, 128)
@@ -382,14 +382,14 @@ def mission03check(intro_flag = True):
     #Load the level
     mission03check_level = [
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#0
-        "P     P                                                                              P",
-        "P     P                                                                              P",
-        "P     l                                                                              P",
-        "P                          1                                                         P",
-        "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",#5
-        "P     P                                              P                              bP",
+        "PI    P                                                                              P",
+        "PI    P                                                                              P",
+        "PI    l                                                                              P",
+        "PI                         1                                                         P",
+        "PI    PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP   P",#5
+        "PI    P                                              P                              bP",
         "P     P                                              P                               P",
-        "P     l                                              P      a                        P",
+        "P     l                                              P          a                    P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP      PPPPPPPPPPPPPPPPPPPPPPPPPP",#10
         "P     P                                              P                               P",
@@ -459,7 +459,7 @@ def mission03check(intro_flag = True):
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                               P",#75
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P                          a     P",
+        "P     l                                              P                               P",
         "P                                                    P                               P",
         "PIIIIIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
     ]   #012345678901234567890123456789012345678901234567890123456789012345678901234567890123456
@@ -492,10 +492,10 @@ def mission03check(intro_flag = True):
                 i = InvisibleWall(x, y)
                 platform_group.add(i)
             if col == "a":
-                a = MovingLaser(x, y, "right", 768)
+                a = MovingLaser(x, y, "right", 640)
                 movelaser_group.add(a)
             if col == "b":
-                b = MovingLaser(x,y,"left",768)
+                b = MovingLaser(x,y,"left",640)
                 movelaser_group.add(b)
             if col == "1":
                 e = Event_Mission03(x, y, 1, 4, 1)
