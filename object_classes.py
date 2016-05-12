@@ -507,12 +507,12 @@ class HMovPlat(pygame.sprite.Sprite): #Horizontal Moving Platforms
                 hero.rect.x += self.speed
                 
 class GenericTrigger(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, height):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 32])
+        self.image = pygame.Surface([32, height])
         self.image.convert()
         self.image.fill((124, 231, 34))
-        self.rect = pygame.Rect(x, y, 32 , 32)
+        self.rect = pygame.Rect(x, y, 32 , height)
         self.active = False
 
     def update(self, hero):
