@@ -37,6 +37,8 @@ def mission03(intro_flag = False):
     movelaser_group = pygame.sprite.Group()
     event_group = pygame.sprite.Group()
     puzzle_group = pygame.sprite.Group()
+    trigger_group = pygame.sprite.Group() #CAN ONLY TAKE ARGUMENT Hero
+    ScrollText_group = pygame.sprite.Group()
 
     #BUT SPOOKY THINGS HAPPEN IN THE MIDDLE OF NOWHERE
     onElevator = True
@@ -48,6 +50,15 @@ def mission03(intro_flag = False):
     sec3 = SecGuard("left", 6*32, 63*32, 48*32)
 
     invisTrig = Trigger(256, 128)
+
+    AlarmTextTrig = GenericTrigger(27 * 32, 32, 192)
+    AlarmText = Scroll_Text("WARNING, INTRUDER DETECTED, SECURITY PROTOCOL A6 ACTIVE.",
+                                  (0, 0, 0))
+    Alarm2TextTrig = GenericTrigger(28 * 32, 32, 192)
+    Alarm2Text = Scroll_Text("AREA IS UNDER LOCKDOWN, REMAIN CALM.", (0, 0, 0))
+
+    trigger_group.add(AlarmTextTrig, Alarm2TextTrig) #This is only for text triggers
+    ScrollText_group.add(AlarmText, Alarm2Text)
 
     trig1 = Trigger(82*32, 15*32)
     triggerdoor1 = TriggerDoor(81*32, 21*32)
@@ -294,6 +305,9 @@ def mission03(intro_flag = False):
         triggerdoor4.update(trig4)
         puzzletrigger.update(hero, MazePuzzle1, mission03check)
         puzzledoor.update(puzzletrigger)
+        trigger_group.update(hero)
+        AlarmText.update(screen, True, AlarmTextTrig.active)
+        Alarm2Text.update(screen, True, Alarm2TextTrig.active)
 
         if event_list[0] == 1:
             motsen_group.update(hero, mission03check)
@@ -315,6 +329,9 @@ def mission03(intro_flag = False):
                 screen.blit(ms.image, camera.apply(ms))
         for mvs in movelaser_group:
             screen.blit(mvs.image, camera.apply(mvs))
+        for ST in ScrollText_group:
+            ST.Scroll(screen, TIMER)
+            ST.TextBlit(screen, TIMER)
 
         screen.blit(trig1.image, camera.apply(trig1))
         screen.blit(trig2.image, camera.apply(trig2))
