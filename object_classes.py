@@ -390,9 +390,8 @@ class HotMotSen(pygame.sprite.Sprite):
 class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
     def __init__(self, x, y, direction, distance):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([8, 64])
+        self.image = pygame.image.load("Sprites/MovingLaser.png").convert_alpha()
         self.image.convert()
-        self.image.fill((29, 134, 226))
         self.rect = pygame.Rect(x, y, 8, 64)
         self.direction = direction
         self.distance = distance
