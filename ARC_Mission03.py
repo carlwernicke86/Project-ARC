@@ -146,7 +146,7 @@ def mission03(intro_flag = False):
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq       P",#50
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P       a                       P",
+        "P     l                                              P        a                      P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq       PPPPPPPPPPPPPPPPPPPPPPPP",#55
         "P     P                                              P                               P",
@@ -451,7 +451,7 @@ def mission03check(intro_flag = True):
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq       P",#50
         "P     P                                              P                               P",
         "P     P                                              P                               P",
-        "P     l                                              P       a                       P",
+        "P     l                                              P        a                      P",
         "P                                                    P                               P",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPq       PPPPPPPPPPPPPPPPPPPPPPPP",#55
         "P     P                                              P                               P",
