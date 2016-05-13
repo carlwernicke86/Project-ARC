@@ -477,9 +477,9 @@ class PuzzleDoorTrigger(pygame.sprite.Sprite):
 class HMovPlat(pygame.sprite.Sprite): #Horizontal Moving Platforms
     def __init__(self, x, y, length, facing, movetime, speed): #x, y, length are ints; facing is str; movetime, speed are ints
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([length, 32])
+        metalbarimage = SpriteSheet("Sprites/metalbeam.png")
+        self.image = metalbarimage.get_image(0, 0, length, 32)
         self.image.convert()
-        self.image.fill((169, 30, 210))
         self.rect = pygame.Rect(x, y, length, 32)
         self.movetime = movetime
         self.timer = 0
