@@ -522,9 +522,8 @@ class GenericTrigger(pygame.sprite.Sprite):
 class ElevatorFloor(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([128, 32])
+        self.image = pygame.image.load("Sprites/ElevatorFloor.png").convert_alpha()
         self.image.convert()
-        self.image.fill((212, 184, 144))
         self.rect = pygame.Rect(x, y, 32, 64)
         self.climbing = True
         self.climbtime = 0
@@ -549,9 +548,8 @@ class ElevatorFloor(pygame.sprite.Sprite):
 class ElevatorRoof(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([128, 32])
+        self.image = pygame.image.load("Sprites/ElevatorRoofAndBackground.png").convert_alpha()
         self.image.convert()
-        self.image.fill((212, 184, 144))
         self.rect = pygame.Rect(x, y, 32, 64)
         self.climbing = True
         self.climbtime = 0
@@ -576,9 +574,8 @@ class ElevatorRoof(pygame.sprite.Sprite):
 class ElevatorWall(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 160])
+        self.image = pygame.image.load("Sprites/ElevatorWall.png").convert_alpha()
         self.image.convert()
-        self.image.fill((212, 184, 144))
         self.rect = pygame.Rect(x, y, 32, 64)
         self.climbing = True
         self.climbtime = 0
@@ -603,9 +600,8 @@ class ElevatorWall(pygame.sprite.Sprite):
 class ElevatorDoorFrame(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 32])
+        self.image = pygame.image.load("Sprites/ElevatorDoorFrame.png").convert_alpha()
         self.image.convert()
-        self.image.fill((212, 184, 144))
         self.rect = pygame.Rect(x, y, 32, 32)
         self.climbing = True
         self.climbtime = 0
@@ -630,9 +626,8 @@ class ElevatorDoorFrame(pygame.sprite.Sprite):
 class ElevatorDoor(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 64])
+        self.image = pygame.image.load("Sprites/ElevatorDoor.png").convert_alpha()
         self.image.convert()
-        self.image.fill((100, 255, 166))
         self.rect = pygame.Rect(x, y, 32, 64)
         self.climbing = True
         self.climbtime = 0
