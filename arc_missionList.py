@@ -6,5 +6,5 @@ mission_list = [
     ("Dan Li", "Saint Mario Secondary Academy", "Easy", ("None", ""), "$500", mission01), #Mission 1
     ("ARC Corp", "DataTech Solutions", "Medium", ("None", ""), "$7000", mission02),   #Mission 2
     ("ARC Corp", "Juno Defense Group", "Medium", ("None", ""), "$15000", mission03), #Mission 3
-    ("Intelligent Contract Solutions", "Maclaurin Group Warehouse #14", "Hard", ("None", ""), "$20000", None)
+    ("Intelligent Secure Solutions", "Maclaurin Group Warehouse #14", "Hard", ("None", ""), "$20000", None)
 ]
