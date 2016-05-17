@@ -360,9 +360,9 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
 class HotMotSen(pygame.sprite.Sprite):
     def __init__(self, x, y, ontime, offtime, delayed, length):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([length, 8])
+        horizontallaser = SpriteSheet("Sprites/HorizontalLaser.png")
+        self.image = horizontallaser.get_image(0, 0, length, 8)
         self.image.convert()
-        self.image.fill((247, 29, 29))
         self.rect = pygame.Rect(x, y, length, 8)
         self.ontime = ontime
         self.offtime = offtime
