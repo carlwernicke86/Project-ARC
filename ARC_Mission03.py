@@ -19,6 +19,13 @@ event_list = [0]              #This will help trigger events; # of 0's dictate a
 
 def mission03(intro_flag = False):
     pygame.init()
+    
+    try:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("Sounds/TakingDarkSong.mp3")
+        pygame.mixer.music.play(-1)
+    except pygame.error:
+        pass
 
     event_list[0] = 0
     #Basic settings
@@ -345,6 +352,13 @@ def mission03(intro_flag = False):
 
 def mission03check(intro_flag = True):
     pygame.init()
+    
+    try:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("Sounds/TakingDarkSong.mp3")
+        pygame.mixer.music.play(-1)
+    except pygame.error:
+        pass
 
     event_list[0] = 1
     #Basic settings
