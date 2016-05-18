@@ -6,7 +6,7 @@ def intro(screen, clock, fps, TIMER):
     TIMER += 1
 
     #Regular Text Objects, images can be added later
-    Title = Regular_Text(80, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Project ARC")
+    Title = Regular_Text(80, ORANGE, (screen.get_rect().centerx, screen.get_rect().centery/2), "Project ARC")
 
     #Click Text Objects
     Continue = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery/1.5), "Continue", False, None, None, None, WHITE)
