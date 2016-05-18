@@ -14,6 +14,13 @@ WIN_H = 900
 
 def mission01(intro_flag = False):
     pygame.init()
+    
+    try:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("Sounds/TakingDarkSong.mp3")
+        pygame.mixer.music.play(-1)
+    except pygame.error:
+        pass
 
     #Basic settings
     mission01_loop = True
