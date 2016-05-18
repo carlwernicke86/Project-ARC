@@ -22,9 +22,12 @@ def intro(screen, clock, fps, TIMER):
 
     bg = pygame.image.load("Sprites/MainBack.png")
 
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load("Sounds/YourCellarSong.mp3")
-    pygame.mixer.music.play(-1)
+    try:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("Sounds/YourCellarSong.mp3")
+        pygame.mixer.music.play(-1)
+    except pygame.error:
+        pass
 
     intro = True
     while intro:
