@@ -125,6 +125,9 @@ def tutorial(clock, fps):
         LaserText.update(screen, True, LaserTextTrig.active)
         DoorText.update(screen, True, DoorTextTrig.active)
         WinDocText.update(screen, True, WinDocsTrig.active)
+        
+        if hero.dead == True:
+            break
 
         # Put stuff on the screen yo
         for p in platform_group:
