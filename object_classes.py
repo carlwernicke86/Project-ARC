@@ -98,6 +98,7 @@ class Hero(pygame.sprite.Sprite):
         self.image.convert()
         self.dead = False
         self.menu = False
+        self.activate_caught = False
 
     def update(self, platform_group, cur_level):
         ControlOptions = open('ControlOptions.txt', 'r')
@@ -265,7 +266,7 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
 
     def update(self, hero, secguard_group, cur_level):
         if pygame.sprite.spritecollideany(hero, secguard_group, collided = None) != None:
-            lose(cur_level, hero)
+            hero.activate_caught = True
         if self.direction == "left":
             self.rect.x -= 1
             self.steps += 1
@@ -355,7 +356,7 @@ class MotionSensor(pygame.sprite.Sprite): #This is misleading, you have to walk 
             self.offtimer = 0
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
-            lose(cur_level, hero)
+            hero.activate_caught = True
             
 class HotMotSen(pygame.sprite.Sprite):
     def __init__(self, x, y, ontime, offtime, delayed, length):
@@ -385,7 +386,7 @@ class HotMotSen(pygame.sprite.Sprite):
             self.offtimer = 0
             self.active = True
         if pygame.sprite.collide_rect(self, hero) and self.active == True:
-            lose(cur_level, hero)
+            hero.activate_caught = True
 
 class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the laser passes over you
     def __init__(self, x, y, direction, distance):
@@ -400,7 +401,7 @@ class MovingLaser(pygame.sprite.Sprite): #Only triggers if you are moving as the
 
     def update(self, hero, cur_level):
         if pygame.sprite.collide_rect(self, hero) and hero.moving == True:
-            lose(cur_level, hero)
+            hero.activate_caught = True
         if self.direction == "left":
             self.rect.x -= self.speed
             self.moved += self.speed
