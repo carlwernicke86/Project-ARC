@@ -28,21 +28,21 @@ def MazePuzzle4():
     maze4_level = [
         "WEEEEEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",#1
         "W     WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-        "W                                                W",
-        "W                                                W",
-        "W                                                W",#5
-        "W                               W     WWWWWWWWWWWW",
-        "W                               W                W",
-        "W                               W                W",
-        "W                               W                W",
-        "W                       WWWWWWWWWWWWWWWWW        W",#10
+        "W                W         W                     W",
+        "W                W         W                     W",
+        "W                W         W      W              W",#5
+        "W     WWWWWWWW   W         W    W W   WWWWWWWWWWWW",
+        "W            W   W              W                W",
+        "W            W   W              W                W",
+        "W            W   W              W                W",
+        "W            W   W      WWWWWWWWWWWWWWWWW        W",#10
+        "W            W   W      W                        W",
+        "W            W   W      W                        W",
         "W                       W                        W",
-        "W                       W                        W",
-        "W                       W                        W",
-        "W                       W      WWWWWWWWWWWWWWWWWWW",
-        "W                       W                        W",#15
-        "W                       W                        W",
-        "W                       W                        W",
+        "W            W   W      W      WWWWWWWWWWWWWWWWWWW",
+        "W            W          W                        W",#15
+        "W            W          W                        W",
+        "W            W          W                        W",
         "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW    W",
         "W                  W         W   WWWWWWWWWWWW    W",
         "W                  W         W   WWWWWWWWWWWW    W",#20
@@ -58,7 +58,7 @@ def MazePuzzle4():
         #0         1         2         3         4
 
     #Build level
-    x = y= 0
+    x = y = 0
     for row in maze4_level: #H only denotes where the hero starts, does not actually spawn anything
         for row in maze4_level:
             for col in row:
@@ -95,3 +95,5 @@ def MazePuzzle4():
             return "Fail"
 
         pygame.display.flip()
+
+MazePuzzle4()
