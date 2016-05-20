@@ -133,6 +133,8 @@ def mission02(intro_flag = False):
 
     fade_in_screen = pygame.Surface((WIN_W, WIN_H))
     fade_in_screen.set_alpha(255)
+    if intro_flag == True:
+        fade_in_screen.set_alpha(0)
     while mission02_loop:
         clock.tick(fps)
         screen.fill((255, 255, 255))
