@@ -128,7 +128,11 @@ def mission01(intro_flag = False):
         fade_in_screen.set_alpha(0)
     while mission01_loop:
         clock.tick(fps)
-        screen.fill((255, 255, 255))
+        if hero.activate_caught == False:
+            screen.fill((100, 100, 100))
+        elif hero.activate_caught == True:
+            screen.fill(WHITE)
+            caught_timer += 1
 
         # Quitting the game
         for event in pygame.event.get():
@@ -164,7 +168,34 @@ def mission01(intro_flag = False):
         screen.blit(fade_in_screen, (0, 0))
         if fade_in_screen.get_alpha() != 0:
             fade_in_screen.set_alpha(fade_in_screen.get_alpha() - 3)
+        
+        if hero.activate_caught == True:
 
+            if caught_timer > 30:
+                for sg in secguard_group:
+                    if sg.rect.y < hero.rect.y + 64 and sg.rect.y > hero.rect.y- 64:
+                        if hero.rect.x < sg.rect.x:
+                            sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
+                        elif hero.rect.x > sg.rect.x:
+                            sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                        else:
+                            sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+
+
+                    sg.exclamation.rect.y = sg.rect.y - sg.rect.height/2
+                    if caught_timer < 90:
+                        screen.blit(sg.exclamation.image, (sg.exclamation.rect.x, sg.exclamation.rect.y))
+
+            if caught_timer > 120:
+                fade_alpha += 3
+                full_fade.set_alpha(fade_alpha)
+                screen.blit(full_fade,(0, 0))
+
+            if caught_timer > 200:
+                lose(mission01, hero)
 
         pygame.display.flip()
 
