@@ -95,5 +95,3 @@ def MazePuzzle4():
             return "Fail"
 
         pygame.display.flip()
-
-MazePuzzle4()
