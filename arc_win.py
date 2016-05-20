@@ -1,51 +1,74 @@
-import pygame, os
-from arc_intro import intro
-from HubLocation import hub
-from tutorial_mission import tutorial
+import pygame, sys
 from other_objects import *
-
-
-fps = 60
 
 WIN_W = 1600
 WIN_H = 900
 
-pygame.init()
+def win(hero, cur_level):
+    level1 = False
+    level2 = False
+    level3 = False
 
-#Screen Variables defined
-pygame.display.set_caption("Project ARC")                                      #Defines the text on the top of the window
-screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)              #The screen
+    MissionSave = open('MissionSaveFile.rtf', 'r')
+    readlvl1 = MissionSave.readline()
+    readlvl2 = MissionSave.readline()
+    readlvl3 = MissionSave.readline()
+    if readlvl1 == "False" + "\n":
+        level1 = False
+    elif readlvl1 == "True" + "\n":
+        level1 = True
+    if readlvl2 == "False" + "\n":
+        level2 = False
+    elif readlvl1 == "True" + "\n":
+        level2 = True
+    if readlvl3 == "False":
+        level3 = False
+    elif readlvl3 == "True":
+        level3 = True
+    MissionSave.close()
 
-#Time Variables are defined below
-clock = pygame.time.Clock()            #The clock which can be used to set fps
-beg_time = pygame.time.get_ticks()     #The time the game first begins
+    level = str(cur_level)
+    level = level[10:19]
+    if level == "mission01":
+        level1 = True
+    if level == "mission02":
+        level2 = True
+    if level == "mission03":
+        level3 = True
 
-level1comp = False
-MissionSave = open('MissionSaveFile.rtf', 'r')
-readlvl1 = MissionSave.readline()
-if readlvl1 == "False" + "\n":
-    level1comp = False
-elif readlvl1 == "True" + "\n":
-    level1comp = True
-MissionSave.close()
+    MissionSave = open('MissionSaveFile.rtf', 'w')
+    MissionSave.write(str(level1) + "\n")
+    MissionSave.write(str(level2) + "\n")
+    MissionSave.write(str(level3))
+    MissionSave.close()
+    
+    win = True
+    screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
+    mission_complete = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Mission Complete!")
+    Continue = Click_Button(40, BLACK, GREEN, (screen.get_rect().centerx, screen.get_rect().centery), "Continue", False)
 
-def main():
-    ControlOptions = open('ControlOptions.txt', 'r')
-    if ControlOptions.readline() == "W\n" and ControlOptions.readline() == "A\n" and ControlOptions.readline() == "D\n" and ControlOptions.readline() == "E":
-        ControlOptions.close()
-        ControlOptions = open('ControlOptions.txt', "w")
-        ControlOptions.write("W"+"\n")
-        ControlOptions.write("A"+"\n")
-        ControlOptions.write("D"+"\n")
-        ControlOptions.write("E")
-    ControlOptions.close()
+    regular_text_group = pygame.sprite.Group()
+    regular_text_group.add(mission_complete)
 
-    TIMER = 0
-    structure_loop = True
-    while structure_loop:
-        intro(screen, clock, fps, TIMER)
-        if level1comp == False:
-            tutorial(clock, fps)
-        structure_loop = hub(screen, clock, fps, TIMER)
+    click_button_group = pygame.sprite.Group()
+    click_button_group.add(Continue)
 
-main()
+    while win:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: sys.exit()
+            click_button_group.update(screen, event)
+            win = Continue.stay
+
+
+        screen.fill(WHITE)
+        for c in click_button_group:
+            c.TextBlit(screen)
+        regular_text_group.update(screen)
+
+        pygame.display.flip()
+
+
+    hero.dead = True
+    hero.menu = True
+    return None
