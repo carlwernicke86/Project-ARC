@@ -1,6 +1,7 @@
 import pygame, os
 from arc_intro import intro
 from HubLocation import hub
+from tutorial_mission import tutorial
 from other_objects import *
 
 
@@ -19,6 +20,14 @@ screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)              #
 clock = pygame.time.Clock()            #The clock which can be used to set fps
 beg_time = pygame.time.get_ticks()     #The time the game first begins
 
+level1comp = False
+MissionSave = open('MissionSaveFile.rtf', 'r')
+readlvl1 = MissionSave.readline()
+if readlvl1 == "False" + "\n":
+    level1comp = False
+elif readlvl1 == "True" + "\n":
+    level1comp = True
+MissionSave.close()
 
 def main():
     ControlOptions = open('ControlOptions.txt', 'r')
@@ -35,6 +44,8 @@ def main():
     structure_loop = True
     while structure_loop:
         intro(screen, clock, fps, TIMER)
+        if level1comp == False:
+            tutorial(clock, fps)
         structure_loop = hub(screen, clock, fps, TIMER)
 
 main()
