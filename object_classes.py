@@ -638,6 +638,11 @@ class ElevatorDoor(pygame.sprite.Sprite):
         self.closetimer = 0
         self.opennow = False
         self.opendelay = 0
+        self.elevatorsong = pygame.mixer.Sound("Sounds/softjazz.wav")
+        try:
+            self.elevatorsong.play(-1)
+        except pygame.error:
+            pass
     def update(self, invisTrig, e):
         if self.climbing:
             if self.climbtime < 2048:
@@ -653,9 +658,11 @@ class ElevatorDoor(pygame.sprite.Sprite):
             self.rect.y -= 1
             self.opentimer += 1
         if invisTrig.active and self.closetimer < 65:
+            self.elevatorsong.set_volume(1 - .015625 * self.closetimer)
             self.rect.y += 1
             self.closetimer += 1
         if self.falling:
+            self.elevatorsong.stop()
             self.rect.y += self.fallspeed
             if self.fallspeed < 100:
                 self.fallspeed += 2
