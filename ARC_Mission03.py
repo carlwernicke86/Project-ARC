@@ -271,10 +271,19 @@ def mission03(intro_flag = False):
     fade_in_screen.set_alpha(255)
     if intro_flag == True:
         fade_in_screen.set_alpha(0)
-
+    
+    full_fade = pygame.Surface([WIN_W, WIN_H])
+    full_fade.fill(BLACK)
+    fade_alpha = 0
+    caught_timer = 0
+    
     while mission03_loop:
         clock.tick(fps)
-        screen.fill((255, 255, 255))
+        if hero.activate_caught == False:
+            screen.fill((100, 100, 100))
+        elif hero.activate_caught == True:
+            screen.fill(WHITE)
+            caught_timer += 1
 
         # Quitting the game
         for event in pygame.event.get():
@@ -357,6 +366,34 @@ def mission03(intro_flag = False):
         screen.blit(fade_in_screen, (0, 0))
         if fade_in_screen.get_alpha() != 0:
             fade_in_screen.set_alpha(fade_in_screen.get_alpha() - 3)
+            
+        if hero.activate_caught == True:
+
+            if caught_timer > 30:
+                for sg in secguard_group:
+                    if sg.rect.y < hero.rect.y + 64 and sg.rect.y > hero.rect.y- 64:
+                        if hero.rect.x < sg.rect.x:
+                            sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
+                        elif hero.rect.x > sg.rect.x:
+                            sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                        else:
+                            sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+
+
+                    sg.exclamation.rect.y = sg.rect.y - sg.rect.height/2
+                    if caught_timer < 90:
+                        screen.blit(sg.exclamation.image, (sg.exclamation.rect.x, sg.exclamation.rect.y))
+
+            if caught_timer > 120:
+                fade_alpha += 3
+                full_fade.set_alpha(fade_alpha)
+                screen.blit(full_fade,(0, 0))
+
+            if caught_timer > 200:
+                lose(mission03, hero)
         pygame.display.flip()
 
 def mission03check(intro_flag = True):
@@ -559,9 +596,18 @@ def mission03check(intro_flag = True):
     total_height_app = len(mission03check_level) * 32
     camera = Camera(total_width_app, total_height_app)
 
+    full_fade = pygame.Surface([WIN_W, WIN_H])
+    full_fade.fill(BLACK)
+    fade_alpha = 0
+    caught_timer = 0
+    
     while mission03check_loop:
         clock.tick(fps)
-        screen.fill((255, 255, 255))
+        if hero.activate_caught == False:
+            screen.fill((100, 100, 100))
+        elif hero.activate_caught == True:
+            screen.fill(WHITE)
+            caught_timer += 1
 
         # Quitting the game
         for event in pygame.event.get():
@@ -611,6 +657,33 @@ def mission03check(intro_flag = True):
         screen.blit(trig3.image, camera.apply(trig3))
         screen.blit(trig4.image, camera.apply(trig4))
 
+        if hero.activate_caught == True:
+
+            if caught_timer > 30:
+                for sg in secguard_group:
+                    if sg.rect.y < hero.rect.y + 64 and sg.rect.y > hero.rect.y- 64:
+                        if hero.rect.x < sg.rect.x:
+                            sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
+                        elif hero.rect.x > sg.rect.x:
+                            sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                        else:
+                            sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+
+
+                    sg.exclamation.rect.y = sg.rect.y - sg.rect.height/2
+                    if caught_timer < 90:
+                        screen.blit(sg.exclamation.image, (sg.exclamation.rect.x, sg.exclamation.rect.y))
+
+            if caught_timer > 120:
+                fade_alpha += 3
+                full_fade.set_alpha(fade_alpha)
+                screen.blit(full_fade,(0, 0))
+
+            if caught_timer > 200:
+                lose(mission03, hero)
 
         pygame.display.flip()
 
