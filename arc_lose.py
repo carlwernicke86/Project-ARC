@@ -17,7 +17,9 @@ def lose(cur_level, hero):
     regular_button_group.add(game_over)
     click_button_group = pygame.sprite.Group()
     click_button_group.add(retry, apartment, exit_game)
-
+    
+    fade_in_screen = pygame.Surface((WIN_W, WIN_H))
+    fade_in_screen.set_alpha(0)
 
     while lose and hub_go:
         clock.tick(60)
@@ -35,6 +37,9 @@ def lose(cur_level, hero):
         for r in regular_button_group:
             r.update(screen)
 
+        screen.blit(fade_in_screen, (0, 0))
+        if fade_in_screen.get_alpha() != 0:
+            fade_in_screen.set_alpha(fade_in_screen.get_alpha() - 3)
         pygame.display.flip()
 
     if retry.stay == False:     #Retrys the mission
