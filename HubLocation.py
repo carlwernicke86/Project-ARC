@@ -12,6 +12,13 @@ WIN_H = 900
 
 def hub(screen, clock, fps, TIMER):
     pygame.init()
+    
+    pygame.mixer.music.stop()
+    try:
+        pygame.mixer.music.load("Sounds/GrayAreaSong.mp3")
+        pygame.mixer.music.play(-1)
+    except pygame.error:
+        pass
 
     apartment = desk = True
 
