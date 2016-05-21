@@ -556,6 +556,8 @@ class ElevatorRoof(pygame.sprite.Sprite):
         self.climbtime = 0
         self.falling = False
         self.fallspeed = 2
+        self.dinged = False
+        self.ding = pygame.mixer.Sound("Sounds/elevatording.ogg")
     def update(self, e):
         if self.climbing:
             if self.climbtime < 2048:
@@ -563,6 +565,12 @@ class ElevatorRoof(pygame.sprite.Sprite):
                 self.climbtime += 2
             elif self.climbtime >= 2048:
                 self.climbing = False
+        if self.climbing == False and self.dinged == False:
+            try:
+                self.ding.play()
+            except pygame.error:
+                pass
+            self.dinged = True
         if self.falling:
             self.rect.y += self.fallspeed
             if self.fallspeed < 100:
