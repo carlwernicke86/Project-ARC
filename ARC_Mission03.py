@@ -291,48 +291,49 @@ def mission03(intro_flag = False):
                 sys.exit()
 
         # Update
-        if not efloor.climbing:
-            hero_group.update(platform_group, mission03check)
-        camera.update(hero.rect)
-        secguard_group.update(hero, secguard_group, mission03check)
-        if hero.rect.x >= eroof.rect.x - 32 and hero.rect.x <= eroof.rect.x + 128:
-            onElevator = True
-        else:
-            onElevator = False
-        if onElevator == True:
-            hero.rect.y = efloor.rect.y - 64
+        if hero.activate_caught == False:
+            if not efloor.climbing:
+                hero_group.update(platform_group, mission03check)
+            camera.update(hero.rect)
+            secguard_group.update(hero, secguard_group, mission03check)
+            if hero.rect.x >= eroof.rect.x - 32 and hero.rect.x <= eroof.rect.x + 128:
+                onElevator = True
+            else:
+                onElevator = False
+            if onElevator == True:
+                hero.rect.y = efloor.rect.y - 64
             
-        if AlarmTextTrig.active:
-            #pygame.mixer.music.stop()
-            if pygame.mixer.music.get_busy() == 0:
-                try:
-                    pygame.mixer.music.load("Sounds/TakingDarkMatterSong.ogg")
-                    pygame.mixer.music.play(-1)
-                except pygame.error:
-                    pass
+            if AlarmTextTrig.active:
+                #pygame.mixer.music.stop()
+                if pygame.mixer.music.get_busy() == 0:
+                    try:
+                        pygame.mixer.music.load("Sounds/TakingDarkMatterSong.ogg")
+                        pygame.mixer.music.play(-1)
+                    except pygame.error:
+                        pass
 
-        invisTrig.update(hero)
-        for e in event_group:
-            eroof.update(e)
-            efloor.update(e)
-            ewall.update(e)
-            edoorframe.update(e)
-            edoor.update(invisTrig,e)
-        movelaser_group.update(hero, mission03check)
-        event_group.update(hero, event_list)
-        trig1.update(hero)
-        triggerdoor1.update(trig1)
-        trig2.update(hero)
-        triggerdoor2.update(trig2)
-        trig3.update(hero)
-        triggerdoor3.update(trig3)
-        trig4.update(hero)
-        triggerdoor4.update(trig4)
-        puzzletrigger.update(hero, MazePuzzle1, mission03check)
-        puzzledoor.update(puzzletrigger)
-        trigger_group.update(hero)
-        AlarmText.update(screen, True, AlarmTextTrig.active)
-        Alarm2Text.update(screen, True, Alarm2TextTrig.active)
+            invisTrig.update(hero)
+            for e in event_group:
+                eroof.update(e)
+                efloor.update(e)
+                ewall.update(e)
+                edoorframe.update(e)
+                edoor.update(invisTrig,e)
+            movelaser_group.update(hero, mission03check)
+            event_group.update(hero, event_list)
+            trig1.update(hero)
+            triggerdoor1.update(trig1)
+            trig2.update(hero)
+            triggerdoor2.update(trig2)
+            trig3.update(hero)
+            triggerdoor3.update(trig3)
+            trig4.update(hero)
+            triggerdoor4.update(trig4)
+            puzzletrigger.update(hero, MazePuzzle1, mission03check)
+            puzzledoor.update(puzzletrigger)
+            trigger_group.update(hero)
+            AlarmText.update(screen, True, AlarmTextTrig.active)
+            Alarm2Text.update(screen, True, Alarm2TextTrig.active)
 
         if event_list[0] == 1:
             motsen_group.update(hero, mission03check)
@@ -615,21 +616,23 @@ def mission03check(intro_flag = True):
                 sys.exit()
 
         # Update
-        hero_group.update(platform_group, mission03check)
-        camera.update(hero.rect)
-        secguard_group.update(hero, secguard_group, mission03check)
-        movelaser_group.update(hero, mission03check)
-        event_group.update(hero, event_list)
-        trig1.update(hero)
-        triggerdoor1.update(trig1)
-        trig2.update(hero)
-        triggerdoor2.update(trig2)
-        trig3.update(hero)
-        triggerdoor3.update(trig3)
-        trig4.update(hero)
-        triggerdoor4.update(trig4)
-        puzzletrigger.update(hero, MazePuzzle1, mission03check)
-        puzzledoor.update(puzzletrigger)
+        if hero.activate_caught == False:
+
+            hero_group.update(platform_group, mission03check)
+            camera.update(hero.rect)
+            secguard_group.update(hero, secguard_group, mission03check)
+            movelaser_group.update(hero, mission03check)
+            event_group.update(hero, event_list)
+            trig1.update(hero)
+            triggerdoor1.update(trig1)
+            trig2.update(hero)
+            triggerdoor2.update(trig2)
+            trig3.update(hero)
+            triggerdoor3.update(trig3)
+            trig4.update(hero)
+            triggerdoor4.update(trig4)
+            puzzletrigger.update(hero, MazePuzzle1, mission03check)
+            puzzledoor.update(puzzletrigger)
 
         if event_list[0] == 1:
             motsen_group.update(hero, mission03check)
