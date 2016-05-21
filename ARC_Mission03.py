@@ -292,6 +292,15 @@ def mission03(intro_flag = False):
             onElevator = False
         if onElevator == True:
             hero.rect.y = efloor.rect.y - 64
+            
+        if AlarmTextTrig.active:
+            #pygame.mixer.music.stop()
+            if pygame.mixer.music.get_busy() == 0:
+                try:
+                    pygame.mixer.music.load("Sounds/TakingDarkMatterSong.ogg")
+                    pygame.mixer.music.play(-1)
+                except pygame.error:
+                    pass
 
         invisTrig.update(hero)
         for e in event_group:
