@@ -263,6 +263,7 @@ class SecGuard(pygame.sprite.Sprite): #Includes flashlight, x dimension is 32 fo
         self.range = range
         self.rect = pygame.Rect(x, y, 128, 64)
         self.steps = 0
+        self.exclamation = Regular_Text(50, RED, (0, 0),"!")
 
     def update(self, hero, secguard_group, cur_level):
         if pygame.sprite.spritecollideany(hero, secguard_group, collided = None) != None:
