@@ -140,14 +140,15 @@ def mission01(intro_flag = False):
                 sys.exit()
 
         # Update
-        hero_group.update(platform_group, mission01)
-        camera.update(hero.rect)
-        secguard_group.update(hero, secguard_group, mission01)
-        trig1.update(hero)
-        triggerdoor1.update(trig1)
-        #platform_group.update()
-        motsen_group.update(hero, mission01)
-        movelaser_group.update(hero, mission01)
+        if hero.activate_caught == False:
+            hero_group.update(platform_group, mission01)
+            camera.update(hero.rect)
+            secguard_group.update(hero, secguard_group, mission01)
+            trig1.update(hero)
+            triggerdoor1.update(trig1)
+            #platform_group.update()
+            motsen_group.update(hero, mission01)
+            movelaser_group.update(hero, mission01)
 
         if hero.dead == True:
             break
