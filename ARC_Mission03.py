@@ -353,9 +353,9 @@ def mission03(intro_flag = False):
 def mission03check(intro_flag = True):
     pygame.init()
     
+    pygame.mixer.music.stop()
     try:
-        pygame.mixer.music.stop()
-        pygame.mixer.music.load("Sounds/TakingDarkSong.mp3")
+        pygame.mixer.music.load("Sounds/TakingDarkMatterSong.ogg")
         pygame.mixer.music.play(-1)
     except pygame.error:
         pass
