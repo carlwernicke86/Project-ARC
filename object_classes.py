@@ -115,41 +115,42 @@ class Hero(pygame.sprite.Sprite):
         self.key_right = self.key_right[0][0]
         self.key_interact = self.key_interact[0][0]
 
-        key = pygame.key.get_pressed()
-        if key[self.key_right] == True and key[self.key_left] == True:
-            self.move_r = False
-            self.move_l = False
-        if key[self.key_right] == True and key[self.key_left] == False:
-            self.move_r = True
-            self.facing = "right"
-            self.step_num_right += 1
-            self.step_num_left = 0
-        if key[self.key_left] == True and key[self.key_right] == False:
-            self.move_l = True
-            self.facing = "left"
-            self.step_num_left += 1
-            self.step_num_right = 0
-        if key[self.key_jump]:
-            self.move_u = True
-        if key[pygame.K_s]:
-            self.move_d = True
-        if key[self.key_interact]:
-            self.interact = True
-        if key[pygame.K_p]:
-            self.pause = True
+        if self.activate_caught == False:
+            key = pygame.key.get_pressed()
+            if key[self.key_right] == True and key[self.key_left] == True:
+                self.move_r = False
+                self.move_l = False
+            if key[self.key_right] == True and key[self.key_left] == False:
+                self.move_r = True
+                self.facing = "right"
+                self.step_num_right += 1
+                self.step_num_left = 0
+            if key[self.key_left] == True and key[self.key_right] == False:
+                self.move_l = True
+                self.facing = "left"
+                self.step_num_left += 1
+                self.step_num_right = 0
+            if key[self.key_jump]:
+                self.move_u = True
+            if key[pygame.K_s]:
+                self.move_d = True
+            if key[self.key_interact]:
+                self.interact = True
+            if key[pygame.K_p]:
+                self.pause = True
 
-        if not key[self.key_right]:
-            self.move_r = False
-            self.step_num_right = 0
-        if not key[self.key_left]:
-            self.move_l = False
-            self.step_num_left = 0
-        if not key[self.key_jump]:
-            self.move_u = False
-        if not key[pygame.K_s]:
-            self.move_d = False
-        if not key[self.key_interact]:
-            self.interact = False
+            if not key[self.key_right]:
+                self.move_r = False
+                self.step_num_right = 0
+            if not key[self.key_left]:
+                self.move_l = False
+                self.step_num_left = 0
+            if not key[self.key_jump]:
+                self.move_u = False
+            if not key[pygame.K_s]:
+                self.move_d = False
+            if not key[self.key_interact]:
+                self.interact = False
 
         if self.move_u:
             if self.grounded:
