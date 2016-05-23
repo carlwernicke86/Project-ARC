@@ -239,6 +239,7 @@ class Scroll_Text(pygame.sprite.Sprite):
                 self.cur_text = self.text[0:len(self.cur_text) + 1]
                 self.image = self.font.render(self.cur_text, 1, self.color)
 
+            pygame.draw.rect(screen, WHITE, self.rect, 0)
             pygame.draw.rect(screen, BLACK, self.rect, 1)
             screen.blit(self.image, (self.rect.left + 20, self.rect.top + 20))
             pygame.display.update()
