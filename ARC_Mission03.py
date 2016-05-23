@@ -291,6 +291,10 @@ def mission03(intro_flag = False):
                 sys.exit()
 
         # Update
+        if hero.activate_caught == True:
+            if not efloor.climbing:
+                hero_group.update(platform_group, mission03check)
+            camera.update(hero.rect)
         if hero.activate_caught == False:
             if not efloor.climbing:
                 hero_group.update(platform_group, mission03check)
@@ -616,6 +620,9 @@ def mission03check(intro_flag = True):
                 sys.exit()
 
         # Update
+        if hero.activate_caught == True:
+            hero_group.update(platform_group, mission03check)
+            camera.update(hero.rect)
         if hero.activate_caught == False:
 
             hero_group.update(platform_group, mission03check)
