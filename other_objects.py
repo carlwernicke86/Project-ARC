@@ -136,7 +136,7 @@ class Option_Text(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topright = position
         self.button = button
-        self.back_rect = pygame.Rect(self.rect.right + 5, self.rect.top, self.rect.height + 3, 4 * self.size)
+        self.back_rect = pygame.Rect(self.rect.right + 5, self.rect.top, self.rect.height + 3, 4.5 * self.size)
         self.back = pygame.Surface([self.back_rect.height, self.back_rect.width])
         self.back.convert()
         self.back.fill(LIGHT_GREY)
