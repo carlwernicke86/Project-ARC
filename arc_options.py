@@ -27,17 +27,17 @@ def options():
             interact_button = k[0]
 
     #These are all the options buttons
-    jump = Option_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2 - 150), "Jump:", jump_button)
-    right = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 125), "Right:", right_button)
-    left = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 250), "Left: ", left_button)
-    interact = Option_Text(100, BLACK, (screen.get_rect().centerx, jump.rect.y + 375), "Interact: ", interact_button)
+    jump = Option_Text(100, ORANGE, (screen.get_rect().centerx, screen.get_rect().centery/2 - 150), "Jump:", jump_button)
+    right = Option_Text(100, ORANGE, (screen.get_rect().centerx, jump.rect.y + 125), "Right:", right_button)
+    left = Option_Text(100, ORANGE, (screen.get_rect().centerx, jump.rect.y + 250), "Left: ", left_button)
+    interact = Option_Text(100, ORANGE, (screen.get_rect().centerx, jump.rect.y + 375), "Interact: ", interact_button)
     
 
     option_text_group = pygame.sprite.Group()
     option_text_group.add(jump, right, left, interact)
 
     #This is the escape button
-    exit = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().bottom - 100), "Main Menu", False)
+    exit = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().bottom - 100), "Main Menu", False, None, None, None, WHITE)
     click_button_group = pygame.sprite.Group()
     click_button_group.add(exit)
 
