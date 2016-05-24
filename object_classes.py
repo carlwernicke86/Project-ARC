@@ -152,7 +152,7 @@ class Hero(pygame.sprite.Sprite):
             if not key[self.key_interact]:
                 self.interact = False
 
-        if self.move_u:
+        if self.move_u and self.activate_caught == False:
             if self.grounded:
                 self.yvel -= 8
         if self.move_d:
