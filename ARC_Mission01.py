@@ -180,15 +180,27 @@ def mission01(intro_flag = False):
             if caught_timer > 30:
                 for sg in secguard_group:
                     if sg.rect.y < hero.rect.y + 64 and sg.rect.y > hero.rect.y- 64:
-                        if hero.rect.x < sg.rect.x:
-                            sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
-                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
-                        elif hero.rect.x > sg.rect.x:
-                            sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
-                        else:
-                            sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                            sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                        if sg.direction == "left":
+                            if hero.rect.x < sg.rect.right:
+                                sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
+                            elif hero.rect.x > sg.rect.right:
+                                sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                            else:
+                                sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+
+                        elif sg.direction == "right":
+                            if hero.rect.x < sg.rect.right + sg.rect.width:
+                                sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
+                            elif hero.rect.x > sg.rect.right + sg.rect.width:
+                                sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                            else:
+                                sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
 
 
                     sg.exclamation.rect.y = sg.rect.y - sg.rect.height/2
