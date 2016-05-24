@@ -4,7 +4,6 @@ from other_objects import *
 WIN_W = 1600
 WIN_H = 900
 def lose(cur_level, hero):
-    
     sound = pygame.mixer.Sound("Sounds/losesound.wav")
     try:
         sound.play()
