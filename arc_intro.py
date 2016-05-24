@@ -10,7 +10,7 @@ def intro(screen, clock, fps, TIMER):
 
     #Click Text Objects
     Continue = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, screen.get_rect().centery/1.5), "Continue", False, None, None, None, WHITE)
-    New_Game = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, Continue.rect.y + 65), "New Game", False, None, None, None, WHITE)
+    New_Game = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, Continue.rect.y + 65), "Play", False, None, None, None, WHITE)
     Options = Click_Button(40, ORANGE, LIGHT_GREY, (screen.get_rect().centerx, New_Game.rect.y + 65), "Options", options, None, None, None, WHITE)
     
     #Groups and adding things to groups
