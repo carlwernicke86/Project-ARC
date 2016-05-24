@@ -19,7 +19,7 @@ def lose(cur_level, hero):
     click_button_group.add(retry, apartment, exit_game)
     
     fade_in_screen = pygame.Surface((WIN_W, WIN_H))
-    fade_in_screen.set_alpha(0)
+    fade_in_screen.set_alpha(255)
 
     while lose and hub_go:
         clock.tick(60)
