@@ -3,3 +3,5 @@ A Corporate Espionage Game where you unrealistically infiltrate overguarded buil
 
 
 Rohit write this as you see fit
+
+True to pygame, this was not optimized for OSX
