@@ -13,6 +13,8 @@ WIN_H = 900
 def hub(screen, clock, fps, TIMER):
     pygame.init()
     
+    bg = BackgroundImage("Sprites/apartment.png")
+    
     pygame.mixer.music.stop()
     try:
         pygame.mixer.music.load("Sounds/GrayAreaSong.mp3")
@@ -32,14 +34,14 @@ def hub(screen, clock, fps, TIMER):
 
     # Load apartment level
     apartment_level = [
-        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
-        "P                   P          P     P          P          P",
-        "P                                                          P",
-        "P                                                          P", #| This represents the player height in relation to the level
-        "P                                                    D     P", #|
-        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",
+        "I         I          I     I          I          I",
+        "I                                                I",
+        "I                                                I", #| This represents the player height in relation to the level
+        "I                                          D     I", #|
+        "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",
     ]
-    #80 P wide (60 * 32) and 6 P high (6 * 32)
+    #80 P wide (50 * 32) and 6 P high (6 * 32)
 
     #Build level
     x = y = 0
@@ -52,6 +54,9 @@ def hub(screen, clock, fps, TIMER):
             if col == "D":
                 desk = LaunchDesk(x, y)
                 platform_group.add(desk)
+            if col == "I":
+                i = InvisibleWall(x, y)
+                platform_group.add(i)
             x += 32
         y += 32
         x = 0
@@ -71,7 +76,7 @@ def hub(screen, clock, fps, TIMER):
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        screen.fill((255,255,255))
+        screen.blit(bg.image, camera.apply(bg))
         #Update
         hero_group.update(platform_group, hub)
         camera.update(hero.rect)
