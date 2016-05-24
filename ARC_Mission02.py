@@ -236,3 +236,8 @@ def mission02(intro_flag = False):
 
             if caught_timer > 200:
                 lose(mission02, hero)
+
+        pygame.display.flip()
+
+if __name__ == "__main__":
+    mission02()
