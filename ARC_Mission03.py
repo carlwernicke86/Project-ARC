@@ -410,7 +410,7 @@ def mission03(intro_flag = False):
                 screen.blit(full_fade,(0, 0))
 
             if caught_timer > 200:
-                lose(mission01, hero)
+                lose(mission03, hero)
 
         pygame.display.flip()
 
@@ -718,7 +718,7 @@ def mission03check(intro_flag = True):
                 screen.blit(full_fade,(0, 0))
 
             if caught_timer > 200:
-                lose(mission01, hero)
+                lose(mission03check, hero)
 
         pygame.display.flip()
 
