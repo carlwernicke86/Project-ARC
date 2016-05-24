@@ -126,6 +126,11 @@ def mission01(intro_flag = False):
     fade_in_screen.set_alpha(255)
     if intro_flag == True:
         fade_in_screen.set_alpha(0)
+        
+    full_fade = pygame.Surface([WIN_W, WIN_H])
+    full_fade.fill(BLACK)
+    fade_alpha = 0
+    caught_timer = 0
     while mission01_loop:
         clock.tick(fps)
         if hero.activate_caught == False:
