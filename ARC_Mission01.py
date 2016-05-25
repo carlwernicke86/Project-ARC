@@ -17,7 +17,7 @@ def mission01(intro_flag = False):
     
     pygame.mixer.music.stop()
     try:
-        pygame.mixer.music.load("Sounds/TakingDarkSong.mp3")
+        pygame.mixer.music.load("Sounds/InLimboSong.mp3")
         pygame.mixer.music.play(-1)
     except pygame.error:
         pass
