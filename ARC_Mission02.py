@@ -14,6 +14,13 @@ WIN_H = 900
 
 def mission02(intro_flag = False):
     pygame.init()
+    
+    pygame.mixer.music.stop()
+    try:
+        pygame.mixer.music.load("Sounds/SuicideSong.ogg")
+        pygame.mixer.music.play(-1)
+    except pygame.error:
+        pass
 
     #Basic settings
     mission02_loop = True
