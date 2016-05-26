@@ -56,43 +56,27 @@ class Hero(pygame.sprite.Sprite):
         self.key_interact = ""
 
         #Sprite sheet loading
-        right_sprite_sheet = SpriteSheet("Sprites/player_sprite_right.png")
-        left_sprite_sheet = SpriteSheet("Sprites/player_sprite_left.png")
+        sprite_sheet = SpriteSheet("Sprites/player_sprite.png")
         self.walking_frames_r = []
         self.walking_frames_l = []
         #Loading into a list
         #RIGHT SIDE
-        image = right_sprite_sheet.get_image(0, 0, 24, 64)
+        image = sprite_sheet.get_image(0, 0, 32, 64)
         self.walking_frames_r.append(image)
-        image = right_sprite_sheet.get_image(32, 0, 24, 64)
+        image = sprite_sheet.get_image(42, 0, 32, 64)
         self.walking_frames_r.append(image)
-        image = right_sprite_sheet.get_image(64, 0, 24, 64)
-        self.walking_frames_r.append(image)
-        image = right_sprite_sheet.get_image(96, 0, 24, 64)
-        self.walking_frames_r.append(image)
-        image = right_sprite_sheet.get_image(128, 0, 24, 64)
-        self.walking_frames_r.append(image)
-        image = right_sprite_sheet.get_image(160, 0, 24, 64)
-        self.walking_frames_r.append(image)
-        image = right_sprite_sheet.get_image(192, 0, 24, 64)
-        self.walking_frames_r.append(image)
-        image = right_sprite_sheet.get_image(224, 0, 24, 64)
+        image = sprite_sheet.get_image(84, 0, 32, 64)
         self.walking_frames_r.append(image)
         #LEFT SIDE
-        image = left_sprite_sheet.get_image(0, 0, 24, 64)
+        image = sprite_sheet.get_image(210, 0, 32, 64)
         self.walking_frames_l.append(image)
-        image = left_sprite_sheet.get_image(32, 0, 24, 64)
+        image = sprite_sheet.get_image(168, 0, 32, 64)
         self.walking_frames_l.append(image)
-        image = left_sprite_sheet.get_image(64, 0, 24, 64)
+        image = sprite_sheet.get_image(126, 0, 32, 64)
         self.walking_frames_l.append(image)
-        image = left_sprite_sheet.get_image(96, 0, 24, 64)
-        self.walking_frames_l.append(image)
-        image = left_sprite_sheet.get_image(128, 0, 24, 64)
-        self.walking_frames_l.append(image)
-        image = left_sprite_sheet.get_image(192, 0, 24, 64)
-        self.walking_frames_l.append(image)
-        image = left_sprite_sheet.get_image(224, 0, 24, 64)
-        self.walking_frames_l.append(image)
+
+        self.jumpright = sprite_sheet.get_image(294, 0, 32, 64)
+        self.jumpleft = sprite_sheet.get_image(252, 0, 32, 64)
 
         self.image = self.walking_frames_r[0]
         self.image.convert()
@@ -186,14 +170,18 @@ class Hero(pygame.sprite.Sprite):
         self.grounded = False
         self.collide(0, self.yvel, platform_group, cur_level)
 
-        if self.step_num_left == 19:
+        if self.step_num_left == 12:
             self.step_num_left = 0
-        if self.step_num_right == 19:
+        if self.step_num_right == 12:
             self.step_num_right = 0
         if self.facing == "right":
-            self.image = self.walking_frames_r[self.step_num_right//3]
+            self.image = self.walking_frames_r[self.step_num_right//6]
         if self.facing == "left":
-            self.image = self.walking_frames_l[self.step_num_left//3]
+            self.image = self.walking_frames_l[self.step_num_left//6]
+        if self.facing == "right" and abs(self.yvel) > .7:
+            self.image = self.jumpright
+        if self.facing == "left" and abs(self.yvel) > .7:
+            self.image = self.jumpleft
             
         if self.hidden:
             print "HIDDEN"
