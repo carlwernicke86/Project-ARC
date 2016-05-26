@@ -14,7 +14,7 @@ fps = 60
 WIN_W = 1600
 WIN_H = 900
 
-def mission05(intro_flag = False):
+def mission04(intro_flag = False):
     pygame.init()
 
     #Basic settings
@@ -250,4 +250,4 @@ def mission05(intro_flag = False):
 
 
 if __name__ == "__main__":
-    mission05()
+    mission04()
