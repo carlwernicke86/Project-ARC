@@ -378,31 +378,37 @@ def mission03(intro_flag = False):
                 for sg in secguard_group:
                     if sg.rect.y < hero.rect.y + 64 and sg.rect.y > hero.rect.y- 64:
                         if sg.direction == "left":
-                            if hero.rect.x < sg.rect.right:
+                            if hero.rect.x < sg.rect.right - sg.rect.width/8:
                                 sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
                                 sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
-                            elif hero.rect.x > sg.rect.right:
+                            elif hero.rect.x > sg.rect.right - sg.rect.width/8:
                                 sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                                sg.rect.x += 128 - 30
+                                sg.exclamation.rect.x = sg.rect.x
+                                sg.direction = "right"
                             else:
                                 sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                                sg.rect.x += 128 - 30
+                                sg.exclamation.rect.x = sg.rect.x
+                                sg.direction = "right"
 
                         elif sg.direction == "right":
-                            if hero.rect.x < sg.rect.right + sg.rect.width:
+                            if hero.rect.x < sg.rect.x + sg.rect.width/8:
                                 sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                                sg.rect.x -= 128 - 30
                                 sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
-                            elif hero.rect.x > sg.rect.right + sg.rect.width:
+                                sg.direction = "left"
+                            elif hero.rect.x > sg.rect.x + sg.rect.width/8:
                                 sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                                sg.exclamation.rect.x = sg.rect.x
                             else:
                                 sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                                sg.exclamation.rect.x = sg.rect.x
 
 
                     sg.exclamation.rect.y = sg.rect.y - sg.rect.height/2
                     if caught_timer < 90:
-                        screen.blit(sg.exclamation.image, (sg.exclamation.rect.x, sg.exclamation.rect.y))
+                        screen.blit(sg.exclamation.image, camera.apply(sg.exclamation))
 
             if caught_timer > 120:
                 fade_alpha += 3
@@ -686,31 +692,37 @@ def mission03check(intro_flag = True):
                 for sg in secguard_group:
                     if sg.rect.y < hero.rect.y + 64 and sg.rect.y > hero.rect.y- 64:
                         if sg.direction == "left":
-                            if hero.rect.x < sg.rect.right:
+                            if hero.rect.x < sg.rect.right - sg.rect.width/8:
                                 sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
                                 sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
-                            elif hero.rect.x > sg.rect.right:
+                            elif hero.rect.x > sg.rect.right - sg.rect.width/8:
                                 sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                                sg.rect.x += 128 - 30
+                                sg.exclamation.rect.x = sg.rect.x
+                                sg.direction = "right"
                             else:
                                 sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                                sg.rect.x += 128 - 30
+                                sg.exclamation.rect.x = sg.rect.x
+                                sg.direction = "right"
 
                         elif sg.direction == "right":
-                            if hero.rect.x < sg.rect.right + sg.rect.width:
+                            if hero.rect.x < sg.rect.x + sg.rect.width/8:
                                 sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                                sg.rect.x -= 128 - 30
                                 sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
-                            elif hero.rect.x > sg.rect.right + sg.rect.width:
+                                sg.direction = "left"
+                            elif hero.rect.x > sg.rect.x + sg.rect.width/8:
                                 sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                                sg.exclamation.rect.x = sg.rect.x
                             else:
                                 sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
-                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width/8
+                                sg.exclamation.rect.x = sg.rect.x
 
 
                     sg.exclamation.rect.y = sg.rect.y - sg.rect.height/2
                     if caught_timer < 90:
-                        screen.blit(sg.exclamation.image, (sg.exclamation.rect.x, sg.exclamation.rect.y))
+                        screen.blit(sg.exclamation.image, camera.apply(sg.exclamation))
 
             if caught_timer > 120:
                 fade_alpha += 3
