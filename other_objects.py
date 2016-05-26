@@ -227,7 +227,7 @@ class Scroll_Text(pygame.sprite.Sprite):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: sys.exit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_t:
+                    if event.key == pygame.K_e:
                         if self.cur_text == self.text:
                             Scroll = False
                             self.kill()
