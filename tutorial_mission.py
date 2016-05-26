@@ -66,7 +66,7 @@ def tutorial(clock, fps, triggers = 0):
         ScrollText_group.add(SecGuardText)
     if triggers == 0:
         ScrollTextIntroTrig = GenericTrigger(96, 200, 200)
-        ScrollTextIntro = Scroll_Text("Default movement keys are W for Jump, A for Left, D for Right. Press T to continue.", (0, 0, 0))
+        ScrollTextIntro = Scroll_Text("Default movement keys are W for Jump, A for Left, D for Right. Press E to continue.", (0, 0, 0))
         trigger_group.add(ScrollTextIntroTrig)
         ScrollText_group.add(ScrollTextIntro)
 
