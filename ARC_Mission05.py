@@ -16,19 +16,14 @@ WIN_H = 900
 
 def mission05(intro_flag = False):
     pygame.init()
-    
-    try:
-        pygame.mixer.music.stop()
-        pygame.mixer.music.load("Sounds/TakingDarkMatterSong.ogg")
-        pygame.mixer.music.play(-1)
-    except pygame.error:
-        pass
 
     #Basic settings
     mission05_loop = True
     pygame.display.set_caption("Project ARC")
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 
+    level5 = Regular_Text(100, BLACK, (screen.get_rect().centerx, screen.get_rect().centery/2), "Level 5")
+    press_continue = Regular_Text(50, (200, 200, 200), (screen.get_rect().centerx, screen.get_rect().centery), "- Press Any Button to Proceed -")
     #Group creation
     platform_group = pygame.sprite.Group()
     hero_group = pygame.sprite.Group()
@@ -238,10 +233,50 @@ def mission05(intro_flag = False):
     total_height_app = len(mission05_level) * 32
     camera = Camera(total_width_app, total_height_app)
 
+    if intro_flag == False:
 
+        pre_level_loop_in = True
+        while pre_level_loop_in:
+            clock.tick(60)
+            for event in pygame.event.get():                    #Fading in Loop
+                if event.type == pygame.QUIT: sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    pre_level_loop_in = False
+
+            screen.fill(BLACK)
+            level5.fade_in(screen)
+            if level5.red > 252:
+                cur_time = pygame.time.get_ticks()
+                press_continue.blink(screen, cur_time, beg_time)
+            pygame.display.update()
+
+        for i in range(150):
+            clock.tick(60)                                      #Fading out Loop
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT: sys.exit()
+
+            screen.fill(BLACK)
+            level5.fade_out(screen)
+
+            pygame.display.update()
+
+    fade_in_screen = pygame.Surface((WIN_W, WIN_H))
+
+    fade_in_screen.set_alpha(255)
+    if intro_flag == True:
+        fade_in_screen.set_alpha(0)
+
+    full_fade = pygame.Surface([WIN_W, WIN_H])
+    full_fade.fill(BLACK)
+    fade_alpha = 0
+    caught_timer = 0
     while mission05_loop:
         clock.tick(fps)
-        screen.fill((100, 100,100))
+        if hero.activate_caught == False:
+            screen.fill((100, 100, 100))
+        elif hero.activate_caught == True:
+            screen.fill(WHITE)
+            caught_timer += 1
 
         # Quitting the game
         for event in pygame.event.get():
@@ -249,53 +284,54 @@ def mission05(intro_flag = False):
                 sys.exit()
 
         # Update
-
-        movelaser_group.update(hero, mission05)
         hero_group.update(platform_group, mission05)
         camera.update(hero.rect)
-        motsen_group.update(hero, mission05)
-        secguard_group.update(hero, secguard_group, mission05)
+        if hero.activate_caught == False:
+            movelaser_group.update(hero, mission05)
+
+            motsen_group.update(hero, mission05)
+            secguard_group.update(hero, secguard_group, mission05)
 
 
 
-        trig1.update(hero)
-        triggerdoor1.update(trig1)
+            trig1.update(hero)
+            triggerdoor1.update(trig1)
 
-        trig2.update(hero)
-        triggerdoor2.update(trig2)
+            trig2.update(hero)
+            triggerdoor2.update(trig2)
 
-        trig3.update(hero)
-        triggerdoor3.update(trig3)
+            trig3.update(hero)
+            triggerdoor3.update(trig3)
 
-        trig4.update(hero)
-        triggerdoor4.update(trig4)
+            trig4.update(hero)
+            triggerdoor4.update(trig4)
 
-        '''
+            '''
 
-        trig5.update(hero)
-        triggerdoor5.update(trig5)
+            trig5.update(hero)
+            triggerdoor5.update(trig5)
 
-        '''
+            '''
 
-        puzzletrigger.update(hero, MazePuzzle4, mission05)
-        puzzledoor.update(puzzletrigger)
+            puzzletrigger.update(hero, MazePuzzle4, mission05)
+            puzzledoor.update(puzzletrigger)
 
-        plat1.update(hero)
-        plat2.update(hero)
-        plat3.update(hero)
-        plat4.update(hero)
-        plat5.update(hero)
-        plat6.update(hero)
-        plat7.update(hero)
-        plat8.update(hero)
-        plat9.update(hero)
-        plat10.update(hero)
-        plat11.update(hero)
-        plat12.update(hero)
-        plat13.update(hero)
+            plat1.update(hero)
+            plat2.update(hero)
+            plat3.update(hero)
+            plat4.update(hero)
+            plat5.update(hero)
+            plat6.update(hero)
+            plat7.update(hero)
+            plat8.update(hero)
+            plat9.update(hero)
+            plat10.update(hero)
+            plat11.update(hero)
+            plat12.update(hero)
+            plat13.update(hero)
 
-        puzzletrigger.update(hero, MazePuzzle4, mission05)
-        puzzledoor.update(puzzletrigger)
+            puzzletrigger.update(hero, MazePuzzle4, mission05)
+            puzzledoor.update(puzzletrigger)
 
         if hero.dead == True:
             break
@@ -325,7 +361,55 @@ def mission05(intro_flag = False):
         screen.blit(trig5.image, camera.apply(trig5))
         '''
 
+        screen.blit(fade_in_screen, (0, 0))
+        if fade_in_screen.get_alpha() != 0:
+            fade_in_screen.set_alpha(fade_in_screen.get_alpha() - 3)
 
+        if hero.activate_caught == True:
+
+            if caught_timer > 30:
+                for sg in secguard_group:
+                    if sg.rect.y < hero.rect.y + 64 and sg.rect.y > hero.rect.y- 64:
+                        if sg.direction == "left":
+                            if hero.rect.x < sg.rect.right - sg.rect.width/8:
+                                sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
+                            elif hero.rect.x > sg.rect.right - sg.rect.width/8:
+                                sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                                sg.rect.x += 128 - 30
+                                sg.exclamation.rect.x = sg.rect.x
+                                sg.direction = "right"
+                            else:
+                                sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                                sg.rect.x += 128 - 30
+                                sg.exclamation.rect.x = sg.rect.x
+                                sg.direction = "right"
+
+                        elif sg.direction == "right":
+                            if hero.rect.x < sg.rect.x + sg.rect.width/8:
+                                sg.image = pygame.image.load("Sprites/security_guard_left.png").convert_alpha()
+                                sg.rect.x -= 128 - 30
+                                sg.exclamation.rect.x = sg.rect.x + sg.rect.width - sg.rect.width/8
+                                sg.direction = "left"
+                            elif hero.rect.x > sg.rect.x + sg.rect.width/8:
+                                sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x
+                            else:
+                                sg.image = pygame.image.load("Sprites/security_guard_right.png").convert_alpha()
+                                sg.exclamation.rect.x = sg.rect.x
+
+
+                    sg.exclamation.rect.y = sg.rect.y - sg.rect.height/2
+                    if caught_timer < 90:
+                        screen.blit(sg.exclamation.image, camera.apply(sg.exclamation))
+
+            if caught_timer > 120:
+                fade_alpha += 3
+                full_fade.set_alpha(fade_alpha)
+                screen.blit(full_fade,(0, 0))
+
+            if caught_timer > 200:
+                lose(mission05, hero)
         pygame.display.flip()
 
 
