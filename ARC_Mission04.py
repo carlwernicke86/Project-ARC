@@ -16,6 +16,13 @@ WIN_H = 900
 
 def mission04(intro_flag = False):
     pygame.init()
+    
+    try:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("Sounds/EventHorizonSong.mp3")
+        pygame.mixer.music.play(-1)
+    except pygame.error:
+        pass
 
     #Basic settings
     mission04_loop = True
