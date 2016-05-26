@@ -1,7 +1,7 @@
 __author__ = 'cardg_000'
 import pygame, os, sys, math
 from object_classes import *
-from MazePuzzle3 import *
+from MazePuzzle4 import *
 
 TIMER = 0
 
@@ -18,7 +18,7 @@ def mission05(intro_flag = False):
     pygame.init()
 
     #Basic settings
-    mission03_loop = True
+    mission05_loop = True
     pygame.display.set_caption("Project ARC")
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 
@@ -31,9 +31,8 @@ def mission05(intro_flag = False):
     puzzle_group = pygame.sprite.Group()
 
     #Object creation
-    #hero = Hero(3*32, 71*32)
-    hero = Hero(102*31, 41*32)
-    #hero = Hero(100*32, 21*32)
+    hero = Hero(3*32, 71*32)
+
 
     hero_group.add(hero)
 
@@ -60,17 +59,12 @@ def mission05(intro_flag = False):
 
     trig5 = Trigger(28*32, 21*32)
     triggerdoor5 = TriggerDoor(20*32, 30*32)
-
-    puzzletrigger2 = PuzzleDoorTrigger(15*32, 26*32)
-    puzzledoor2 = PuzzleDoor(16*32, 26*32)
-    puzzle_group.add(puzzletrigger2)
-
-
-    sec2 = SecGuard("right", 8*32, 40*32, 30*32)
-    sec3 = SecGuard("left", 8*32, 60*32, 30*32)
-    sec4 = SecGuard("right", 8*32, 80*32, 30*32)
-    sec5 = SecGuard("left", 8*32, 115*32, 30*32)
     '''
+
+    puzzletrigger = PuzzleDoorTrigger(103*32, 21*32)
+    puzzledoor = PuzzleDoor(102*32, 21*32)
+    puzzle_group.add(puzzletrigger)
+
     sec1 = SecGuard("left", 15*32, 43*32, 71*32)
     sec2 = SecGuard("left", 6*32, 147*32, 41*32)
     sec3 = SecGuard("right", 15*32, 106*32, 31*32)
@@ -89,10 +83,10 @@ def mission05(intro_flag = False):
     plat12 = HMovPlat(95*32, 11*32, 2*32, "left", 8*32, 5)
     plat13 = HMovPlat(60*32, 8*32, 1*32, "right", 6*32, 6)
 
-    platform_group.add(plat1, plat2, plat3, plat4, plat5, plat6, plat7, plat8, plat9, plat10, plat11, plat12, plat13, triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor4)
+    platform_group.add(plat1, plat2, plat3, plat4, plat5, plat6, plat7, plat8, plat9, plat10, plat11, plat12, plat13, triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor4, puzzledoor)
     secguard_group.add(sec1, sec2, sec3)
 
-    mission04_level = [
+    mission05_level = [
         "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP", #0
         "P                                                  P                                                  P                                                  P",
         "P                                                  P                                                  P                                                  P",
@@ -175,7 +169,7 @@ def mission05(intro_flag = False):
      #Build level
     x = y = 0
     platforms = []
-    for row in mission04_level:
+    for row in mission05_level:
         for col in row:
             if col == "D":
                 d = WinDocs(x,y)
@@ -233,12 +227,12 @@ def mission05(intro_flag = False):
         x = 0
 
     #Set Up Camera
-    total_width_app = len(mission04_level[0]) * 32
-    total_height_app = len(mission04_level) * 32
+    total_width_app = len(mission05_level[0]) * 32
+    total_height_app = len(mission05_level) * 32
     camera = Camera(total_width_app, total_height_app)
 
 
-    while mission03_loop:
+    while mission05_loop:
         clock.tick(fps)
         screen.fill((100, 100,100))
 
@@ -274,9 +268,11 @@ def mission05(intro_flag = False):
         trig5.update(hero)
         triggerdoor5.update(trig5)
 
-        puzzletrigger2.update(hero, MazePuzzle3, mission05)
-        puzzledoor2.update(puzzletrigger2)
         '''
+
+        puzzletrigger.update(hero, MazePuzzle4, mission05)
+        puzzledoor.update(puzzletrigger)
+
         plat1.update(hero)
         plat2.update(hero)
         plat3.update(hero)
@@ -291,8 +287,8 @@ def mission05(intro_flag = False):
         plat12.update(hero)
         plat13.update(hero)
 
-        #puzzletrigger.update(hero, MazePuzzle1)
-        #puzzledoor.update(puzzletrigger)
+        puzzletrigger.update(hero, MazePuzzle4, mission05)
+        puzzledoor.update(puzzletrigger)
 
         if hero.dead == True:
             break

@@ -18,7 +18,7 @@ def mission04(intro_flag = False):
     pygame.init()
 
     #Basic settings
-    mission03_loop = True
+    mission04_loop = True
     pygame.display.set_caption("Project ARC")
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)
 
@@ -170,7 +170,7 @@ def mission04(intro_flag = False):
     camera = Camera(total_width_app, total_height_app)
 
 
-    while mission03_loop:
+    while mission04_loop:
         clock.tick(fps)
         screen.fill((100, 100,100))
 
@@ -204,7 +204,7 @@ def mission04(intro_flag = False):
         trig5.update(hero)
         triggerdoor5.update(trig5)
 
-        puzzletrigger2.update(hero, MazePuzzle3, mission05)
+        puzzletrigger2.update(hero, MazePuzzle3, mission04)
         puzzledoor2.update(puzzletrigger2)
 
         plat1.update(hero)
@@ -214,10 +214,6 @@ def mission04(intro_flag = False):
         plat5.update(hero)
         plat6.update(hero)
         plat7.update(hero)
-
-
-        #puzzletrigger.update(hero, MazePuzzle1)
-        #puzzledoor.update(puzzletrigger)
 
         if hero.dead == True:
             break
