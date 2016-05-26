@@ -19,7 +19,7 @@ def mission04(intro_flag = False):
     
     try:
         pygame.mixer.music.stop()
-        pygame.mixer.music.load("Sounds/EventHorizonSong.mp3")
+        pygame.mixer.music.load("Sounds/EventHorizonSong.ogg")
         pygame.mixer.music.play(-1)
     except pygame.error:
         pass
