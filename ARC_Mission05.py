@@ -31,15 +31,29 @@ def mission05(intro_flag = False):
     puzzle_group = pygame.sprite.Group()
 
     #Object creation
-    hero = Hero(3*32, 7*32)
+    #hero = Hero(3*32, 71*32)
+    hero = Hero(102*31, 41*32)
+    #hero = Hero(100*32, 21*32)
 
     hero_group.add(hero)
 
-    trig1 = Trigger(28*32, 8*32)
-    triggerdoor1 = TriggerDoor(121*32, 4*32)
 
-    trig2 = Trigger(119*32, 24*32)
-    triggerdoor2 = TriggerDoor(95*32, 30*32)
+
+    trig1 = Trigger(1*32, 55*32)
+    triggerdoor1 = TriggerDoor(51*32, 41*32)
+
+    trig2 = Trigger(139*32, 39*32)
+    triggerdoor2 = TriggerDoor(140*32, 41*32)
+
+    trig3 = Trigger(103*32, 32*32)
+    triggerdoor3 = TriggerDoor(133*32,26*32)
+
+    trig4 = Trigger(134*32,27*32)
+    triggerdoor4 = TriggerDoor(128*32,31*32)
+
+
+
+    '''
 
     trig3 = Trigger(60*32,18*32)
     triggerdoor3 = TriggerDoor(59*32, 30*32)
@@ -51,63 +65,113 @@ def mission05(intro_flag = False):
     puzzledoor2 = PuzzleDoor(16*32, 26*32)
     puzzle_group.add(puzzletrigger2)
 
-    sec1 = SecGuard("left", 8*32, 20*32, 30*32)
+
     sec2 = SecGuard("right", 8*32, 40*32, 30*32)
     sec3 = SecGuard("left", 8*32, 60*32, 30*32)
     sec4 = SecGuard("right", 8*32, 80*32, 30*32)
     sec5 = SecGuard("left", 8*32, 115*32, 30*32)
+    '''
+    sec1 = SecGuard("left", 15*32, 43*32, 71*32)
+    sec2 = SecGuard("left", 6*32, 147*32, 41*32)
+    sec3 = SecGuard("right", 15*32, 106*32, 31*32)
 
-    plat1 = HMovPlat(43*32, 16*32, 2*32, "right", 32*4, 2)
-    plat2 = HMovPlat(60*32, 14*32, 4*32, "right", 32*8, 2)
-    plat3 = HMovPlat(91*32, 16*32, 4*32, "right", 32*8, 3)
-    plat4 = HMovPlat(108*32, 10*32, 4*32, "left", 32*8, 2)
-    plat5 = HMovPlat(72*32, 10*32, 4*32, "right", 32*8, 2)
-    plat6 = HMovPlat(51*32, 8*32, 4*32, "right", 32*5, 2)
-    plat7 = HMovPlat(120*32, 19*32, 4*32, "left", 32*8, 2)
+    plat1 = HMovPlat(12*32, 65*32, 3*32, "right", 32*4, 3)
+    plat2 = HMovPlat(40*32, 64*32, 3*32, "left", 32*4, 3)
+    plat3 = HMovPlat(32*32, 58*32, 3*32, "right", 32*4, 3)
+    plat4 = HMovPlat(3*32, 57*32, 2*32, "right", 32*3, 4)
+    plat5 = HMovPlat(14*32, 54*32, 2*32, "left", 32*3, 4)
+    plat6 = HMovPlat(31*32, 46*32, 1*32, "right", 32*3, 3)
+    plat7 = HMovPlat(106*32, 25*32, 4*32, "right", 2*32, 5)
+    plat8 = HMovPlat(147*32, 30*32, 4*32, "left", 2*32, 5)
+    plat9 = HMovPlat(56*32,20*32, 4*32,"right",10*32,4)
+    plat10 = HMovPlat(93*32, 17*32, 4*32, "left", 10*32, 4)
+    plat11 = HMovPlat(58*32, 14*32, 2*32, "right", 8*32, 5)
+    plat12 = HMovPlat(95*32, 11*32, 2*32, "left", 8*32, 5)
+    plat13 = HMovPlat(60*32, 8*32, 1*32, "right", 6*32, 6)
 
-    platform_group.add(triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor5, plat1, plat2, plat3, plat4, plat5, plat6, plat7, puzzledoor2)
-    secguard_group.add(sec1, sec2, sec3, sec4, sec5)
+    platform_group.add(plat1, plat2, plat3, plat4, plat5, plat6, plat7, plat8, plat9, plat10, plat11, plat12, plat13, triggerdoor1, triggerdoor2, triggerdoor3, triggerdoor4)
+    secguard_group.add(sec1, sec2, sec3)
 
-    #Load the level
     mission04_level = [
-        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",  #0
-        "P                          P                                                                                             P         P",
-        "P                          P                                                                                             P         P",
-        "P                          P                                                                                             P         P",
-        "P                          P                                                                                                       P",
-        "P                          P                                                                                                       P",
-        "P                          P                     L                                          L    PPPPPPPPPPPPPPPPPPPPPPPPPPPP      P",
-        "P                          Pi  l   L   l                                                                                    P      P",
-        "P                          P                    PPPh                                       PPP                    l         P      P",
-        "P                          PPPPPPPPPPPPPPPP     LlL                                                                         P      P",
-        "P                                                                   PPPPh                                   H   PPPPP     L P      P",  #10
-        "P    m                                          LlL                                                                         P      P",
-        "PPPPP         o            L              L            m                                                            l   PPPPP      P",
-        "PPPPPPPPPP     m                                                                                                            P      P",
-        "PPPPPPPPPPPPPPP         o  L  v           L            PPPPPh                    v                                PPPPP     P      P",
-        "PPPPPPPPPPPPPPPPPPPP                                                                        h                               P      P",
-        "PPPPPPPPPPPPPPPPPPPPPPPPPk    PPPPPPa     Ps                                    PPPPPPPs                                    P      P",
-        "P                   P                                      P                                   P                                   P",
-        "P                   P                                      P                                  bP                                   P",
-        "P                   P                                      PPPPP                               P                            PPPPPPPP",
-        "P                   P      LlL   lLl                       Pt            PPPPP             PPPPPt                                 bP", #20
-        "P                   P                                      P                                   P                                   P",
-        "P                   P      PPP   PPP  LlL   lLl            P  PPPPPPP          PPPPPPPPPPPP   bPe           PPPPPPPPPPPPP          P",
-        "PD                  P                                      P                                   P                        PPPP       P",
-        "PPPPPPPPPPPPPPPPP   P                 PPP   PPPLlL         Pt           PP                     P                        P          P",
-        "P               P  PP                                lLl   P                                   PPPPPPPPPPPPPPPPPPPPPPPPPP          P",
-        "P                   P                          PPP         P                                  bP                        P       PPPP",
-        "P                   P                                PPP   P          PPPPPPP                  P                        P          P",
-        "P   PPPPPPPPPPPPPPPPP                                      Pt                    PPPPP         P                        P          P",
-        "PP  P               P                                     PP                              PPPPPP                        PPPP       P",
-        "P                                                                                                                                  P", #30
-        "P                                                                                                                                  P",
-        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
-        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP", #0
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  PD                                                DP                                                  P",
+        "P                                                  PPPPPPPPPPPPPPPPPPPPP          PPPPPPPPPPPPPPPPPPPPP                                                  P",
+        "P                                                  P                    P        P                    P                                                  P", #5
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P", #10
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P", #15
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                                                  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "P                                                  P                                                  P                              P                   P", #20
+        "P                                                  d                                                                                 P                   P",
+        "P                                                                                                                                    P                   P",
+        "P                                                  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                         P                   P",
+        "P                                                  P                                                  P                              P                   P",
+        "P                                                  P                                                  P                              P                   P", #25
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "P                                                  P                                                  P                   PPPPPPPPPPPPP                  P",
+        "P                                                  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                         P                        P",
+        "P                                                  P                                                  P                         P                        P", #30
+        "P                                                  d                                                  d                                                  P",
+        "P                                                                                                                                                  M     P",
+        "P                                                  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP    P",
+        "P                                                  P                                                  P~                        P           P            P",
+        "P                                                  P                                                  P    q r q r q r q r q r q            P            P", #35
+        "P                                                  P                                                  P                                     P           PP",
+        "P                                                  P                                                  P   PPPPPPPPPPPPPPPPPPPPPPP           PPPPPPPPPP   P",
+        "P                                                  P                                                  P    c  e  c  e  c  e     P           Px          yP",
+        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                         P           P            P",
+        "PPP                                                P                                                  PPPPPPPPPPPPPPPPPPPPPPP   Pj         PP      PPPPPPP", #40
+        "PPPP                                                                                                    a    b    a    b   a    P                        P",
+        "PPPPP                PPPPPPPPPPPPPPPPPPPPPPPPPPP                                                                                P                        P",
+        "PPPPPPPPPPPPPPPP    P                           PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+        "P               P                                  P                                                  P                                                  P",
+        "P                P                                 P                                                  P                                                  P", #45
+        "P                 PPPPPPPPPPPPM           PPP      P                                                  P                                                  P",
+        "P                 x L      L y                     P                                                  P                                                  P",
+        "P                                               P  P                                                  P                                                  P",
+        "P                 x L      L y                     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                                                  P",
+        "P                                                 PP                                                  P                                                  P", #50
+        "P                 x L      L y                     d                                                  d                                                  P",
+        "P                                                                                                                                                        P",
+        "P                 PPPPPPPPPPPP     P      P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                                                  P",
+        "P             M   x L      L y                     P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P", #55
+        "PP                x L      L y                     P                                                  P                                                  P",
+        "P   M                                              P                                                  P                                                  P",
+        "Pk                PPPPPPPPPPPP                     P                                                  P                                                  P",
+        "P                               M                  PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                                                  P",
+        "P                                                 PP                                                  P                                                  P", #60
+        "P                                                  d                                                  d                                                  P",
+        "P                                                                                                                                                        P",
+        "P                                               PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                                                  P",
+        "P                                           M      P                                                  P                                                  P",
+        "P        PPPM                                      P                                                  P                                                  P", #65
+        "Pm        L                                        P                                                  P                                                  P",
+        "P                                                  P                                                  P                                                  P",
+        "PPPPPPP   L                P                       P                                                  P                                                  P",
+        "P                          P                       PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP                                                  P",
+        "P       PPPPP              PP                      P                                                  P                                                  P", #70
+        "P           l              P                       d                                                  d                                                  P",
+        "P                          P                                                                                                                             P",
+        "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP", #73
 
         ]
-        #0         1         2         3         4         5         6         7         8         9         10       11        12        13        14
-        #012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+    #Load the level
+        #0         1         2         3         4         5         6         7         8         9         10       11        12        13        14        15
+        #0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123
      #Build level
     x = y = 0
     platforms = []
@@ -116,41 +180,50 @@ def mission05(intro_flag = False):
             if col == "D":
                 d = WinDocs(x,y)
                 platform_group.add(d)
+            if col == "d":
+                DummyDoor = TriggerDoor(x,y)
+                platform_group.add(DummyDoor)
             if col == "L":
                 l = MotionSensor(x + 12,y, 60, 60, False)
                 motsen_group.add(l)
             if col == "l":
-                l = MotionSensor(x+12, y, 60, 60, True)
-                motsen_group.add(l)
-            if col == "k":
-                l = HotMotSen(x,y,0, 60, False, 5*32)
+                l = MotionSensor(x+12, y, 99999999, 0, False)
                 motsen_group.add(l)
             if col == "a":
-                l = HotMotSen(x,y,0,60, False, 6*32)
+                l = MotionSensor(x+12, y, 60, 60, False)
                 motsen_group.add(l)
-            if col == "s":
-                l = HotMotSen(x,y,0,60, False, 37*32)
+            if col == "b":
+                l = MotionSensor(x+12,y, 60,60, True)
+                motsen_group.add(l)
+            if col == "c":
+                l = MotionSensor(x+12,y, 45,45, False)
+                motsen_group.add(l)
+            if col == "e":
+                l = MotionSensor(x+12, y, 45,45, True)
+                motsen_group.add(l)
+            if col == "q":
+                l = MotionSensor(x+12,y, 30,30, False)
+                motsen_group.add(l)
+            if col == "r":
+                l = MotionSensor(x+12, y, 30,30, True)
+                motsen_group.add(l)
+            if col == "j":
+                l = HotMotSen(x,y+12, 30,30,False, 10*32)
+                motsen_group.add(l)
+            if col == "~":
+                l = HotMotSen(x,y+12,999999,0, False,25*32)
+                motsen_group.add(l)
+            if col == "k":
+                l = HotMotSen(x,y,0, 60, False, 17*32)
                 motsen_group.add(l)
             if col == "m":
-                l = MovingLaser(x+12,y, "right", 4*32)
+                l = MovingLaser(x+12,y, "right", 5*32)
                 movelaser_group.add(l)
-            if col == "o":
-                l = MovingLaser(x+12,y, "left",4*32)
+            if col == "x":
+                l = MovingLaser(x+12,y, "right", 11*32)
                 movelaser_group.add(l)
-            if col == "e":
-                l = HotMotSen(x,y,60, 60, False, 12*32)
-                motsen_group.add(l)
-            if col == "v":
-                l = MovingLaser(x+12, y, "right", 5*32)
-                movelaser_group.add(l)
-            if col == "i":
-                l = MovingLaser(x+12,y, "right", 15*32)
-                movelaser_group.add(l)
-            if col == "t":
-                l = MovingLaser(x+12,y, "right", 35*12)
-                movelaser_group.add(l)
-            if col == "b":
-                l = MovingLaser(x+12, y, "left", 35*12)
+            if col == "y":
+                l = MovingLaser(x+12, y, "left", 11*32)
                 movelaser_group.add(l)
             if col == "P":
                 p = Platform("Sprites/BlackBlock.png",x,y)
@@ -158,11 +231,6 @@ def mission05(intro_flag = False):
             x += 32
         y += 32
         x = 0
-
-    trig4 = Trigger(94*32,19*32)
-    triggerdoor4 = TriggerDoor(95*32, 32*32)
-
-    platform_group.add(triggerdoor4)
 
     #Set Up Camera
     total_width_app = len(mission04_level[0]) * 32
@@ -201,12 +269,14 @@ def mission05(intro_flag = False):
         trig4.update(hero)
         triggerdoor4.update(trig4)
 
+        '''
+
         trig5.update(hero)
         triggerdoor5.update(trig5)
 
         puzzletrigger2.update(hero, MazePuzzle3, mission05)
         puzzledoor2.update(puzzletrigger2)
-
+        '''
         plat1.update(hero)
         plat2.update(hero)
         plat3.update(hero)
@@ -214,7 +284,12 @@ def mission05(intro_flag = False):
         plat5.update(hero)
         plat6.update(hero)
         plat7.update(hero)
-
+        plat8.update(hero)
+        plat9.update(hero)
+        plat10.update(hero)
+        plat11.update(hero)
+        plat12.update(hero)
+        plat13.update(hero)
 
         #puzzletrigger.update(hero, MazePuzzle1)
         #puzzledoor.update(puzzletrigger)
@@ -243,7 +318,10 @@ def mission05(intro_flag = False):
         screen.blit(trig2.image, camera.apply(trig2))
         screen.blit(trig3.image, camera.apply(trig3))
         screen.blit(trig4.image, camera.apply(trig4))
+        '''
         screen.blit(trig5.image, camera.apply(trig5))
+        '''
+
 
         pygame.display.flip()
 
