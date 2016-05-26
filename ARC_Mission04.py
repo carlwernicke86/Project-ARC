@@ -181,11 +181,11 @@ def mission04(intro_flag = False):
 
         # Update
 
-        movelaser_group.update(hero, mission05)
-        hero_group.update(platform_group, mission05)
+        movelaser_group.update(hero, mission04)
+        hero_group.update(platform_group, mission04)
         camera.update(hero.rect)
-        motsen_group.update(hero, mission05)
-        secguard_group.update(hero, secguard_group, mission05)
+        motsen_group.update(hero, mission04)
+        secguard_group.update(hero, secguard_group, mission04)
 
 
 
