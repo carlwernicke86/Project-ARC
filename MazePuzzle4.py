@@ -22,12 +22,12 @@ def MazePuzzle4():
     wall_group = pygame.sprite.Group() #Just the walls and boundaries of the puzzle
     exit_group = pygame.sprite.Group() #Touch these to wim
     #Object creation
-    hacker = Hacker(96, 832, 5, "right")
+    hacker = Hacker(96, 450, 5, "up")
 
     #The actual level
     maze4_level = [
-        "WEEEEEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",#1
-        "W     WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",#1
+        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
         "W                W         W                     W",
         "W                W         W                     W",
         "W                W         W      W              W",#5
@@ -42,17 +42,17 @@ def MazePuzzle4():
         "W            W   W      W      WWWWWWWWWWWWWWWWWWW",
         "W            W          W                        W",#15
         "W            W          W                        W",
-        "W            W          W                        W",
-        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW    W",
+        "WWWWWWWWWWWWWW          W                        W",
+        "W            WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW    W",
         "W                  W         W   WWWWWWWWWWWW    W",
-        "W                  W         W   WWWWWWWWWWWW    W",#20
-        "W   WWWWWWWWWW     W    W    W         WWWWWW    W",
+        "W    WWWWW         W         W   WWWWWWWWWWWW    W",#20
+        "W        WWWWW     W    W    W         WWWWWW    W",
         "W            W     W    W    W         WWWWW     W",
-        "W            W     W    W    W   W     WWWWW     W",
-        "WWWWWWWW     W          W        W               W",#25
-        "W  H         W          W        W               W",
+        "WWWWW        W     W    W    W   W     WWWWW     W",
+        "W            W          W        W               W",#25
         "W            W          W        W               W",
-        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+        "W            W          W        W               W",
+        "WEEEEEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
         "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
     ]   #01234567890123456789012345678901234567890123456789
         #0         1         2         3         4
@@ -95,3 +95,5 @@ def MazePuzzle4():
             return "Fail"
 
         pygame.display.flip()
+
+MazePuzzle4()
