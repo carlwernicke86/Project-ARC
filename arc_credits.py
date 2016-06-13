@@ -11,8 +11,8 @@ def credits():
     pr = Regular_Text(80, YELLOW, (screen.get_rect().centerx/2, 100), "Programmers:")
     art = Regular_Text(80, YELLOW, (screen.get_rect().centerx*1.5, 100), "Artists:")
 
-    al = Regular_Text(50, YELLOW, (screen.get_rect().centerx/2, 200), "Andy Lee - Object Design")
-    cw = Regular_Text(50, YELLOW, (screen.get_rect().centerx/2, 300), "Carl Wernicke - Game Structure")
+    al = Regular_Text(50, YELLOW, (screen.get_rect().centerx/2, 200), "Andy Lee - Object/Structure Design")
+    cw = Regular_Text(50, YELLOW, (screen.get_rect().centerx/2, 300), "Carl Wernicke - Structure/Interface Design")
     rk = Regular_Text(50, YELLOW, (screen.get_rect().centerx/2, 400), "Rohit Kaushik - Level Design")
     vw = Regular_Text(50, YELLOW, (screen.get_rect().centerx*1.5, 200), "Valerie Wang")
     al1 = Regular_Text(50, YELLOW, (screen.get_rect().centerx*1.5, 300), "Lillian Murtonen")

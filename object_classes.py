@@ -56,7 +56,7 @@ class Hero(pygame.sprite.Sprite):
         self.key_interact = ""
 
         #Sprite sheet loading
-        sprite_sheet = SpriteSheet("Sprites/player_sprite.png")
+        sprite_sheet = SpriteSheet("Sprites/player_sprite_black.gif")
         self.walking_frames_r = []
         self.walking_frames_l = []
         #Loading into a list
@@ -170,9 +170,9 @@ class Hero(pygame.sprite.Sprite):
         self.grounded = False
         self.collide(0, self.yvel, platform_group, cur_level)
 
-        if self.step_num_left == 12:
+        if self.step_num_left == 18:
             self.step_num_left = 0
-        if self.step_num_right == 12:
+        if self.step_num_right == 18:
             self.step_num_right = 0
         if self.facing == "right":
             self.image = self.walking_frames_r[self.step_num_right//6]
