@@ -436,7 +436,7 @@ class HidingSpot(pygame.sprite.Sprite):
 class PuzzleDoor(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 64])
+        self.image = pygame.image.load("Sprites/triggerdoor.png").convert_alpha()
         self.image.convert()
         self.image.fill((255, 0, 255))
         self.rect = pygame.Rect(x, y, 32, 64)
@@ -450,13 +450,15 @@ class PuzzleDoor(pygame.sprite.Sprite):
 class PuzzleDoorTrigger(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([32, 64])
+        self.image = pygame.image.load("Sprites/keypad.png").convert_alpha()
         self.image.convert()
         self.image.fill((255, 153, 255))
         self.rect = pygame.Rect(x, y, 32, 64)
         self.active = False
 
     def update(self, hero, puzzle_function, cur_level):
+        if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 10:
+            self.image = pygame.image.load("Sprites/keypadtext.png").convert_alpha()
         if hero.interact:
             if hero.rect.bottom == self.rect.bottom and abs(hero.rect.centerx - self.rect.centerx) < 10:
                 if puzzle_function() == "Fail":
