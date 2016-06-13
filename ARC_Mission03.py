@@ -159,7 +159,7 @@ def mission03(intro_flag = False):
         "P     P                                              P                               P",
         "P     P                                              P                               P",
         "P     l                                              P                        b     ZD",
-        "P                                                    P                               P",
+        "P                                                    P                                ",
         "P     PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",#60
         "P     P                                              P                               P",
         "P     P                                              P                               P",
