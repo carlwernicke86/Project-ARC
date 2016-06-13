@@ -1,6 +1,8 @@
 # Project-ARC
 A Corporate Espionage Game where you unrealistically infiltrate overguarded buildings to achieve some vaguely defined end.
 
+Run arc_main to start the game.
+
 KNOWN ISSUES:
 
 Exclamation point after being caught may appear in wrong place
