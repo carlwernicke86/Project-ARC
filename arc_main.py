@@ -1,9 +1,9 @@
+#Game created by Andy Lee, Rohit Girish, and Carl Wernicke ARC)
 import pygame, os
 from arc_intro import intro
 from HubLocation import hub
 from tutorial_mission import tutorial
 from other_objects import *
-
 
 fps = 60
 

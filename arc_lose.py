@@ -5,9 +5,10 @@ WIN_W = 1600
 WIN_H = 900
 def lose(cur_level, hero):
     pygame.mixer.music.stop()
-    sound = pygame.mixer.Sound("Sounds/losesound.wav")
+
     try:
-        sound.play()
+        pygame.mixer.music.load("Sounds/losesound.wav")
+        pygame.mixer.music.play(-1)
     except pygame.error:
         pass
     screen = pygame.display.set_mode((WIN_W, WIN_H), pygame.SRCALPHA)

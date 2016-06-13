@@ -41,6 +41,7 @@ def missions(hero):
     lvl1 = MissionSave.readline()
     lvl2 = MissionSave.readline()
     lvl3 = MissionSave.readline()
+    lvl4 = MissionSave.readline()
     if lvl1 == "False" + "\n":
         lvl1comp = False
     elif lvl1 == "True" + "\n":
@@ -49,10 +50,14 @@ def missions(hero):
         lvl2comp = False
     elif lvl1 == "True" + "\n":
         lvl2comp = True
-    if lvl3 == "False":
+    if lvl3 == "False" + "\n":
         lvl3comp = False
-    elif lvl3 == "True":
+    elif lvl3 == "True" + "\n":
         lvl3comp = True
+    if lvl4 == "False":
+        lvl4comp = False
+    elif lvl4 == "True":
+        lvl4comp = True
     MissionSave.close()
 
     for m in range(len(mission_list)):                                                                           #The last argument here is the argument that needs to be passed into the button's next_screen method
@@ -66,6 +71,9 @@ def missions(hero):
                 button = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, 50 + (50 * m)), "Mission " + str(m + 1), mission_screen, mission_list[m], hero)
         if m == 3:
             if lvl1comp == True and lvl2comp == True and lvl3comp == True:
+                button = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, 50 + (50 * m)), "Mission " + str(m + 1), mission_screen, mission_list[m], hero)
+        if m == 4:
+            if lvl1comp == True and lvl2comp == True and lvl3comp == True and lvl4comp == True:
                 button = Click_Button(40, BLACK, LIGHT_GREY, (screen.get_rect().centerx, 50 + (50 * m)), "Mission " + str(m + 1), mission_screen, mission_list[m], hero)
         click_button_group.add(button)
 

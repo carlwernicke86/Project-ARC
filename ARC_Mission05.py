@@ -17,6 +17,13 @@ WIN_H = 900
 def mission05(intro_flag = False):
     pygame.init()
 
+    try:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("Sounds/SwaleSong.ogg")
+        pygame.mixer.music.play(-1)
+    except pygame.error:
+        pass
+
     #Basic settings
     mission05_loop = True
     pygame.display.set_caption("Project ARC")
