@@ -18,3 +18,7 @@ Issues with file (ControlOptions.txt) reading on Mac. To solve this issue simply
 Unrealistic difficulty
 
 How fun the game really is
+
+True to pygame, this was not optimized for OSX
+
+Game is currently unpackaged as turning the multiple files and resources into one standalone executable or application is a huge PitA, this may be done in the future but not for now.
