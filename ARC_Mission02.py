@@ -55,7 +55,7 @@ def mission02(intro_flag = False):
     triggerdoor4 = TriggerDoor(2336, 160)
 
     trig5 = Trigger(92*32, 192)
-    triggerdoor5 = TriggerDoor(106*32, 64)
+    triggerdoor5 = TriggerDoor(104*32, 64)
 
     hero_group.add(hero)
     secguard_group.add(sec1)
