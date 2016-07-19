@@ -438,7 +438,6 @@ class PuzzleDoor(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Sprites/triggerdoor.png").convert_alpha()
         self.image.convert()
-        self.image.fill((255, 0, 255))
         self.rect = pygame.Rect(x, y, 32, 64)
         self.movecount = 0
 
@@ -452,7 +451,6 @@ class PuzzleDoorTrigger(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("Sprites/keypad.png").convert_alpha()
         self.image.convert()
-        self.image.fill((255, 153, 255))
         self.rect = pygame.Rect(x, y, 32, 64)
         self.active = False
 
